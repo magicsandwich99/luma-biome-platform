@@ -66,7 +66,6 @@ export default function HomePage() {
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         .mono { font-family: 'DM Mono', monospace; }
 
         @keyframes fadeUp {
@@ -97,28 +96,17 @@ export default function HomePage() {
           50% { opacity: 0.9; }
         }
 
-        .hero-title {
-          animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.2s both;
-        }
-        .hero-sub {
-          animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.45s both;
-        }
-        .hero-cta {
-          animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.65s both;
-        }
-        .hero-badge {
-          animation: fadeIn 1s ease 0.1s both;
-        }
+        .hero-title { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+        .hero-sub { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.45s both; }
+        .hero-cta { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
+        .hero-badge { animation: fadeIn 1s ease 0.1s both; }
 
         .reveal {
           opacity: 0;
           transform: translateY(32px);
           transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
         }
-        .reveal.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
         .feature-card {
           background: rgba(255,255,255,0.03);
@@ -139,162 +127,85 @@ export default function HomePage() {
           opacity: 0;
           transition: opacity 0.3s;
         }
-        .feature-card:hover {
-          background: rgba(255,255,255,0.05);
-          border-color: rgba(255,255,255,0.15);
-          transform: translateY(-4px);
-        }
-        .feature-card:hover::before {
-          opacity: 1;
-        }
+        .feature-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); transform: translateY(-4px); }
+        .feature-card:hover::before { opacity: 1; }
 
-        .stat-num {
-          font-size: clamp(2.5rem, 5vw, 4rem);
-          line-height: 1;
-          letter-spacing: -0.02em;
-        }
+        .stat-num { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; letter-spacing: -0.02em; }
 
         .btn-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 16px 36px;
-          background: #10b981;
-          color: #080c0a;
-          font-family: 'DM Mono', monospace;
-          font-size: 13px;
-          font-weight: 500;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          border: none;
-          cursor: pointer;
-          transition: background 0.2s, transform 0.2s;
+          display: inline-flex; align-items: center; gap: 10px;
+          padding: 16px 36px; background: #10b981; color: #080c0a;
+          font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500;
+          letter-spacing: 0.08em; text-transform: uppercase; border: none;
+          cursor: pointer; transition: background 0.2s, transform 0.2s;
         }
-        .btn-primary:hover {
-          background: #34d399;
-          transform: translateY(-2px);
-        }
+        .btn-primary:hover { background: #34d399; transform: translateY(-2px); }
 
         .btn-ghost {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 16px 36px;
-          background: transparent;
-          color: #e8ede9;
-          font-family: 'DM Mono', monospace;
-          font-size: 13px;
-          font-weight: 400;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          border: 1px solid rgba(255,255,255,0.2);
-          cursor: pointer;
+          display: inline-flex; align-items: center; gap: 10px;
+          padding: 16px 36px; background: transparent; color: #e8ede9;
+          font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 400;
+          letter-spacing: 0.08em; text-transform: uppercase;
+          border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
           transition: border-color 0.2s, transform 0.2s;
         }
-        .btn-ghost:hover {
-          border-color: rgba(255,255,255,0.5);
-          transform: translateY(-2px);
-        }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
 
         .tag {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 6px 14px;
-          background: rgba(16,185,129,0.1);
-          border: 1px solid rgba(16,185,129,0.3);
-          color: #10b981;
-          font-family: 'DM Mono', monospace;
-          font-size: 11px;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
+          display: inline-flex; align-items: center; gap: 6px;
+          padding: 6px 14px; background: rgba(16,185,129,0.1);
+          border: 1px solid rgba(16,185,129,0.3); color: #10b981;
+          font-family: 'DM Mono', monospace; font-size: 11px;
+          letter-spacing: 0.1em; text-transform: uppercase;
         }
 
         .grid-bg {
-          position: absolute;
-          inset: 0;
+          position: absolute; inset: 0;
           background-image: linear-gradient(rgba(16,185,129,0.04) 1px, transparent 1px),
                             linear-gradient(90deg, rgba(16,185,129,0.04) 1px, transparent 1px);
-          background-size: 60px 60px;
-          pointer-events: none;
+          background-size: 60px 60px; pointer-events: none;
         }
 
         .ticker-wrap {
           overflow: hidden;
           border-top: 1px solid rgba(255,255,255,0.06);
           border-bottom: 1px solid rgba(255,255,255,0.06);
-          padding: 14px 0;
-          background: rgba(16,185,129,0.03);
+          padding: 14px 0; background: rgba(16,185,129,0.03);
         }
-        .ticker-inner {
-          display: flex;
-          width: max-content;
-          animation: ticker 28s linear infinite;
-        }
+        .ticker-inner { display: flex; width: max-content; animation: ticker 28s linear infinite; }
         .ticker-item {
-          padding: 0 48px;
-          font-family: 'DM Mono', monospace;
-          font-size: 11px;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.3);
-          white-space: nowrap;
-          display: flex;
-          align-items: center;
-          gap: 48px;
+          padding: 0 48px; font-family: 'DM Mono', monospace; font-size: 11px;
+          letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3);
+          white-space: nowrap; display: flex; align-items: center; gap: 48px;
         }
-        .ticker-dot {
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background: #10b981;
-          display: inline-block;
-        }
+        .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: #10b981; display: inline-block; }
 
         .orb {
-          position: absolute;
-          border-radius: 50%;
-          filter: blur(120px);
-          pointer-events: none;
-          animation: glow-pulse 4s ease-in-out infinite;
+          position: absolute; border-radius: 50%; filter: blur(120px);
+          pointer-events: none; animation: glow-pulse 4s ease-in-out infinite;
         }
 
         .framework-pill {
-          padding: 8px 20px;
-          border: 1px solid rgba(255,255,255,0.1);
-          font-family: 'DM Mono', monospace;
-          font-size: 12px;
-          color: rgba(255,255,255,0.5);
-          letter-spacing: 0.05em;
-          transition: all 0.2s;
+          padding: 8px 20px; border: 1px solid rgba(255,255,255,0.1);
+          font-family: 'DM Mono', monospace; font-size: 12px;
+          color: rgba(255,255,255,0.5); letter-spacing: 0.05em; transition: all 0.2s;
         }
-        .framework-pill:hover {
-          border-color: rgba(16,185,129,0.4);
-          color: #10b981;
-          background: rgba(16,185,129,0.05);
-        }
+        .framework-pill:hover { border-color: rgba(16,185,129,0.4); color: #10b981; background: rgba(16,185,129,0.05); }
 
-        .line-accent {
-          width: 40px;
-          height: 1px;
-          background: #10b981;
-          margin-bottom: 24px;
-        }
+        .line-accent { width: 40px; height: 1px; background: #10b981; margin-bottom: 24px; }
 
         .section-label {
-          font-family: 'DM Mono', monospace;
-          font-size: 11px;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #10b981;
-          margin-bottom: 16px;
+          font-family: 'DM Mono', monospace; font-size: 11px;
+          letter-spacing: 0.2em; text-transform: uppercase; color: #10b981; margin-bottom: 16px;
         }
 
-        .divider {
-          width: 100%;
-          height: 1px;
-          background: rgba(255,255,255,0.06);
+        .footer-link {
+          font-family: 'DM Mono', monospace; font-size: 11px;
+          color: rgba(255,255,255,0.35); letter-spacing: 0.1em;
+          text-transform: uppercase; background: none; border: none;
+          cursor: pointer; text-decoration: none; transition: color 0.2s;
         }
+        .footer-link:hover { color: #10b981; }
       `}</style>
 
       {/* Hero */}
@@ -303,7 +214,6 @@ export default function HomePage() {
         <div className="orb" style={{ width: 600, height: 600, background: 'rgba(16,185,129,0.12)', top: -100, right: -100, animationDelay: '0s' }} />
         <div className="orb" style={{ width: 400, height: 400, background: 'rgba(139,92,246,0.08)', bottom: 0, left: '30%', animationDelay: '2s' }} />
 
-        {/* Scanline effect */}
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden', opacity: 0.03 }}>
           <div style={{ position: 'absolute', width: '100%', height: 2, background: '#10b981', animation: 'scanline 8s linear infinite' }} />
         </div>
@@ -326,16 +236,11 @@ export default function HomePage() {
           </p>
 
           <div className="hero-cta" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <button className="btn-primary" onClick={() => navigate('/record')}>
-              Enter Platform →
-            </button>
-            <button className="btn-ghost" onClick={() => navigate('/reports')}>
-              View Reports
-            </button>
+            <button className="btn-primary" onClick={() => navigate('/record')}>Enter Platform →</button>
+            <button className="btn-ghost" onClick={() => navigate('/reports')}>View Reports</button>
           </div>
         </div>
 
-        {/* Floating metric */}
         <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.7 }}>
           <div style={{ padding: 24, border: '1px solid rgba(16,185,129,0.2)', background: 'rgba(8,12,10,0.8)', backdropFilter: 'blur(20px)', minWidth: 200 }}>
             <div className="mono" style={{ fontSize: 11, color: '#10b981', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>Live — Forest CO₂</div>
@@ -352,8 +257,7 @@ export default function HomePage() {
             <div key={i} className="ticker-item">
               {['Air Quality Monitoring', 'Water pH Sensors', 'Biodiversity Tracking', 'Soil Health Analysis', 'Climate Data', 'Carbon Accounting', 'TNFD Reporting', 'GRI Standards', 'CDP Disclosure', 'EU Taxonomy'].map((item, j) => (
                 <span key={j} style={{ display: 'flex', alignItems: 'center', gap: 48 }}>
-                  {item}
-                  <span className="ticker-dot" />
+                  {item}<span className="ticker-dot" />
                 </span>
               ))}
             </div>
@@ -381,16 +285,9 @@ export default function HomePage() {
             Three tools.<br />One source of truth.
           </h2>
         </div>
-
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: 'rgba(255,255,255,0.06)' }}>
           {features.map((f, i) => (
-            <div
-              key={i}
-              data-id={`feat-${i}`}
-              className={`feature-card reveal${visible[`feat-${i}`] ? ' visible' : ''}`}
-              style={{ '--accent': f.color, transitionDelay: `${i * 0.12}s` }}
-              onClick={() => navigate(f.path)}
-            >
+            <div key={i} data-id={`feat-${i}`} className={`feature-card reveal${visible[`feat-${i}`] ? ' visible' : ''}`} style={{ '--accent': f.color, transitionDelay: `${i * 0.12}s` }} onClick={() => navigate(f.path)}>
               <div style={{ fontSize: 28, color: f.color, marginBottom: 24, fontFamily: 'monospace' }}>{f.icon}</div>
               <div className="line-accent" style={{ background: f.color }} />
               <h3 style={{ fontSize: 22, fontWeight: 400, marginBottom: 16, letterSpacing: '-0.01em' }}>{f.title}</h3>
@@ -424,7 +321,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-
             <div style={{ position: 'relative' }}>
               <div style={{ border: '1px solid rgba(255,255,255,0.08)', padding: 40, background: 'rgba(8,12,10,0.6)' }}>
                 <div className="mono" style={{ fontSize: 11, color: '#10b981', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 24 }}>Live data pipeline</div>
@@ -490,17 +386,21 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: '40px 80px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <footer style={{ padding: '48px 80px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 28, height: 28, background: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#080c0a', fontSize: 12 }}>L</div>
           <span className="mono" style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em' }}>LUMA Biome Platform</span>
         </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
+          <button className="footer-link" onClick={() => navigate('/about')}>About Us</button>
+          <button className="footer-link" onClick={() => navigate('/contact')}>Contact</button>
+          <a href="https://luma.earth" target="_blank" rel="noreferrer" className="footer-link">luma.earth ↗</a>
+        </div>
+
         <div className="mono" style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.05em' }}>
           © 2025 LUMA Earth. All rights reserved.
         </div>
-        <a href="https://luma.earth" target="_blank" rel="noreferrer" className="mono" style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textDecoration: 'none', textTransform: 'uppercase' }}>
-          luma.earth ↗
-        </a>
       </footer>
     </div>
   )

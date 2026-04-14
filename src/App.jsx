@@ -5,6 +5,8 @@ import MapPage from './app/pages/MapPage'
 import RefinePage from './app/pages/RefinePage'
 import ReportsPage from './app/pages/ReportsPage'
 import HomePage from './app/pages/HomePage'
+import AboutPage from './app/pages/AboutPage'
+import ContactPage from './app/pages/ContactPage'
 import { Map, GitBranch, BarChart2, Home } from 'lucide-react'
 
 const queryClient = new QueryClient()
@@ -24,36 +26,16 @@ export default function App() {
                 </div>
               </div>
               <nav className="flex items-center gap-2">
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${isActive ? 'bg-green-500 text-black font-medium' : 'text-white/60 hover:text-white hover:bg-white/10'}`
-                  }
-                >
+                <NavLink to="/" className={({ isActive }) => `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${isActive ? 'bg-green-500 text-black font-medium' : 'text-white/60 hover:text-white hover:bg-white/10'}`}>
                   <Home size={16} /> Home
                 </NavLink>
-                <NavLink
-                  to="/record"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${isActive ? 'bg-green-500 text-black font-medium' : 'text-white/60 hover:text-white hover:bg-white/10'}`
-                  }
-                >
+                <NavLink to="/record" className={({ isActive }) => `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${isActive ? 'bg-green-500 text-black font-medium' : 'text-white/60 hover:text-white hover:bg-white/10'}`}>
                   <Map size={16} /> Record
                 </NavLink>
-                <NavLink
-                  to="/refine"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${isActive ? 'bg-green-500 text-black font-medium' : 'text-white/60 hover:text-white hover:bg-white/10'}`
-                  }
-                >
+                <NavLink to="/refine" className={({ isActive }) => `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${isActive ? 'bg-green-500 text-black font-medium' : 'text-white/60 hover:text-white hover:bg-white/10'}`}>
                   <GitBranch size={16} /> Refine
                 </NavLink>
-                <NavLink
-                  to="/reports"
-                  className={({ isActive }) =>
-                    `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${isActive ? 'bg-green-500 text-black font-medium' : 'text-white/60 hover:text-white hover:bg-white/10'}`
-                  }
-                >
+                <NavLink to="/reports" className={({ isActive }) => `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${isActive ? 'bg-green-500 text-black font-medium' : 'text-white/60 hover:text-white hover:bg-white/10'}`}>
                   <BarChart2 size={16} /> Report
                 </NavLink>
               </nav>
@@ -64,6 +46,8 @@ export default function App() {
                 <Route path="/record" element={<MapPage />} />
                 <Route path="/refine" element={<RefinePage />} />
                 <Route path="/reports" element={<ReportsPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
               </Routes>
             </main>
           </div>
