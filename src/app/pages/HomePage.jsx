@@ -37,6 +37,15 @@ const features = [
 
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
 
+const services = [
+  { number: '01', title: 'Service One', desc: 'Coming soon' },
+  { number: '02', title: 'Service Two', desc: 'Coming soon' },
+  { number: '03', title: 'Service Three', desc: 'Coming soon' },
+  { number: '04', title: 'Service Four', desc: 'Coming soon' },
+  { number: '05', title: 'Service Five', desc: 'Coming soon' },
+  { number: '06', title: 'Service Six', desc: 'Coming soon' },
+]
+
 export default function HomePage() {
   const navigate = useNavigate()
   const heroRef = useRef(null)
@@ -87,7 +96,7 @@ export default function HomePage() {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-12px); }
         }
-        @keyframes ticker {
+        @keyframes scroll-cards {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
@@ -166,19 +175,43 @@ export default function HomePage() {
           background-size: 60px 60px; pointer-events: none;
         }
 
-        .ticker-wrap {
+        .services-track {
+          display: flex;
+          width: max-content;
+          animation: scroll-cards 40s linear infinite;
+          gap: 24px;
+        }
+        .services-track:hover {
+          animation-play-state: paused;
+        }
+
+        .service-card {
+          width: 320px;
+          min-height: 260px;
+          flex-shrink: 0;
+          border: 1px solid rgba(255,255,255,0.07);
+          background: rgba(255,255,255,0.02);
+          padding: 36px;
+          transition: border-color 0.3s, background 0.3s, transform 0.3s;
+          cursor: pointer;
+          position: relative;
           overflow: hidden;
-          border-top: 1px solid rgba(255,255,255,0.06);
-          border-bottom: 1px solid rgba(255,255,255,0.06);
-          padding: 14px 0; background: rgba(16,185,129,0.03);
         }
-        .ticker-inner { display: flex; width: max-content; animation: ticker 28s linear infinite; }
-        .ticker-item {
-          padding: 0 48px; font-family: 'DM Mono', monospace; font-size: 11px;
-          letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3);
-          white-space: nowrap; display: flex; align-items: center; gap: 48px;
+        .service-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 1px;
+          background: #10b981;
+          opacity: 0;
+          transition: opacity 0.3s;
         }
-        .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: #10b981; display: inline-block; }
+        .service-card:hover {
+          border-color: rgba(16,185,129,0.25);
+          background: rgba(16,185,129,0.03);
+          transform: translateY(-6px);
+        }
+        .service-card:hover::before { opacity: 1; }
 
         .orb {
           position: absolute; border-radius: 50%; filter: blur(120px);
@@ -250,20 +283,40 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Ticker */}
-      <div className="ticker-wrap">
-        <div className="ticker-inner">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="ticker-item">
-              {['Air Quality Monitoring', 'Water pH Sensors', 'Biodiversity Tracking', 'Soil Health Analysis', 'Climate Data', 'Carbon Accounting', 'TNFD Reporting', 'GRI Standards', 'CDP Disclosure', 'EU Taxonomy'].map((item, j) => (
-                <span key={j} style={{ display: 'flex', alignItems: 'center', gap: 48 }}>
-                  {item}<span className="ticker-dot" />
-                </span>
-              ))}
-            </div>
-          ))}
+      {/* Our Services */}
+      <section style={{ padding: '100px 0', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', overflow: 'hidden', background: 'rgba(255,255,255,0.01)' }}>
+        <div style={{ padding: '0 80px', marginBottom: 56, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+          <div>
+            <div className="section-label">Our Services</div>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+              What LUMA offers.
+            </h2>
+          </div>
+          <p className="mono" style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', maxWidth: 320, lineHeight: 1.7, fontWeight: 300, textAlign: 'right' }}>
+            Hover to pause. Each service is designed to help companies track, understand and report on their environmental impact.
+          </p>
         </div>
-      </div>
+
+        <div style={{ overflow: 'hidden', position: 'relative' }}>
+          {/* Fade edges */}
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, background: 'linear-gradient(to right, #080c0a, transparent)', zIndex: 10, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, background: 'linear-gradient(to left, #080c0a, transparent)', zIndex: 10, pointerEvents: 'none' }} />
+
+          <div className="services-track">
+            {[...services, ...services].map((service, i) => (
+              <div key={i} className="service-card">
+                <div className="mono" style={{ fontSize: 11, color: '#10b981', letterSpacing: '0.15em', marginBottom: 24 }}>{service.number}</div>
+                <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.1)', marginBottom: 24 }} />
+                <h3 style={{ fontSize: 22, fontWeight: 400, letterSpacing: '-0.01em', marginBottom: 16 }}>{service.title}</h3>
+                <p className="mono" style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', lineHeight: 1.75, fontWeight: 300 }}>{service.desc}</p>
+                <div style={{ position: 'absolute', bottom: 36, right: 36 }}>
+                  <span className="mono" style={{ fontSize: 11, color: 'rgba(16,185,129,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Learn more →</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Stats */}
       <section style={{ padding: '100px 80px' }}>
@@ -391,13 +444,11 @@ export default function HomePage() {
           <div style={{ width: 28, height: 28, background: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#080c0a', fontSize: 12 }}>L</div>
           <span className="mono" style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em' }}>LUMA Biome Platform</span>
         </div>
-
         <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
           <button className="footer-link" onClick={() => navigate('/about')}>About Us</button>
           <button className="footer-link" onClick={() => navigate('/contact')}>Contact</button>
           <a href="https://luma.earth" target="_blank" rel="noreferrer" className="footer-link">luma.earth ↗</a>
         </div>
-
         <div className="mono" style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.05em' }}>
           © 2025 LUMA Earth. All rights reserved.
         </div>
