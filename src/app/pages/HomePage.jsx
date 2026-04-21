@@ -38,12 +38,15 @@ const features = [
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
 
 const services = [
-  { number: '01', title: 'Service One', desc: 'Coming soon' },
-  { number: '02', title: 'Service Two', desc: 'Coming soon' },
-  { number: '03', title: 'Service Three', desc: 'Coming soon' },
-  { number: '04', title: 'Service Four', desc: 'Coming soon' },
-  { number: '05', title: 'Service Five', desc: 'Coming soon' },
-  { number: '06', title: 'Service Six', desc: 'Coming soon' },
+  { number: '01', title: 'Tree Care & Tree Assessment', desc: 'Coming soon' },
+  { number: '02', title: 'Consulting & Conceptual Design', desc: 'Coming soon' },
+  { number: '03', title: 'Drone Surveys & Remote Sensing', desc: 'Coming soon' },
+  { number: '04', title: 'Installation', desc: 'Coming soon' },
+  { number: '05', title: 'Climate Resilience Measures', desc: 'Coming soon' },
+  { number: '06', title: 'Habitat Structures', desc: 'Coming soon' },
+  { number: '07', title: 'Green Roofs & Living Walls', desc: 'Coming soon' },
+  { number: '08', title: 'BIOME Platform', desc: 'Coming soon' },
+  { number: '09', title: 'Long-Term Stewardship', desc: 'Coming soon' },
 ]
 
 export default function HomePage() {
@@ -181,9 +184,7 @@ export default function HomePage() {
           animation: scroll-cards 40s linear infinite;
           gap: 24px;
         }
-        .services-track:hover {
-          animation-play-state: paused;
-        }
+        .services-track:hover { animation-play-state: paused; }
 
         .service-card {
           width: 320px;
@@ -298,7 +299,6 @@ export default function HomePage() {
         </div>
 
         <div style={{ overflow: 'hidden', position: 'relative' }}>
-          {/* Fade edges */}
           <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, background: 'linear-gradient(to right, #080c0a, transparent)', zIndex: 10, pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, background: 'linear-gradient(to left, #080c0a, transparent)', zIndex: 10, pointerEvents: 'none' }} />
 
