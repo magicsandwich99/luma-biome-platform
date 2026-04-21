@@ -31,7 +31,7 @@ export const themeColors = {
     cardBorder: 'rgba(255,255,255,0.07)',
   },
   light: {
-    accent: '#7c3aed',
+    accent: '#b71048',
     accentHover: '#6d28d9',
     accentMuted: 'rgba(124,58,237,0.08)',
     accentBorder: 'rgba(124,58,237,0.25)',
