@@ -30,47 +30,70 @@ function AppInner() {
   const navLinkInactive = isDark
     ? 'text-white/60 hover:text-white hover:bg-white/10'
     : 'text-black/50 hover:text-black hover:bg-black/5'
-  const navLinkActive = isDark
-    ? 'bg-green-500 text-black font-medium'
-    : 'bg-purple-600 text-white font-medium'
 
   const langInactive = isDark
     ? 'text-white/50 hover:text-white hover:bg-white/10'
     : 'text-black/40 hover:text-black hover:bg-black/5'
 
-  const langActiveBg = isDark ? 'bg-green-500 text-black' : 'bg-purple-600 text-white'
   const langBorder = isDark ? 'border-white/10' : 'border-black/10'
   const langDivider = isDark ? 'bg-white/10' : 'bg-black/10'
+
+  const activeStyle = { background: c.accent, color: '#ffffff', fontWeight: 500 }
+  const langActiveStyle = { background: c.accent, color: '#ffffff' }
 
   return (
     <BrowserRouter>
       <div style={{ minHeight: '100vh', background: c.bg, display: 'flex', flexDirection: 'column', transition: 'background 0.3s' }}>
         <header className="flex items-center justify-between px-6 py-4" style={headerStyle}>
           <div className="flex items-center gap-3">
-            <div style={{ width: 36, height: 36, borderRadius: 8, background: c.accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: isDark ? '#080c0a' : '#ffffff', fontSize: 13 }}>L</div>
+            <div style={{ width: 36, height: 36, borderRadius: 8, background: c.accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#ffffff', fontSize: 13 }}>L</div>
             <div>
               <div className="font-semibold" style={{ color: c.fg }}>LUMA Biome Platform</div>
               <div className="text-xs" style={{ color: c.fgMuted }}>{t.tagline}</div>
             </div>
           </div>
           <nav className="flex items-center gap-2">
-            <NavLink to="/" className={({ isActive }) => `${navLinkBase} ${isActive ? navLinkActive : navLinkInactive}`}>
+            <NavLink
+              to="/"
+              className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`}
+              style={({ isActive }) => isActive ? activeStyle : {}}
+            >
               <Home size={16} /> {t.home}
             </NavLink>
-            <NavLink to="/record" className={({ isActive }) => `${navLinkBase} ${isActive ? navLinkActive : navLinkInactive}`}>
+            <NavLink
+              to="/record"
+              className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`}
+              style={({ isActive }) => isActive ? activeStyle : {}}
+            >
               <Map size={16} /> {t.record}
             </NavLink>
-            <NavLink to="/refine" className={({ isActive }) => `${navLinkBase} ${isActive ? navLinkActive : navLinkInactive}`}>
+            <NavLink
+              to="/refine"
+              className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`}
+              style={({ isActive }) => isActive ? activeStyle : {}}
+            >
               <GitBranch size={16} /> {t.refine}
             </NavLink>
-            <NavLink to="/reports" className={({ isActive }) => `${navLinkBase} ${isActive ? navLinkActive : navLinkInactive}`}>
+            <NavLink
+              to="/reports"
+              className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`}
+              style={({ isActive }) => isActive ? activeStyle : {}}
+            >
               <BarChart2 size={16} /> {t.report}
             </NavLink>
 
             <div className={`flex items-center gap-1 ml-4 border rounded-lg overflow-hidden ${langBorder}`}>
-              <button onClick={() => setLang('en')} className={`px-3 py-2 text-xs font-medium transition-colors ${lang === 'en' ? langActiveBg : langInactive}`}>EN</button>
+              <button
+                onClick={() => setLang('en')}
+                className={`px-3 py-2 text-xs font-medium transition-colors ${lang === 'en' ? '' : langInactive}`}
+                style={lang === 'en' ? langActiveStyle : {}}
+              >EN</button>
               <div className={`w-px h-4 ${langDivider}`} />
-              <button onClick={() => setLang('de')} className={`px-3 py-2 text-xs font-medium transition-colors ${lang === 'de' ? langActiveBg : langInactive}`}>DE</button>
+              <button
+                onClick={() => setLang('de')}
+                className={`px-3 py-2 text-xs font-medium transition-colors ${lang === 'de' ? '' : langInactive}`}
+                style={lang === 'de' ? langActiveStyle : {}}
+              >DE</button>
             </div>
           </nav>
         </header>
