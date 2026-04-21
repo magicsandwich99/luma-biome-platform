@@ -32,9 +32,9 @@ export const themeColors = {
   },
   light: {
     accent: '#0A7652',
-    accentHover: '#6d28d9',
-    accentMuted: 'rgba(124,58,237,0.08)',
-    accentBorder: 'rgba(124,58,237,0.25)',
+    accentHover: '#085f42',
+    accentMuted: 'rgba(10,118,82,0.08)',
+    accentBorder: 'rgba(10,118,82,0.25)',
     bg: '#f0efe8',
     fg: '#0a0a0a',
     fgMuted: 'rgba(0,0,0,0.5)',
