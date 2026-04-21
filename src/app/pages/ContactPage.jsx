@@ -29,7 +29,8 @@ export default function ContactPage() {
         </h1>
         <p className="mono" style={{ fontSize: 13, color: fgMuted, maxWidth: 500, lineHeight: 1.8, marginBottom: 80, fontWeight: 300 }}>{t.desc}</p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: cardBorder }}>
+        {/* Contact cards */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: cardBorder, marginBottom: 80 }}>
           {t.contacts.map((c, i) => (
             <div key={i} className="contact-card" style={{ border: `1px solid ${cardBorder}`, background: cardBg }}>
               <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 24 }}>{c.role}</div>
@@ -43,21 +44,29 @@ export default function ContactPage() {
           ))}
         </div>
 
-        <div style={{ width: '100%', height: 1, background: borderColor, margin: '60px 0' }} />
+        <div style={{ width: '100%', height: 1, background: borderColor, marginBottom: 80 }} />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+        {/* Address + Contact info */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, marginBottom: 80 }}>
           <div>
-            <div className="mono" style={{ fontSize: 11, color: fgMuted, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 24 }}>{t.findUs}</div>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 400, letterSpacing: '-0.02em', marginBottom: 24, color: fg }}>{t.hq}</h2>
-            <a href="https://luma.earth" target="_blank" rel="noreferrer" style={{ color: accent, textDecoration: 'none', fontFamily: "'DM Mono', monospace", fontSize: 13 }}>luma.earth ↗</a>
-          </div>
-          <div style={{ border: `1px solid ${cardBorder}`, background: cardBg, height: 280, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ textAlign: 'center' }}>
-              <div className="mono" style={{ fontSize: 11, color: fgMuted, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>{t.visit}</div>
-              <a href="https://luma.earth" target="_blank" rel="noreferrer" className="mono" style={{ fontSize: 13, color: accent, textDecoration: 'none' }}>luma.earth ↗</a>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.01em', marginBottom: 24, color: fg }}>{t.addressTitle}</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <span className="mono" style={{ fontSize: 13, color: fg, fontWeight: 500 }}>{t.company}</span>
+              <span className="mono" style={{ fontSize: 13, color: fgMuted }}>{t.street}</span>
+              <span className="mono" style={{ fontSize: 13, color: fgMuted }}>{t.city}</span>
+              <span className="mono" style={{ fontSize: 13, color: fgMuted }}>{t.country}</span>
             </div>
           </div>
+          <div>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.01em', marginBottom: 24, color: fg }}>{t.contactTitle}</h2>
+            <a href="mailto:info@luma.earth" className="mono" style={{ fontSize: 13, color: fgMuted, textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = accent} onMouseLeave={e => e.currentTarget.style.color = fgMuted}>{t.emailLabel}</a>
+          </div>
         </div>
+
+        <div style={{ width: '100%', height: 1, background: borderColor, marginBottom: 48 }} />
+
+        {/* Legal */}
+        <a href="https://luma.earth" target="_blank" rel="noreferrer" style={{ fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', fontWeight: 400, color: fg, textDecoration: 'underline', fontFamily: "'DM Serif Display', Georgia, serif", transition: 'opacity 0.2s' }} onMouseEnter={e => e.currentTarget.style.opacity = '0.6'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>{t.legal}</a>
       </div>
     </div>
   )

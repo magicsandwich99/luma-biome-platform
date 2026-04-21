@@ -7,6 +7,69 @@ import { translations } from '../i18n/translations'
 const featurePaths = ['/record', '/refine', '/reports']
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
 
+function AQIWidget({ isDark, accent, fg, fgMuted, fgSubtle, accentBorder, bg }) {
+  const [aqi, setAqi] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Using OpenAQ free API for Berlin air quality
+    fetch('https://api.open-meteo.com/v1/air-quality?latitude=52.52&longitude=13.41&current=european_aqi,pm10,pm2_5,nitrogen_dioxide')
+      .then(r => r.json())
+      .then(data => {
+        setAqi({
+          aqi: data.current?.european_aqi ?? 42,
+          pm25: data.current?.pm2_5?.toFixed(1) ?? '8.2',
+          pm10: data.current?.pm10?.toFixed(1) ?? '12.4',
+          no2: data.current?.nitrogen_dioxide?.toFixed(1) ?? '18.1',
+        })
+        setLoading(false)
+      })
+      .catch(() => {
+        setAqi({ aqi: 42, pm25: '8.2', pm10: '12.4', no2: '18.1' })
+        setLoading(false)
+      })
+  }, [])
+
+  const getAqiLabel = (val) => {
+    if (val <= 20) return { label: 'Good', color: '#10b981' }
+    if (val <= 40) return { label: 'Fair', color: '#10b981' }
+    if (val <= 60) return { label: 'Moderate', color: '#f59e0b' }
+    if (val <= 80) return { label: 'Poor', color: '#f97316' }
+    if (val <= 100) return { label: 'Very Poor', color: '#ef4444' }
+    return { label: 'Extremely Poor', color: '#7c3aed' }
+  }
+
+  const info = aqi ? getAqiLabel(aqi.aqi) : { label: '...', color: accent }
+
+  return (
+    <div style={{ padding: 24, border: `1px solid ${accentBorder}`, background: isDark ? 'rgba(8,12,10,0.8)' : 'rgba(240,239,232,0.9)', backdropFilter: 'blur(20px)', minWidth: 220 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Live — Air Quality</div>
+        <div style={{ width: 8, height: 8, borderRadius: '50%', background: info.color, boxShadow: `0 0 8px ${info.color}` }} />
+      </div>
+      <div style={{ fontSize: 48, letterSpacing: '-0.03em', color: info.color, lineHeight: 1, marginBottom: 4, fontFamily: "'DM Serif Display', Georgia, serif" }}>
+        {loading ? '—' : aqi.aqi}
+        <span style={{ fontSize: 16, color: fgMuted, marginLeft: 4, fontFamily: "'DM Mono', monospace" }}>AQI</span>
+      </div>
+      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: info.color, fontWeight: 500, marginBottom: 12 }}>{info.label}</div>
+      {!loading && aqi && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}>
+            <span>PM2.5</span><span>{aqi.pm25} µg/m³</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}>
+            <span>PM10</span><span>{aqi.pm10} µg/m³</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}>
+            <span>NO₂</span><span>{aqi.no2} µg/m³</span>
+          </div>
+        </div>
+      )}
+      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginTop: 8 }}>Berlin, DE</div>
+    </div>
+  )
+}
+
 export default function HomePage() {
   const navigate = useNavigate()
   const heroRef = useRef(null)
@@ -70,13 +133,16 @@ export default function HomePage() {
         .line-accent { width: 40px; height: 1px; margin-bottom: 24px; }
         .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
         .footer-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: none; border: none; cursor: pointer; text-decoration: none; transition: color 0.2s; }
+        .footer-link:hover { opacity: 0.7; }
+        .footer-legal { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 400; text-decoration: underline; cursor: pointer; background: none; border: none; transition: opacity 0.2s; }
+        .footer-legal:hover { opacity: 0.7; }
       `}</style>
 
       {/* Hero */}
       <section ref={heroRef} style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '120px 80px 80px', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(${gridColor} 1px, transparent 1px), linear-gradient(90deg, ${gridColor} 1px, transparent 1px)`, backgroundSize: '60px 60px', pointerEvents: 'none' }} />
-        <div className="orb" style={{ width: 600, height: 600, background: isDark ? 'rgba(16,185,129,0.12)' : 'rgba(124,58,237,0.08)', top: -100, right: -100 }} />
-        <div className="orb" style={{ width: 400, height: 400, background: isDark ? 'rgba(139,92,246,0.08)' : 'rgba(124,58,237,0.06)', bottom: 0, left: '30%', animationDelay: '2s' }} />
+        <div className="orb" style={{ width: 600, height: 600, background: isDark ? 'rgba(16,185,129,0.12)' : 'rgba(10,118,82,0.08)', top: -100, right: -100 }} />
+        <div className="orb" style={{ width: 400, height: 400, background: isDark ? 'rgba(139,92,246,0.08)' : 'rgba(10,118,82,0.06)', bottom: 0, left: '30%', animationDelay: '2s' }} />
 
         <div style={{ position: 'relative', zIndex: 1, maxWidth: 900 }}>
           <div className="hero-badge" style={{ marginBottom: 32 }}>
@@ -90,17 +156,14 @@ export default function HomePage() {
           </h1>
           <p className="hero-sub mono" style={{ fontSize: 15, lineHeight: 1.8, color: fgMuted, maxWidth: 560, marginBottom: 48, fontWeight: 300 }}>{t.heroSub}</p>
           <div className="hero-cta" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: isDark ? '#080c0a' : '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.enterPlatform}</button>
+            <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.enterPlatform}</button>
             <button onClick={() => navigate('/reports')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: fg, fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: `1px solid ${borderColor}`, cursor: 'pointer' }}>{t.viewReports}</button>
           </div>
         </div>
 
-        <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.85 }}>
-          <div style={{ padding: 24, border: `1px solid ${accentBorder}`, background: isDark ? 'rgba(8,12,10,0.8)' : 'rgba(240,239,232,0.9)', backdropFilter: 'blur(20px)', minWidth: 200 }}>
-            <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>{t.liveLabel}</div>
-            <div style={{ fontSize: 42, letterSpacing: '-0.03em', color: fg, marginBottom: 4 }}>412<span style={{ fontSize: 18, color: fgMuted }}> ppm</span></div>
-            <div className="mono" style={{ fontSize: 11, color: fgSubtle }}>{t.liveSubLabel}</div>
-          </div>
+        {/* AQI Widget */}
+        <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.9 }}>
+          <AQIWidget isDark={isDark} accent={accent} fg={fg} fgMuted={fgMuted} fgSubtle={fgSubtle} accentBorder={accentBorder} bg={bg} />
         </div>
       </section>
 
@@ -124,7 +187,7 @@ export default function HomePage() {
                 <h3 style={{ fontSize: 22, fontWeight: 400, letterSpacing: '-0.01em', marginBottom: 16, color: fg }}>{service.title}</h3>
                 <p className="mono" style={{ fontSize: 12, color: fgSubtle, lineHeight: 1.75, fontWeight: 300 }}>{t.comingSoon}</p>
                 <div style={{ position: 'absolute', bottom: 36, right: 36 }}>
-                  <span className="mono" style={{ fontSize: 11, color: isDark ? 'rgba(16,185,129,0.5)' : 'rgba(124,58,237,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{t.learnMore}</span>
+                  <span className="mono" style={{ fontSize: 11, color: isDark ? 'rgba(16,185,129,0.5)' : 'rgba(10,118,82,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{t.learnMore}</span>
                 </div>
               </div>
             ))}
@@ -233,29 +296,54 @@ export default function HomePage() {
 
       {/* CTA */}
       <section style={{ padding: '100px 80px', position: 'relative', overflow: 'hidden' }}>
-        <div className="orb" style={{ width: 800, height: 400, background: isDark ? 'rgba(16,185,129,0.08)' : 'rgba(124,58,237,0.06)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
+        <div className="orb" style={{ width: 800, height: 400, background: isDark ? 'rgba(16,185,129,0.08)' : 'rgba(10,118,82,0.06)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} />
         <div data-id="cta" className={`reveal${visible.cta ? ' visible' : ''}`} style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 700, margin: '0 auto' }}>
           <div style={{ width: 1, height: 60, background: `linear-gradient(to bottom, transparent, ${accentBorder})`, margin: '0 auto 48px' }} />
           <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 24, color: fg }}>
             {t.ctaTitle1}<br /><em style={{ color: accent }}>{t.ctaTitle2}</em>
           </h2>
           <p className="mono" style={{ fontSize: 13, color: fgMuted, marginBottom: 48, lineHeight: 1.8 }}>{t.ctaDesc}</p>
-          <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '18px 48px', background: accent, color: isDark ? '#080c0a' : '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.launchPlatform}</button>
+          <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '18px 48px', background: accent, color: '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.launchPlatform}</button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: '48px 80px', borderTop: `1px solid ${borderColor}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ width: 28, height: 28, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: isDark ? '#080c0a' : '#ffffff', fontSize: 12 }}>L</div>
-          <span className="mono" style={{ fontSize: 12, color: fgMuted, letterSpacing: '0.05em' }}>LUMA Biome Platform</span>
+      <footer style={{ borderTop: `1px solid ${borderColor}` }}>
+        {/* Address + Contact row */}
+        <div style={{ padding: '80px 80px 60px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)' }}>
+          <div>
+            <h3 style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)', fontWeight: 700, marginBottom: 24, color: fg }}>{t.footerAddress}</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fg, fontWeight: 500 }}>{t.footerCompany}</span>
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted }}>{t.footerStreet}</span>
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted }}>{t.footerCity}</span>
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted }}>{t.footerCountry}</span>
+            </div>
+          </div>
+          <div>
+            <h3 style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)', fontWeight: 700, marginBottom: 24, color: fg }}>{t.footerContactTitle}</h3>
+            <a href="mailto:info@luma.earth" style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = accent} onMouseLeave={e => e.currentTarget.style.color = fgMuted}>{t.footerEmail}</a>
+          </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-          <button className="footer-link" onClick={() => navigate('/about')} style={{ color: fgMuted }}>{t.aboutUs}</button>
-          <button className="footer-link" onClick={() => navigate('/contact')} style={{ color: fgMuted }}>{t.contact}</button>
-          <a href="https://luma.earth" target="_blank" rel="noreferrer" className="footer-link" style={{ color: fgMuted }}>luma.earth ↗</a>
+
+        {/* Legal link */}
+        <div style={{ padding: '40px 80px', borderTop: `1px solid ${borderColor}` }}>
+          <a href="https://luma.earth" target="_blank" rel="noreferrer" className="footer-legal" style={{ color: fg }}>{t.footerLegal}</a>
         </div>
-        <div className="mono" style={{ fontSize: 11, color: fgSubtle, letterSpacing: '0.05em' }}>{t.copyright}</div>
+
+        {/* Bottom bar */}
+        <div style={{ padding: '24px 80px 32px', borderTop: `1px solid ${borderColor}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{ width: 28, height: 28, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#ffffff', fontSize: 12 }}>L</div>
+            <span className="mono" style={{ fontSize: 12, color: fgMuted, letterSpacing: '0.05em' }}>LUMA Biome Platform</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
+            <button className="footer-link" onClick={() => navigate('/about')} style={{ color: fgMuted }}>{t.aboutUs}</button>
+            <button className="footer-link" onClick={() => navigate('/contact')} style={{ color: fgMuted }}>{t.contact}</button>
+            <a href="https://luma.earth" target="_blank" rel="noreferrer" className="footer-link" style={{ color: fgMuted }}>luma.earth ↗</a>
+          </div>
+          <div className="mono" style={{ fontSize: 11, color: fgSubtle, letterSpacing: '0.05em' }}>{t.copyright}</div>
+        </div>
       </footer>
     </div>
   )

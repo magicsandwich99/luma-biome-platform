@@ -1,6 +1,5 @@
 export const translations = {
   en: {
-    // Nav
     nav: {
       home: 'Home',
       record: 'Record',
@@ -8,7 +7,6 @@ export const translations = {
       report: 'Report',
       tagline: 'Biodiversity & Sustainability Data',
     },
-    // Home
     home: {
       badge: 'Biome Intelligence Platform',
       heroTitle1: "Nature's data,",
@@ -16,8 +14,6 @@ export const translations = {
       heroSub: 'LUMA Biome Platform is the centralised intelligence layer for companies committed to nature-positive operations — capturing, refining, and reporting real biodiversity data to the bodies that matter.',
       enterPlatform: 'Enter Platform →',
       viewReports: 'View Reports',
-      liveLabel: 'Live — Forest CO₂',
-      liveSubLabel: '↑ 0.3% from last hour',
       servicesLabel: 'Our Services',
       servicesTitle: 'What LUMA offers.',
       servicesDesc: 'Hover to pause. Each service is designed to help companies track, understand and report on their environmental impact.',
@@ -47,6 +43,14 @@ export const translations = {
       aboutUs: 'About Us',
       contact: 'Contact',
       copyright: '© 2025 LUMA Earth. All rights reserved.',
+      footerAddress: 'Address',
+      footerCompany: 'LUMA GbR Malte Larsen & Lukas Steingässer',
+      footerStreet: 'Schillerstrasse 15',
+      footerCity: 'DE-16225 Eberswalde',
+      footerCountry: 'GERMANY',
+      footerContactTitle: 'Contact us',
+      footerEmail: 'Email: info@luma.earth',
+      footerLegal: 'Legal notice & privacy policy',
       stats: [
         { value: '2.4M', label: 'Data points collected' },
         { value: '180+', label: 'Active monitoring stations' },
@@ -54,7 +58,7 @@ export const translations = {
         { value: '12', label: 'Reporting frameworks supported' },
       ],
       features: [
-        { icon: '⬡', title: 'Live Sensor Network', desc: 'Connect biodiversity sensors across air, water, soil and climate. Real-time data streams from every monitoring station, visualised on a live map.', cta: 'Open Record' },
+        { icon: '⬡', title: 'Data Monitoring Solutions', desc: 'Connect biodiversity sensors across air, water, soil and climate. Real-time data streams from every monitoring station, visualised on a live map.', cta: 'Open Record' },
         { icon: '⟁', title: 'Intelligent Data Refinery', desc: 'Build visual data pipelines. Connect sensors to filters, aggregators and normalisation nodes. Clean your data before it reaches any report.', cta: 'Open Refine' },
         { icon: '◈', title: 'Compliance Reports', desc: 'Generate audit-ready sustainability reports aligned to GRI, TNFD, CDP and more. Export with one click and submit directly to reporting bodies.', cta: 'Open Reports' },
       ],
@@ -70,7 +74,6 @@ export const translations = {
         { number: '09', title: 'Long-Term Stewardship' },
       ],
     },
-    // About
     about: {
       label: 'About Us',
       title1: 'The team behind',
@@ -82,7 +85,6 @@ export const translations = {
       sponsorRole: 'Project Sponsor — LUMA Earth',
       photo: 'Photo',
     },
-    // Contact
     contact: {
       label: 'Contact Us',
       title1: 'Get in touch',
@@ -91,13 +93,20 @@ export const translations = {
       findUs: 'Find Us',
       hq: 'LUMA Earth HQ',
       visit: 'Visit',
+      addressTitle: 'Address',
+      company: 'LUMA GbR Malte Larsen & Lukas Steingässer',
+      street: 'Schillerstrasse 15',
+      city: 'DE-16225 Eberswalde',
+      country: 'GERMANY',
+      contactTitle: 'Contact us',
+      emailLabel: 'Email: info@luma.earth',
+      legal: 'Legal notice & privacy policy',
       contacts: [
         { name: 'LUMA Earth', role: 'General Enquiries', description: 'For general questions about LUMA Earth and our sustainability programs.' },
         { name: 'Platform Support', role: 'Technical Support', description: 'For technical issues, sensor onboarding, or data pipeline questions.' },
         { name: 'Partnerships', role: 'Business Development', description: 'Interested in becoming a LUMA partner company? Get in touch with our team.' },
       ],
     },
-    // Map
     map: {
       sensors: 'Sensors',
       addSensor: 'Add Sensor',
@@ -124,7 +133,6 @@ export const translations = {
       last: 'Last',
       monitoring: 'active monitoring',
     },
-    // Refine
     refine: {
       title: 'Refine Flow',
       desc: 'Connect sensors to filters and create report outputs',
@@ -158,7 +166,6 @@ export const translations = {
       noNodesDesc: 'Add sensors in the Record tab to get started',
       flowCanvas: 'Flow Canvas',
     },
-    // Reports
     reports: {
       title: 'Reports & Analytics',
       desc: 'Visualize trends and export data from your sensors',
@@ -205,8 +212,6 @@ export const translations = {
       heroSub: 'LUMA Biome Platform ist die zentrale Intelligenzschicht für Unternehmen, die sich naturpositiven Betrieben verschrieben haben — Erfassung, Verfeinerung und Meldung realer Biodiversitätsdaten.',
       enterPlatform: 'Plattform betreten →',
       viewReports: 'Berichte ansehen',
-      liveLabel: 'Live — Wald CO₂',
-      liveSubLabel: '↑ 0,3% zur letzten Stunde',
       servicesLabel: 'Unsere Leistungen',
       servicesTitle: 'Was LUMA bietet.',
       servicesDesc: 'Zum Pausieren hovern. Jede Leistung hilft Unternehmen, ihren Umwelteinfluss zu verfolgen und zu berichten.',
@@ -236,6 +241,14 @@ export const translations = {
       aboutUs: 'Über uns',
       contact: 'Kontakt',
       copyright: '© 2025 LUMA Earth. Alle Rechte vorbehalten.',
+      footerAddress: 'Addresse',
+      footerCompany: 'LUMA GbR Malte Larsen & Lukas Steingässer',
+      footerStreet: 'Schillerstraße 15',
+      footerCity: 'DE-16225 Eberswalde',
+      footerCountry: 'GERMANY',
+      footerContactTitle: 'Kontakt',
+      footerEmail: 'E-Mail: info@luma.earth',
+      footerLegal: 'Impressum & Datenschutzerklärung',
       stats: [
         { value: '2,4M', label: 'Gesammelte Datenpunkte' },
         { value: '180+', label: 'Aktive Messstationen' },
@@ -243,7 +256,7 @@ export const translations = {
         { value: '12', label: 'Unterstützte Berichtsrahmen' },
       ],
       features: [
-        { icon: '⬡', title: 'Live-Sensornetzwerk', desc: 'Verbinden Sie Biodiversitätssensoren für Luft, Wasser, Boden und Klima. Echtzeit-Datenströme von jeder Messstation, visualisiert auf einer Live-Karte.', cta: 'Erfassen öffnen' },
+        { icon: '⬡', title: 'Datenüberwachungslösungen', desc: 'Verbinden Sie Biodiversitätssensoren für Luft, Wasser, Boden und Klima. Echtzeit-Datenströme von jeder Messstation, visualisiert auf einer Live-Karte.', cta: 'Erfassen öffnen' },
         { icon: '⟁', title: 'Intelligente Datenraffinerie', desc: 'Erstellen Sie visuelle Datenpipelines. Verbinden Sie Sensoren mit Filtern, Aggregatoren und Normalisierungsknoten.', cta: 'Verfeinern öffnen' },
         { icon: '◈', title: 'Compliance-Berichte', desc: 'Erstellen Sie prüfungssichere Nachhaltigkeitsberichte nach GRI, TNFD, CDP und mehr. Mit einem Klick exportieren und direkt einreichen.', cta: 'Berichte öffnen' },
       ],
@@ -278,6 +291,14 @@ export const translations = {
       findUs: 'Finden Sie uns',
       hq: 'LUMA Earth Hauptsitz',
       visit: 'Besuchen',
+      addressTitle: 'Addresse',
+      company: 'LUMA GbR Malte Larsen & Lukas Steingässer',
+      street: 'Schillerstraße 15',
+      city: 'DE-16225 Eberswalde',
+      country: 'GERMANY',
+      contactTitle: 'Kontakt',
+      emailLabel: 'E-Mail: info@luma.earth',
+      legal: 'Impressum & Datenschutzerklärung',
       contacts: [
         { name: 'LUMA Earth', role: 'Allgemeine Anfragen', description: 'Für allgemeine Fragen zu LUMA Earth und unseren Nachhaltigkeitsprogrammen.' },
         { name: 'Plattform-Support', role: 'Technischer Support', description: 'Für technische Probleme, Sensor-Onboarding oder Datenpipeline-Fragen.' },
