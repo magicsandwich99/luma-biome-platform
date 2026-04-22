@@ -6,6 +6,10 @@ export const translations = {
       refine: 'Refine',
       report: 'Report',
       tagline: 'Biodiversity & Sustainability Data',
+      services: 'Our Services',
+      projects: 'Projects',
+      about: 'About Us',
+      contactNav: 'Contact Us',
     },
     home: {
       badge: 'Biome Intelligence Platform',
@@ -100,6 +104,7 @@ export const translations = {
       country: 'GERMANY',
       contactTitle: 'Contact us',
       emailLabel: 'Email: info@luma.earth',
+      phone: '+49 15226220865',
       legal: 'Legal notice & privacy policy',
       contacts: [
         { name: 'LUMA Earth', role: 'General Enquiries', description: 'For general questions about LUMA Earth and our sustainability programs.' },
@@ -204,6 +209,10 @@ export const translations = {
       refine: 'Verfeinern',
       report: 'Bericht',
       tagline: 'Biodiversitäts- & Nachhaltigkeitsdaten',
+      services: 'Leistungen',
+      projects: 'Projekte',
+      about: 'Über uns',
+      contactNav: 'Kontakt',
     },
     home: {
       badge: 'Biom-Intelligenzplattform',
@@ -298,6 +307,7 @@ export const translations = {
       country: 'GERMANY',
       contactTitle: 'Kontakt',
       emailLabel: 'E-Mail: info@luma.earth',
+      phone: '+49 15226220865',
       legal: 'Impressum & Datenschutzerklärung',
       contacts: [
         { name: 'LUMA Earth', role: 'Allgemeine Anfragen', description: 'Für allgemeine Fragen zu LUMA Earth und unseren Nachhaltigkeitsprogrammen.' },
