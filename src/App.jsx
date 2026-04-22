@@ -10,6 +10,7 @@ import ReportsPage from './app/pages/ReportsPage'
 import HomePage from './app/pages/HomePage'
 import AboutPage from './app/pages/AboutPage'
 import ContactPage from './app/pages/ContactPage'
+import PrivacyPage from './app/pages/PrivacyPage'
 import { Map, GitBranch, BarChart2, Home, Sun, Moon } from 'lucide-react'
 
 const queryClient = new QueryClient()
@@ -106,6 +107,7 @@ function AppInner() {
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
           </Routes>
         </main>
 

@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import { useLang } from '../context/LangContext'
 import { useTheme, themeColors } from '../context/ThemeContext'
 import { translations } from '../i18n/translations'
 
 export default function ContactPage() {
+  const navigate = useNavigate()
   const { lang } = useLang()
   const { theme } = useTheme()
   const t = translations[lang].contact
@@ -65,8 +67,15 @@ export default function ContactPage() {
 
         <div style={{ width: '100%', height: 1, background: borderColor, marginBottom: 48 }} />
 
-        {/* Legal */}
-        <a href="https://luma.earth" target="_blank" rel="noreferrer" style={{ fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', fontWeight: 400, color: fg, textDecoration: 'underline', fontFamily: "'DM Serif Display', Georgia, serif", transition: 'opacity 0.2s' }} onMouseEnter={e => e.currentTarget.style.opacity = '0.6'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>{t.legal}</a>
+        {/* Legal link — goes to internal privacy page */}
+        <button
+          onClick={() => navigate('/privacy')}
+          style={{ fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', fontWeight: 400, color: fg, textDecoration: 'underline', fontFamily: "'DM Serif Display', Georgia, serif", transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          onMouseEnter={e => e.currentTarget.style.opacity = '0.6'}
+          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+        >
+          {t.legal}
+        </button>
       </div>
     </div>
   )
