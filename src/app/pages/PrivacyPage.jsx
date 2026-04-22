@@ -10,10 +10,6 @@ const content = {
     back: '← Back',
     sections: [
       {
-        heading: 'Legal Notice (Impressum)',
-        body: 'LUMA GbR\nMalte Larsen & Lukas Steingässer\nSchillerstrasse 15\nDE-16225 Eberswalde\nGermany\n\nEmail: info@luma.earth\nWebsite: luma.earth',
-      },
-      {
         heading: 'introduction',
         body: 'We, LUMA GmbH („we", „us", „our"), take the protection of your personal data very seriously. This privacy policy informs you how we collect, use and protect personal information when you visit our website and use our services.',
       },
@@ -50,7 +46,7 @@ const content = {
       },
       {
         heading: 'Cookies and tracking technologies',
-        body: 'We use cookies to provide you with an optimal usage experience. When you first visit our website, you can use a cookie banner to decide whether you only need cookies or also additional cookies (e.g.B. for analyses). For more information, please see our Cookies Policy.',
+        body: 'We use cookies to provide you with an optimal usage experience. When you first visit our website, you can use a cookie banner to decide whether you only need cookies or also additional cookies (e.g. B. for analyses). For more information, please see our Cookies Policy.',
       },
       {
         heading: 'How long do we store your data?',
@@ -87,10 +83,6 @@ const content = {
     statusDate: '17. November 2024',
     back: '← Zurück',
     sections: [
-      {
-        heading: 'Impressum',
-        body: 'LUMA GbR\nMalte Larsen & Lukas Steingässer\nSchillerstraße 15\nDE-16225 Eberswalde\nDeutschland\n\nE-Mail: info@luma.earth\nWebsite: luma.earth',
-      },
       {
         heading: 'Einleitung',
         body: 'Wir, die LUMA GmbH („wir", „uns", „unser/e"), nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Diese Datenschutzerklärung informiert Sie darüber, wie wir personenbezogene Daten erfassen, verwenden und schützen, wenn Sie unsere Website besuchen und unsere Dienste nutzen.',
@@ -167,59 +159,57 @@ export default function PrivacyPage() {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
   const c = themeColors[theme]
-  const { accent, bg, fg, fgMuted, fgSubtle, borderColor, cardBg } = c
+  const { accent, bg, fg, fgMuted, fgSubtle, borderColor } = c
   const t = content[lang]
 
   return (
-    <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
+    <div style={{ fontFamily: "'DM Mono', monospace", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
-        .mono { font-family: 'DM Mono', monospace; }
       `}</style>
 
       {/* Hero band */}
-      <div style={{ background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', borderBottom: `1px solid ${borderColor}`, padding: '60px 80px 48px' }}>
+      <div style={{ background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', borderBottom: `1px solid ${borderColor}`, padding: '60px 80px 48px', textAlign: 'center' }}>
         <button
           onClick={() => navigate(-1)}
-          className="mono"
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: accent, fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 32, padding: 0, transition: 'opacity 0.2s' }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: accent, fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 32, padding: 0, display: 'block', transition: 'opacity 0.2s', fontFamily: "'DM Mono', monospace", textAlign: 'left' }}
           onMouseEnter={e => e.currentTarget.style.opacity = '0.6'}
           onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
           {t.back}
         </button>
-        <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: fg, marginBottom: 16 }}>{t.title}</h1>
-        <p className="mono" style={{ fontSize: 13, color: fgSubtle, letterSpacing: '0.02em' }}>
+        <h1 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.05, color: fg, marginBottom: 24 }}>{t.title}</h1>
+        <p style={{ fontSize: 14, color: fgMuted, letterSpacing: '0.02em' }}>
           {t.status} <strong style={{ color: fg }}>{t.statusDate}</strong>
         </p>
       </div>
 
       {/* Content */}
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '80px 80px 120px' }}>
+      <div style={{ maxWidth: 760, margin: '0 auto', padding: '60px 40px 120px' }}>
         {t.sections.map((section, i) => (
-          <div key={i} style={{ marginBottom: 48, paddingBottom: 48, borderBottom: i < t.sections.length - 1 ? `1px solid ${borderColor}` : 'none' }}>
-            <h2 style={{ fontSize: 'clamp(1rem, 2vw, 1.3rem)', fontWeight: 700, letterSpacing: '0', marginBottom: 12, color: fg, fontFamily: "'DM Mono', monospace" }}>{section.heading}</h2>
+          <div key={i} style={{ marginBottom: 32 }}>
+            {/* Heading */}
+            <p style={{ fontSize: 14, fontWeight: 700, color: fg, marginBottom: 8, fontFamily: "'DM Mono', monospace" }}>{section.heading}</p>
 
+            {/* Body text */}
             {section.body && (
-              <p className="mono" style={{ fontSize: 13, lineHeight: 1.9, color: fgMuted, fontWeight: 300, whiteSpace: 'pre-line', marginBottom: section.list ? 16 : 0 }}>{section.body}</p>
+              <p style={{ fontSize: 14, lineHeight: 1.8, color: fgMuted, fontWeight: 300, whiteSpace: 'pre-line', marginBottom: section.list || section.orderedList ? 12 : 0 }}>{section.body}</p>
             )}
 
+            {/* Ordered list */}
             {section.orderedList && (
-              <ol style={{ paddingLeft: 20, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <ol style={{ paddingLeft: 24, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {section.orderedList.map((item, j) => (
-                  <li key={j}>
-                    <span className="mono" style={{ fontSize: 13, lineHeight: 1.8, color: fgMuted, fontWeight: 300 }}>{item}</span>
-                  </li>
+                  <li key={j} style={{ fontSize: 14, lineHeight: 1.8, color: fgMuted, fontWeight: 300, paddingLeft: 4 }}>{item}</li>
                 ))}
               </ol>
             )}
 
+            {/* Bullet list */}
             {section.list && (
-              <ul style={{ paddingLeft: 20, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <ul style={{ paddingLeft: 24, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {section.list.map((item, j) => (
-                  <li key={j}>
-                    <span className="mono" style={{ fontSize: 13, lineHeight: 1.8, color: fgMuted, fontWeight: 300 }}>{item}</span>
-                  </li>
+                  <li key={j} style={{ fontSize: 14, lineHeight: 1.8, color: fgMuted, fontWeight: 300, paddingLeft: 4 }}>{item}</li>
                 ))}
               </ul>
             )}
@@ -231,9 +221,9 @@ export default function PrivacyPage() {
       <div style={{ borderTop: `1px solid ${borderColor}`, padding: '32px 80px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ width: 28, height: 28, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#ffffff', fontSize: 12 }}>L</div>
-          <span className="mono" style={{ fontSize: 12, color: fgMuted, letterSpacing: '0.05em' }}>LUMA Biome Platform</span>
+          <span style={{ fontSize: 12, color: fgMuted, letterSpacing: '0.05em' }}>LUMA Biome Platform</span>
         </div>
-        <span className="mono" style={{ fontSize: 11, color: fgSubtle, letterSpacing: '0.05em' }}>© 2025 LUMA Earth. All rights reserved.</span>
+        <span style={{ fontSize: 11, color: fgSubtle, letterSpacing: '0.05em' }}>© 2025 LUMA Earth. All rights reserved.</span>
       </div>
     </div>
   )
