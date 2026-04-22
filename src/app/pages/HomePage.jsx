@@ -7,12 +7,11 @@ import { translations } from '../i18n/translations'
 const featurePaths = ['/record', '/refine', '/reports']
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
 
-function AQIWidget({ isDark, accent, fg, fgMuted, fgSubtle, accentBorder, bg }) {
+function AQIWidget({ isDark, accent, fg, fgMuted, fgSubtle, accentBorder }) {
   const [aqi, setAqi] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Using OpenAQ free API for Berlin air quality
     fetch('https://api.open-meteo.com/v1/air-quality?latitude=52.52&longitude=13.41&current=european_aqi,pm10,pm2_5,nitrogen_dioxide')
       .then(r => r.json())
       .then(data => {
@@ -81,7 +80,7 @@ export default function HomePage() {
   const c = themeColors[theme]
   const { accent, accentHover, accentMuted, accentBorder, bg, fg, fgMuted, fgSubtle, borderColor, cardBg, cardBorder } = c
 
-  const gridColor = isDark ? 'rgba(16,185,129,0.04)' : 'rgba(124,58,237,0.04)'
+  const gridColor = isDark ? 'rgba(16,185,129,0.04)' : 'rgba(10,118,82,0.04)'
   const fadeLeft = isDark ? 'linear-gradient(to right, #080c0a, transparent)' : 'linear-gradient(to right, #f0efe8, transparent)'
   const fadeRight = isDark ? 'linear-gradient(to left, #080c0a, transparent)' : 'linear-gradient(to left, #f0efe8, transparent)'
   const statsBg = isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.01)'
@@ -132,9 +131,9 @@ export default function HomePage() {
         .framework-pill { padding: 8px 20px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.05em; transition: all 0.2s; cursor: default; }
         .line-accent { width: 40px; height: 1px; margin-bottom: 24px; }
         .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
-        .footer-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: none; border: none; cursor: pointer; text-decoration: none; transition: color 0.2s; }
+        .footer-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: none; border: none; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
         .footer-link:hover { opacity: 0.7; }
-        .footer-legal { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 400; text-decoration: underline; cursor: pointer; background: none; border: none; transition: opacity 0.2s; }
+        .footer-legal { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 400; text-decoration: underline; cursor: pointer; background: none; border: none; transition: opacity 0.2s; padding: 0; text-align: left; }
         .footer-legal:hover { opacity: 0.7; }
       `}</style>
 
@@ -163,7 +162,7 @@ export default function HomePage() {
 
         {/* AQI Widget */}
         <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.9 }}>
-          <AQIWidget isDark={isDark} accent={accent} fg={fg} fgMuted={fgMuted} fgSubtle={fgSubtle} accentBorder={accentBorder} bg={bg} />
+          <AQIWidget isDark={isDark} accent={accent} fg={fg} fgMuted={fgMuted} fgSubtle={fgSubtle} accentBorder={accentBorder} />
         </div>
       </section>
 
@@ -314,10 +313,10 @@ export default function HomePage() {
           <div>
             <h3 style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)', fontWeight: 700, marginBottom: 24, color: fg }}>{t.footerAddress}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fg, fontWeight: 500 }}>{t.footerCompany}</span>
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted }}>{t.footerStreet}</span>
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted }}>{t.footerCity}</span>
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted }}>{t.footerCountry}</span>
+              <span className="mono" style={{ fontSize: 13, color: fg, fontWeight: 500 }}>{t.footerCompany}</span>
+              <span className="mono" style={{ fontSize: 13, color: fgMuted }}>{t.footerStreet}</span>
+              <span className="mono" style={{ fontSize: 13, color: fgMuted }}>{t.footerCity}</span>
+              <span className="mono" style={{ fontSize: 13, color: fgMuted }}>{t.footerCountry}</span>
             </div>
           </div>
           <div>
@@ -326,9 +325,15 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Legal link */}
+        {/* Legal link — navigates to internal privacy page */}
         <div style={{ padding: '40px 80px', borderTop: `1px solid ${borderColor}` }}>
-          <a href="https://luma.earth" target="_blank" rel="noreferrer" className="footer-legal" style={{ color: fg }}>{t.footerLegal}</a>
+          <button
+            onClick={() => navigate('/privacy')}
+            className="footer-legal"
+            style={{ color: fg }}
+          >
+            {t.footerLegal}
+          </button>
         </div>
 
         {/* Bottom bar */}
