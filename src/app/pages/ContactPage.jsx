@@ -31,7 +31,6 @@ export default function ContactPage() {
         </h1>
         <p className="mono" style={{ fontSize: 13, color: fgMuted, maxWidth: 500, lineHeight: 1.8, marginBottom: 80, fontWeight: 300 }}>{t.desc}</p>
 
-        {/* Contact cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: cardBorder, marginBottom: 80 }}>
           {t.contacts.map((c, i) => (
             <div key={i} className="contact-card" style={{ border: `1px solid ${cardBorder}`, background: cardBg }}>
@@ -48,7 +47,6 @@ export default function ContactPage() {
 
         <div style={{ width: '100%', height: 1, background: borderColor, marginBottom: 80 }} />
 
-        {/* Address + Contact info */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, marginBottom: 80 }}>
           <div>
             <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.01em', marginBottom: 24, color: fg }}>{t.addressTitle}</h2>
@@ -61,40 +59,13 @@ export default function ContactPage() {
           </div>
           <div>
             <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.01em', marginBottom: 24, color: fg }}>{t.contactTitle}</h2>
-            
-              href="mailto:info@luma.earth"
-              className="mono"
-              style={{ fontSize: 13, color: fgMuted, textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.color = accent}
-              onMouseLeave={e => e.currentTarget.style.color = fgMuted}
-            >
-              {t.emailLabel}
-            </a>
+            <a href="mailto:info@luma.earth" className="mono" style={{ fontSize: 13, color: fgMuted, textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = accent} onMouseLeave={e => e.currentTarget.style.color = fgMuted}>{t.emailLabel}</a>
           </div>
         </div>
 
         <div style={{ width: '100%', height: 1, background: borderColor, marginBottom: 48 }} />
 
-        {/* Legal link — navigates to internal privacy page */}
-        <button
-          onClick={() => navigate('/privacy')}
-          style={{
-            fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
-            fontWeight: 400,
-            color: fg,
-            textDecoration: 'underline',
-            fontFamily: "'DM Serif Display', Georgia, serif",
-            transition: 'opacity 0.2s',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: 0,
-          }}
-          onMouseEnter={e => e.currentTarget.style.opacity = '0.6'}
-          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-        >
-          {t.legal}
-        </button>
+        <button onClick={() => navigate('/privacy')} style={{ fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', fontWeight: 400, color: fg, textDecoration: 'underline', fontFamily: "'DM Serif Display', Georgia, serif", transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }} onMouseEnter={e => e.currentTarget.style.opacity = '0.6'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>{t.legal}</button>
       </div>
     </div>
   )
