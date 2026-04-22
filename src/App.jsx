@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import { DataProvider } from './app/context/DataContext'
 import { LangProvider, useLang } from './app/context/LangContext'
 import { ThemeProvider, useTheme, themeColors } from './app/context/ThemeContext'
@@ -14,6 +15,14 @@ import PrivacyPage from './app/pages/PrivacyPage'
 import { Map, GitBranch, BarChart2, Home, Sun, Moon } from 'lucide-react'
 
 const queryClient = new QueryClient()
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
 
 function AppInner() {
   const { lang, setLang } = useLang()
@@ -44,6 +53,7 @@ function AppInner() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div style={{ minHeight: '100vh', background: c.bg, display: 'flex', flexDirection: 'column', transition: 'background 0.3s' }}>
         <header className="flex items-center justify-between px-6 py-4" style={headerStyle}>
           <div className="flex items-center gap-3">
@@ -111,7 +121,6 @@ function AppInner() {
           </Routes>
         </main>
 
-        {/* Floating theme toggle */}
         <button
           onClick={toggleTheme}
           style={{

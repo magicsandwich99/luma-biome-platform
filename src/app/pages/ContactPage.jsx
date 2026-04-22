@@ -61,16 +61,35 @@ export default function ContactPage() {
           </div>
           <div>
             <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.01em', marginBottom: 24, color: fg }}>{t.contactTitle}</h2>
-            <a href="mailto:info@luma.earth" className="mono" style={{ fontSize: 13, color: fgMuted, textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = accent} onMouseLeave={e => e.currentTarget.style.color = fgMuted}>{t.emailLabel}</a>
+            
+              href="mailto:info@luma.earth"
+              className="mono"
+              style={{ fontSize: 13, color: fgMuted, textDecoration: 'none', transition: 'color 0.2s' }}
+              onMouseEnter={e => e.currentTarget.style.color = accent}
+              onMouseLeave={e => e.currentTarget.style.color = fgMuted}
+            >
+              {t.emailLabel}
+            </a>
           </div>
         </div>
 
         <div style={{ width: '100%', height: 1, background: borderColor, marginBottom: 48 }} />
 
-        {/* Legal link — goes to internal privacy page */}
+        {/* Legal link — navigates to internal privacy page */}
         <button
           onClick={() => navigate('/privacy')}
-          style={{ fontSize: 'clamp(1.2rem, 2.5vw, 2rem)', fontWeight: 400, color: fg, textDecoration: 'underline', fontFamily: "'DM Serif Display', Georgia, serif", transition: 'opacity 0.2s', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          style={{
+            fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
+            fontWeight: 400,
+            color: fg,
+            textDecoration: 'underline',
+            fontFamily: "'DM Serif Display', Georgia, serif",
+            transition: 'opacity 0.2s',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: 0,
+          }}
           onMouseEnter={e => e.currentTarget.style.opacity = '0.6'}
           onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
