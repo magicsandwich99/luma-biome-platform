@@ -1,6 +1,6 @@
 import { useTheme, themeColors } from '../context/ThemeContext'
 import { useLang } from '../context/LangContext'
-import smoothDrone from '../../assets/SmoothDrone.MP4'
+import smoothDrone from '../../assets/SmoothDrone.mp4'
 
 export default function ProjectsPage() {
   const { theme } = useTheme()
