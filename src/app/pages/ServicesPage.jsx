@@ -4,13 +4,53 @@ import { useLang } from '../context/LangContext'
 import { translations } from '../i18n/translations'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 
+import treeService1 from '../../assets/Service1/Tree service 1.png'
+import treeService2 from '../../assets/Service1/Tree service 2.jpg'
+import treeService3 from '../../assets/Service1/Tree service 3.jpg'
+import treeService4 from '../../assets/Service1/Tree service 4.jpg'
+import treeService5 from '../../assets/Service1/Tree service 5.jpg'
+
+import consulting1 from '../../assets/Service2/Consulting1.jpeg'
+import consulting2 from '../../assets/Service2/Consulting2.jpeg'
+import consulting3 from '../../assets/Service2/Consulting3.jpg'
+import consulting4 from '../../assets/Service2/Consulting4.jpg'
+import consulting5 from '../../assets/Service2/Consulting5.jpg'
+import consulting6 from '../../assets/Service2/Consulting6.jpg'
+import consulting7 from '../../assets/Service2/Consulting7.jpg'
+
+import drone1 from '../../assets/Service3/Drone1.jpg'
+import drone2 from '../../assets/Service3/Drone2.jpg'
+
+import climate1 from '../../assets/Service5/Climate1.jpg'
+import climate2 from '../../assets/Service5/Climate2.jpg'
+import climate3 from '../../assets/Service5/Climate3.jpg'
+import climate4 from '../../assets/Service5/Climate4.png'
+import climate5 from '../../assets/Service5/Climate5.jpg'
+import climate6 from '../../assets/Service5/Climate6.JPG'
+import climate7 from '../../assets/Service5/Climate7.JPG'
+import climate8 from '../../assets/Service5/Climate8.JPG'
+import climate9 from '../../assets/Service5/Climate9.JPG'
+
+import biome1 from '../../assets/Service8/Biome1.JPG'
+import biome2 from '../../assets/Service8/Biome2.JPG'
+import biome3 from '../../assets/Service8/Biome3.JPG'
+
+import stewardship1 from '../../assets/Service9/Stewardship1.JPG'
+import stewardship2 from '../../assets/Service9/Stewardship2.JPG'
+import stewardship3 from '../../assets/Service9/Stewardship3.JPG'
+import stewardship4 from '../../assets/Service9/Stewardship4.JPG'
+import stewardship5 from '../../assets/Service9/Stewardship5.JPG'
+import stewardship6 from '../../assets/Service9/Stewardship6.JPG'
+import stewardship7 from '../../assets/Service9/Stewardship7.JPG'
+import stewardship8 from '../../assets/Service9/Stewardship8.JPG'
+
 const serviceDetails = {
   en: [
     {
       number: '01',
       title: 'Tree Care & Tree Assessment',
       summary: 'Professional pruning, assessment and care of urban trees in line with German industry standards.',
-      images: [],
+      images: [treeService1, treeService2, treeService3, treeService4, treeService5],
       points: [
         {
           title: 'Pruning & Crown Work',
@@ -43,7 +83,7 @@ const serviceDetails = {
       number: '02',
       title: 'Consulting & Conceptual Design',
       summary: 'Planning and development of urban greening concepts tailored to site conditions, biodiversity goals and climate resilience.',
-      images: [],
+      images: [consulting1, consulting2, consulting3, consulting4, consulting5, consulting6, consulting7],
       points: [
         {
           title: 'Site Assessment & Concept Development',
@@ -75,7 +115,7 @@ const serviceDetails = {
       number: '03',
       title: 'Drone Surveys & Remote Sensing',
       summary: 'Aerial vegetation and area analysis using drone technology and multispectral imaging.',
-      images: [],
+      images: [drone1, drone2],
       points: [
         {
           title: 'Aerial Analysis',
@@ -124,7 +164,7 @@ const serviceDetails = {
       number: '05',
       title: 'Climate Resilience Measures',
       summary: 'Stormwater management, sponge city principles and soil microbiome optimisation for climate-resilient urban spaces.',
-      images: [],
+      images: [climate1, climate2, climate3, climate4, climate5, climate6, climate7, climate8, climate9],
       points: [
         {
           title: 'Stormwater Management & Sponge City',
@@ -204,7 +244,7 @@ const serviceDetails = {
       number: '08',
       title: 'BIOME Platform',
       summary: 'Data-driven climate resilience and biodiversity monitoring — from sensor data to decision-ready reports.',
-      images: [],
+      images: [biome1, biome2, biome3],
       points: [
         {
           title: 'Data Collection & Integration',
@@ -238,7 +278,7 @@ const serviceDetails = {
       number: '09',
       title: 'Long-Term Stewardship',
       summary: 'Multi-year care contracts, monitoring and adaptive management for lasting ecological performance.',
-      images: [],
+      images: [stewardship1, stewardship2, stewardship3, stewardship4, stewardship5, stewardship6, stewardship7, stewardship8],
       points: [
         {
           title: 'Care & Maintenance',
@@ -265,7 +305,7 @@ const serviceDetails = {
       number: '01',
       title: 'Baumpflege & Baumgutachten',
       summary: 'Professionelle Pflege, Begutachtung und Fällung von Stadtbäumen gemäß ZTV-Baumpflege und FLL-Richtlinien.',
-      images: [],
+      images: [treeService1, treeService2, treeService3, treeService4, treeService5],
       points: [
         {
           title: 'Schnitt- & Kronenarbeiten',
@@ -298,7 +338,7 @@ const serviceDetails = {
       number: '02',
       title: 'Beratung & Konzeptplanung',
       summary: 'Planung und Entwicklung urbaner Begrünungskonzepte, angepasst an Standortbedingungen, Biodiversitätsziele und Klimaresilienz.',
-      images: [],
+      images: [consulting1, consulting2, consulting3, consulting4, consulting5, consulting6, consulting7],
       points: [
         {
           title: 'Standortanalyse & Konzeptentwicklung',
@@ -330,7 +370,7 @@ const serviceDetails = {
       number: '03',
       title: 'Drohnenerhebungen & Fernerkundung',
       summary: 'Luftgestützte Vegetations- und Flächenanalyse mit Drohnentechnologie und Multispektralbildgebung.',
-      images: [],
+      images: [drone1, drone2],
       points: [
         {
           title: 'Luftbildanalyse',
@@ -379,7 +419,7 @@ const serviceDetails = {
       number: '05',
       title: 'Klimaresilienzmaßnahmen',
       summary: 'Regenwassermanagement, Schwammstadtprinzipien und Bodenmikrobiom-Optimierung für klimaresiliente Stadträume.',
-      images: [],
+      images: [climate1, climate2, climate3, climate4, climate5, climate6, climate7, climate8, climate9],
       points: [
         {
           title: 'Regenwassermanagement & Schwammstadt',
@@ -459,7 +499,7 @@ const serviceDetails = {
       number: '08',
       title: 'BIOME-Plattform',
       summary: 'Datengestützte Klimaresilienz und Biodiversitätsmonitoring — von Sensordaten bis zu entscheidungsreifen Berichten.',
-      images: [],
+      images: [biome1, biome2, biome3],
       points: [
         {
           title: 'Datenerfassung & Integration',
@@ -493,7 +533,7 @@ const serviceDetails = {
       number: '09',
       title: 'Langfristige Pflege',
       summary: 'Mehrjährige Pflegeverträge, Monitoring und adaptives Management für nachhaltige ökologische Leistung.',
-      images: [],
+      images: [stewardship1, stewardship2, stewardship3, stewardship4, stewardship5, stewardship6, stewardship7, stewardship8],
       points: [
         {
           title: 'Pflege & Wartung',
@@ -519,7 +559,7 @@ const serviceDetails = {
 
 function ServiceModal({ service, onClose, isDark, c }) {
   const [imgIndex, setImgIndex] = useState(0)
-  const { accent, fg, fgMuted, fgSubtle, borderColor, cardBg } = c
+  const { accent, fg, fgMuted, fgSubtle, borderColor } = c
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }} onClick={onClose}>
@@ -546,17 +586,44 @@ function ServiceModal({ service, onClose, isDark, c }) {
         </button>
 
         {/* Image gallery */}
-        <div style={{ position: 'relative', height: 320, background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.04)', borderBottom: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+        <div style={{ position: 'relative', height: 360, background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.04)', borderBottom: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
           {service.images && service.images.length > 0 ? (
             <>
-              <img src={service.images[imgIndex]} alt={`${service.title} ${imgIndex + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img
+                src={service.images[imgIndex]}
+                alt={`${service.title} ${imgIndex + 1}`}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s ease' }}
+              />
+              {/* Image counter */}
+              <div style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(0,0,0,0.5)', borderRadius: 20, padding: '4px 12px' }}>
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: '#fff', letterSpacing: '0.05em' }}>{imgIndex + 1} / {service.images.length}</span>
+              </div>
               {service.images.length > 1 && (
                 <>
-                  <button onClick={() => setImgIndex(i => (i - 1 + service.images.length) % service.images.length)} style={{ position: 'absolute', left: 16, width: 40, height: 40, borderRadius: '50%', background: 'rgba(0,0,0,0.5)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,0,0,0.75)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(0,0,0,0.5)'}><ChevronLeft size={20} /></button>
-                  <button onClick={() => setImgIndex(i => (i + 1) % service.images.length)} style={{ position: 'absolute', right: 16, width: 40, height: 40, borderRadius: '50%', background: 'rgba(0,0,0,0.5)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,0,0,0.75)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(0,0,0,0.5)'}><ChevronRight size={20} /></button>
-                  <div style={{ position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 6 }}>
+                  <button
+                    onClick={() => setImgIndex(i => (i - 1 + service.images.length) % service.images.length)}
+                    style={{ position: 'absolute', left: 16, width: 44, height: 44, borderRadius: '50%', background: 'rgba(0,0,0,0.5)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', transition: 'background 0.2s' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,0,0,0.8)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(0,0,0,0.5)'}
+                  >
+                    <ChevronLeft size={22} />
+                  </button>
+                  <button
+                    onClick={() => setImgIndex(i => (i + 1) % service.images.length)}
+                    style={{ position: 'absolute', right: 16, width: 44, height: 44, borderRadius: '50%', background: 'rgba(0,0,0,0.5)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', transition: 'background 0.2s' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,0,0,0.8)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(0,0,0,0.5)'}
+                  >
+                    <ChevronRight size={22} />
+                  </button>
+                  {/* Dot indicators */}
+                  <div style={{ position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 6 }}>
                     {service.images.map((_, i) => (
-                      <button key={i} onClick={() => setImgIndex(i)} style={{ width: i === imgIndex ? 20 : 6, height: 6, borderRadius: 3, background: i === imgIndex ? accent : 'rgba(255,255,255,0.4)', border: 'none', cursor: 'pointer', padding: 0, transition: 'all 0.3s' }} />
+                      <button
+                        key={i}
+                        onClick={() => setImgIndex(i)}
+                        style={{ width: i === imgIndex ? 24 : 8, height: 8, borderRadius: 4, background: i === imgIndex ? accent : 'rgba(255,255,255,0.5)', border: 'none', cursor: 'pointer', padding: 0, transition: 'all 0.3s ease' }}
+                      />
                     ))}
                   </div>
                 </>
