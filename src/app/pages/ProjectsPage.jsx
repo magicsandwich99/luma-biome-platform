@@ -1,5 +1,6 @@
 import { useTheme, themeColors } from '../context/ThemeContext'
 import { useLang } from '../context/LangContext'
+import smoothDrone from '../../assets/SmoothDrone.MP4'
 
 export default function ProjectsPage() {
   const { theme } = useTheme()
@@ -14,18 +15,93 @@ export default function ProjectsPage() {
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
         .mono { font-family: 'DM Mono', monospace; }
       `}</style>
-      <div style={{ background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', borderBottom: `1px solid ${borderColor}`, padding: '80px 80px 64px' }}>
-        <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 16 }}>
-          {lang === 'en' ? 'Projects' : 'Projekte'}
+
+      {/* Hero with video background */}
+      <div style={{ position: 'relative', height: '92vh', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
+
+        {/* Inset video container */}
+        <div style={{
+          position: 'absolute',
+          inset: '24px',
+          borderRadius: 6,
+          overflow: 'hidden',
+        }}>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          >
+            <source src={smoothDrone} type="video/mp4" />
+          </video>
+
+          {/* Dark tint over video */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.65) 100%)',
+          }} />
+
+          {/* Subtle border overlay */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: 6,
+            boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.08)',
+            pointerEvents: 'none',
+          }} />
         </div>
-        <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: fg, marginBottom: 20 }}>
-          {lang === 'en' ? 'Our Projects.' : 'Unsere Projekte.'}
-        </h1>
-        <p className="mono" style={{ fontSize: 14, color: fgMuted, maxWidth: 560, lineHeight: 1.8, fontWeight: 300 }}>
-          {lang === 'en' ? 'Project case studies coming soon.' : 'Projektfallstudien demnächst verfügbar.'}
-        </p>
+
+        {/* Text content over video */}
+        <div style={{ position: 'relative', zIndex: 10, padding: '0 80px', maxWidth: 900 }}>
+          <div className="mono" style={{
+            fontSize: 11,
+            color: accent,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            marginBottom: 20,
+          }}>
+            {lang === 'en' ? 'Projects' : 'Projekte'}
+          </div>
+          <h1 style={{
+            fontSize: 'clamp(3rem, 7vw, 6rem)',
+            fontWeight: 400,
+            letterSpacing: '-0.03em',
+            lineHeight: 1.02,
+            color: '#ffffff',
+            marginBottom: 24,
+          }}>
+            {lang === 'en' ? 'Our Projects.' : 'Unsere Projekte.'}
+          </h1>
+          <p className="mono" style={{
+            fontSize: 14,
+            color: 'rgba(255,255,255,0.65)',
+            maxWidth: 480,
+            lineHeight: 1.8,
+            fontWeight: 300,
+          }}>
+            {lang === 'en'
+              ? 'Project case studies coming soon.'
+              : 'Projektfallstudien demnächst verfügbar.'}
+          </p>
+        </div>
+
+        {/* Bottom fade into page background */}
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 120,
+          background: `linear-gradient(to bottom, transparent, ${bg})`,
+          zIndex: 5,
+          pointerEvents: 'none',
+        }} />
       </div>
-      <div style={{ padding: '120px 80px', textAlign: 'center' }}>
+
+      {/* Below-fold content */}
+      <div style={{ padding: '80px 80px 120px', textAlign: 'center' }}>
         <div className="mono" style={{ fontSize: 12, color: fgSubtle, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
           {lang === 'en' ? 'Coming soon' : 'Demnächst'}
         </div>
