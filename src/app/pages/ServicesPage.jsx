@@ -4,11 +4,11 @@ import { useLang } from '../context/LangContext'
 import { translations } from '../i18n/translations'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 
-import treeService1 from '../../assets/Service1/TreeService 1.png'
-import treeService2 from '../../assets/Service1/TreeService 2.jpg'
-import treeService3 from '../../assets/Service1/TreeService 3.jpg'
-import treeService4 from '../../assets/Service1/TreeService 4.jpg'
-import treeService5 from '../../assets/Service1/TreeService 5.jpg'
+import treeService1 from '../../assets/Service1/Tree service 1.PNG'
+import treeService2 from '../../assets/Service1/Tree service 2.jpg'
+import treeService3 from '../../assets/Service1/Tree service 3.jpg'
+import treeService4 from '../../assets/Service1/Tree service 4.jpg'
+import treeService5 from '../../assets/Service1/Tree service 5.jpg'
 
 import consulting1 from '../../assets/Service2/Consulting1.jpeg'
 import consulting2 from '../../assets/Service2/Consulting2.jpeg'
@@ -575,7 +575,6 @@ function ServiceModal({ service, onClose, isDark, c }) {
           }
         `}</style>
 
-        {/* Close button */}
         <button
           onClick={onClose}
           style={{ position: 'absolute', top: 20, right: 20, width: 36, height: 36, borderRadius: '50%', background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: fg, zIndex: 10, transition: 'background 0.2s' }}
@@ -585,7 +584,6 @@ function ServiceModal({ service, onClose, isDark, c }) {
           <X size={16} />
         </button>
 
-        {/* Image gallery */}
         <div style={{ position: 'relative', height: 360, background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.04)', borderBottom: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
           {service.images && service.images.length > 0 ? (
             <>
@@ -594,7 +592,6 @@ function ServiceModal({ service, onClose, isDark, c }) {
                 alt={`${service.title} ${imgIndex + 1}`}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s ease' }}
               />
-              {/* Image counter */}
               <div style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(0,0,0,0.5)', borderRadius: 20, padding: '4px 12px' }}>
                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: '#fff', letterSpacing: '0.05em' }}>{imgIndex + 1} / {service.images.length}</span>
               </div>
@@ -616,7 +613,6 @@ function ServiceModal({ service, onClose, isDark, c }) {
                   >
                     <ChevronRight size={22} />
                   </button>
-                  {/* Dot indicators */}
                   <div style={{ position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 6 }}>
                     {service.images.map((_, i) => (
                       <button
@@ -643,7 +639,6 @@ function ServiceModal({ service, onClose, isDark, c }) {
           )}
         </div>
 
-        {/* Content */}
         <div style={{ padding: '40px 48px 48px' }}>
           <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>{service.number}</div>
           <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, marginBottom: 12, lineHeight: 1.1 }}>{service.title}</h2>
@@ -718,7 +713,6 @@ export default function ServicesPage() {
         .service-tile:hover::before { opacity: 1; }
       `}</style>
 
-      {/* Header band */}
       <div style={{ background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', borderBottom: `1px solid ${borderColor}`, padding: '80px 80px 64px' }}>
         <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 16 }}>{t.services}</div>
         <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: fg, marginBottom: 20 }}>
@@ -731,7 +725,6 @@ export default function ServicesPage() {
         </p>
       </div>
 
-      {/* Services grid */}
       <div style={{ padding: '80px 80px 120px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {services.map((service, i) => (
@@ -750,7 +743,6 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* Modal */}
       {selectedService && (
         <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} isDark={isDark} c={c} />
       )}
