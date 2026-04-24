@@ -44,6 +44,8 @@ import stewardship6 from '../../assets/Service9/Stewardship6.JPG'
 import stewardship7 from '../../assets/Service9/Stewardship7.JPG'
 import stewardship8 from '../../assets/Service9/Stewardship8.JPG'
 
+import serviceBG2 from '../../assets/ServiceBG2.jpeg'
+
 const serviceDetails = {
   en: [
     {
@@ -713,18 +715,37 @@ export default function ServicesPage() {
         .service-tile:hover::before { opacity: 1; }
       `}</style>
 
-      <div style={{ background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', borderBottom: `1px solid ${borderColor}`, padding: '80px 80px 64px' }}>
-        <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 16 }}>{t.services}</div>
-        <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: fg, marginBottom: 20 }}>
-          {lang === 'en' ? 'What LUMA offers.' : 'Was LUMA bietet.'}
-        </h1>
-        <p className="mono" style={{ fontSize: 14, color: fgMuted, maxWidth: 560, lineHeight: 1.8, fontWeight: 300 }}>
-          {lang === 'en'
-            ? 'From ecological consulting to digital biodiversity monitoring — our services cover the full lifecycle of nature-positive urban development. Click any service to learn more.'
-            : 'Von ökologischer Beratung bis zum digitalen Biodiversitätsmonitoring — unsere Leistungen decken den gesamten Lebenszyklus ab. Klicken Sie auf eine Leistung für mehr Informationen.'}
-        </p>
+      {/* Header band with background image */}
+      <div style={{ position: 'relative', borderBottom: `1px solid ${borderColor}`, padding: '80px 80px 64px', overflow: 'hidden' }}>
+        {/* Background image */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: `url(${serviceBG2})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }} />
+        {/* Dark tint so text stays readable */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: isDark
+            ? 'linear-gradient(to right, rgba(8,12,10,0.72) 0%, rgba(8,12,10,0.5) 60%, rgba(8,12,10,0.2) 100%)'
+            : 'linear-gradient(to right, rgba(8,12,10,0.65) 0%, rgba(8,12,10,0.4) 60%, rgba(8,12,10,0.1) 100%)',
+        }} />
+        {/* Content */}
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 16 }}>{t.services}</div>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: '#ffffff', marginBottom: 20 }}>
+            {lang === 'en' ? 'What LUMA offers.' : 'Was LUMA bietet.'}
+          </h1>
+          <p className="mono" style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', maxWidth: 560, lineHeight: 1.8, fontWeight: 300 }}>
+            {lang === 'en'
+              ? 'From ecological consulting to digital biodiversity monitoring — our services cover the full lifecycle of nature-positive urban development. Click any service to learn more.'
+              : 'Von ökologischer Beratung bis zum digitalen Biodiversitätsmonitoring — unsere Leistungen decken den gesamten Lebenszyklus ab. Klicken Sie auf eine Leistung für mehr Informationen.'}
+          </p>
+        </div>
       </div>
 
+      {/* Services grid */}
       <div style={{ padding: '80px 80px 120px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {services.map((service, i) => (
