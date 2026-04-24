@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useLang } from '../context/LangContext'
 import { useTheme, themeColors } from '../context/ThemeContext'
 import { translations } from '../i18n/translations'
-import smoothDrone from '../../assets/SmootherDrone.MP4'
+import smoothDrone from '../../assets/SmootherDrone.mp4'
 
 const featurePaths = ['/record', '/refine', '/reports']
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
