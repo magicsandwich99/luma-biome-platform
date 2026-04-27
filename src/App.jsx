@@ -15,7 +15,8 @@ import PrivacyPage from './app/pages/PrivacyPage'
 import ServicesPage from './app/pages/ServicesPage'
 import ProjectsPage from './app/pages/ProjectsPage'
 import { Home, Sun, Moon } from 'lucide-react'
-import lumaLogo from './assets/LumaLogom.png'
+import lumaLogoDark from './assets/LumaLogom.png'
+import lumaLogoLight from './assets/PNGLogo.png'
 
 const queryClient = new QueryClient()
 
@@ -35,15 +36,21 @@ function AppInner() {
   const c = themeColors[theme]
 
   const headerStyle = {
-    background: '#0a0a0a',
-    borderBottom: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.08)',
+    height: 64,
+    background: isDark ? '#0a0a0a' : '#f0efe8',
+    borderBottom: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.08)',
+    transition: 'background 0.3s',
   }
 
   const navLinkBase = `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors`
-  const navLinkInactive = 'text-white/60 hover:text-white hover:bg-white/10'
-  const langInactive = 'text-white/50 hover:text-white hover:bg-white/10'
-  const langBorder = 'border-white/10'
-  const langDivider = 'bg-white/10'
+  const navLinkInactive = isDark
+    ? 'text-white/60 hover:text-white hover:bg-white/10'
+    : 'text-black/50 hover:text-black hover:bg-black/5'
+  const langInactive = isDark
+    ? 'text-white/50 hover:text-white hover:bg-white/10'
+    : 'text-black/40 hover:text-black hover:bg-black/5'
+  const langBorder = isDark ? 'border-white/10' : 'border-black/10'
+  const langDivider = isDark ? 'bg-white/10' : 'bg-black/10'
 
   const activeStyle = { background: c.accent, color: '#ffffff', fontWeight: 500 }
   const langActiveStyle = { background: c.accent, color: '#ffffff' }
@@ -52,17 +59,17 @@ function AppInner() {
     <BrowserRouter>
       <ScrollToTop />
       <div style={{ minHeight: '100vh', background: c.bg, display: 'flex', flexDirection: 'column', transition: 'background 0.3s' }}>
-        <header className="flex items-center justify-between px-6 py-3" style={headerStyle}>
-          {/* Logo */}
+        <header className="flex items-center justify-between px-6" style={headerStyle}>
           <div className="flex items-center">
             <img
-              src={lumaLogo}
+              src={isDark ? lumaLogoDark : lumaLogoLight}
               alt="LUMA"
               style={{
-                height: 32,
-                width: 'auto',
+                width: 120,
+                height: 'auto',
                 objectFit: 'contain',
                 display: 'block',
+                transition: 'opacity 0.3s',
               }}
             />
           </div>
