@@ -1,205 +1,387 @@
-import { useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import { Button } from '../components/ui/button'
-import { Card } from '../components/ui/card'
-import { Badge } from '../components/ui/badge'
-import { Plus, Radio, Upload, Trash2, MapPin } from 'lucide-react'
-import { useData } from '../context/DataContext'
+import { useState, useRef } from 'react'
 import { useLang } from '../context/LangContext'
-import { translations } from '../i18n/translations'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog'
-import { Input } from '../components/ui/input'
-import { Label } from '../components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select'
+import { useTheme, themeColors } from '../context/ThemeContext'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
+import { Search, SlidersHorizontal, X, ChevronDown } from 'lucide-react'
 
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
 })
 
+const greenIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+})
+
+const goldIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+  iconSize: [35, 57],
+  iconAnchor: [17, 57],
+  popupAnchor: [1, -46],
+  shadowSize: [57, 57],
+})
+
+const projects = [
+  { id: 1, name: 'Fungal Leaves Compostsystem', category: 'Soil & Microbiome', location: [52.4965, 13.4308], district: 'Neukölln', year: '2024', client: null, address: null },
+  { id: 2, name: 'BL (Blankenburg) BEW:Vattenfall', category: 'Urban Greening', location: [52.5747, 13.4408], district: 'Blankenburg', year: '2024', client: 'BEW:Vattenfall', address: null },
+  { id: 3, name: 'MV Willow Dome BEW', category: 'Habitat Structures', location: [52.5779, 13.3513], district: 'Märkisches Viertel', year: '2024', client: 'BEW', address: null },
+  { id: 4, name: 'MV (Märkisches Viertel) BEW:Vattenfall', category: 'Urban Greening', location: [52.5810, 13.3490], district: 'Märkisches Viertel', year: '2024', client: 'BEW:Vattenfall', address: null },
+  { id: 5, name: 'H14 (Hermannstraße 14) JOPE', category: 'Tree Care', location: [52.4726, 13.4332], district: 'Neukölln', year: '2024', client: 'JOPE Real Estate', address: 'Hermannstraße 14, 12049 Berlin' },
+  { id: 6, name: 'Mobile Forests, HTW', category: 'Innovation', location: [52.4567, 13.5258], district: 'Oberschöneweide', year: '2024', client: 'HTW Berlin', address: null },
+  { id: 7, name: 'PP (Preußenpark) Bezirksamt Charlottenburg', category: 'Public Space', location: [52.4974, 13.3050], district: 'Charlottenburg', year: '2024', client: 'Bezirksamt Charlottenburg', address: null },
+  { id: 8, name: 'LE (Langen Enden) BEW:Vattenfall', category: 'Urban Greening', location: [52.4385, 13.5502], district: 'Köpenick', year: '2024', client: 'BEW:Vattenfall', address: null },
+  { id: 9, name: 'Clearing WISAG Berlin', category: 'Tree Care', location: [52.5200, 13.4050], district: 'Mitte', year: '2024', client: 'WISAG', address: null },
+  { id: 10, name: 'AG (Alt-Glienicke) BEW:Vattenfall', category: 'Urban Greening', location: [52.3978, 13.5297], district: 'Alt-Glienicke', year: '2024', client: 'BEW:Vattenfall', address: null },
+  { id: 11, name: 'R95 (Raschdorfstraße) JOPE', category: 'Tree Care', location: [52.5698, 13.3827], district: 'Reinickendorf', year: '2024', client: 'JOPE Real Estate', address: 'Raschdorfstraße 95, 13409 Berlin' },
+  { id: 12, name: 'P85 (Prinzenallee) JOPE', category: 'Tree Care', location: [52.5589, 13.3826], district: 'Wedding', year: '2024', client: 'JOPE Real Estate', address: null },
+  { id: 13, name: 'S3 (Sickingenstraße 3) JOPE', category: 'Tree Care', location: [52.5272, 13.3345], district: 'Moabit', year: '2024', client: 'JOPE Real Estate', address: 'Sickingenstraße 2, 10553 Berlin' },
+  { id: 14, name: 'P15 (Putlitzstraße) JOPE', category: 'Tree Care', location: [52.5308, 13.3398], district: 'Moabit', year: '2024', client: 'JOPE Real Estate', address: 'Putlitzstraße 15, 10551 Berlin' },
+  { id: 15, name: 'X13 (Kreuzbergstraße) JOPE', category: 'Tree Care', location: [52.4878, 13.3812], district: 'Kreuzberg', year: '2024', client: 'JOPE Real Estate', address: 'Kreuzbergstraße 13, 10965 Berlin' },
+  { id: 16, name: 'Wild-Bee-Hive Project', category: 'Habitat Structures', location: [52.5120, 13.3890], district: 'Tiergarten', year: '2024', client: null, address: null },
+  { id: 17, name: 'SH (Scharnhorsstraße) BEW:Vattenfall', category: 'Urban Greening', location: [52.5340, 13.3670], district: 'Mitte', year: '2024', client: 'BEW:Vattenfall', address: null },
+]
+
 const categoryColors = {
-  'Air Quality': { bg: 'bg-green-500/10', text: 'text-green-400', border: 'border-green-500/30' },
-  'Water Quality': { bg: 'bg-blue-500/10', text: 'text-blue-400', border: 'border-blue-500/30' },
-  'Soil Health': { bg: 'bg-orange-500/10', text: 'text-orange-400', border: 'border-orange-500/30' },
-  'Biodiversity': { bg: 'bg-purple-500/10', text: 'text-purple-400', border: 'border-purple-500/30' },
-  'Climate': { bg: 'bg-pink-500/10', text: 'text-pink-400', border: 'border-pink-500/30' },
+  'Soil & Microbiome': '#10b981',
+  'Urban Greening': '#3b82f6',
+  'Habitat Structures': '#f59e0b',
+  'Tree Care': '#8b5cf6',
+  'Innovation': '#ec4899',
+  'Public Space': '#06b6d4',
 }
 
-function AddSensorForm({ onAdd }) {
-  const { lang } = useLang()
-  const t = translations[lang].map
-  const [open, setOpen] = useState(false)
-  const [formData, setFormData] = useState({ name: '', type: 'automatic', dataSource: 'stream', category: 'Air Quality', unit: 'ppm', lat: 51.505, lng: -0.09 })
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    onAdd({ id: Date.now(), name: formData.name, type: formData.type, lat: formData.lat, lng: formData.lng, dataSource: formData.dataSource, status: 'active', category: formData.category, unit: formData.unit, lastReading: null })
-    setOpen(false)
-    setFormData({ name: '', type: 'automatic', dataSource: 'stream', category: 'Air Quality', unit: 'ppm', lat: 51.505, lng: -0.09 })
+function FlyToMarker({ project }) {
+  const map = useMap()
+  if (project) {
+    map.flyTo(project.location, 14, { duration: 1.2 })
   }
-
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="bg-green-600 hover:bg-green-700 shadow-lg shadow-green-500/20">
-          <Plus className="w-4 h-4 mr-2" /> {t.addSensor}
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="bg-[#131621] border-gray-800">
-        <DialogHeader>
-          <DialogTitle className="text-gray-100">{t.addNewSensor}</DialogTitle>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label className="text-gray-300">{t.sensorName}</Label>
-            <Input value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} placeholder="e.g., Forest CO2 Monitor" className="bg-[#1e293b] border-gray-700 text-gray-100" required />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label className="text-gray-300">{t.type}</Label>
-              <Select value={formData.type} onValueChange={v => setFormData({ ...formData, type: v })}>
-                <SelectTrigger className="bg-[#1e293b] border-gray-700 text-gray-100"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="automatic">{t.automatic}</SelectItem>
-                  <SelectItem value="manual">{t.manual}</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label className="text-gray-300">{t.dataSource}</Label>
-              <Select value={formData.dataSource} onValueChange={v => setFormData({ ...formData, dataSource: v })}>
-                <SelectTrigger className="bg-[#1e293b] border-gray-700 text-gray-100"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="stream">{t.stream}</SelectItem>
-                  <SelectItem value="upload">{t.upload}</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label className="text-gray-300">{t.category}</Label>
-              <Select value={formData.category} onValueChange={v => setFormData({ ...formData, category: v })}>
-                <SelectTrigger className="bg-[#1e293b] border-gray-700 text-gray-100"><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Air Quality">Air Quality</SelectItem>
-                  <SelectItem value="Water Quality">Water Quality</SelectItem>
-                  <SelectItem value="Soil Health">Soil Health</SelectItem>
-                  <SelectItem value="Biodiversity">Biodiversity</SelectItem>
-                  <SelectItem value="Climate">Climate</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label className="text-gray-300">{t.unit}</Label>
-              <Input value={formData.unit} onChange={e => setFormData({ ...formData, unit: e.target.value })} placeholder="e.g., ppm, pH, %" className="bg-[#1e293b] border-gray-700 text-gray-100" required />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label className="text-gray-300">{t.latitude}</Label>
-              <Input type="number" step="0.000001" value={formData.lat} onChange={e => setFormData({ ...formData, lat: parseFloat(e.target.value) })} className="bg-[#1e293b] border-gray-700 text-gray-100" required />
-            </div>
-            <div>
-              <Label className="text-gray-300">{t.longitude}</Label>
-              <Input type="number" step="0.000001" value={formData.lng} onChange={e => setFormData({ ...formData, lng: parseFloat(e.target.value) })} className="bg-[#1e293b] border-gray-700 text-gray-100" required />
-            </div>
-          </div>
-          <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 shadow-lg shadow-green-500/20">{t.addSensor}</Button>
-        </form>
-      </DialogContent>
-    </Dialog>
-  )
+  return null
 }
 
 export default function MapPage() {
-  const { sensors, deleteSensor, addSensor } = useData()
   const { lang } = useLang()
-  const t = translations[lang].map
-  const center = sensors.length > 0 ? [sensors[0].lat, sensors[0].lng] : [51.505, -0.09]
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
+  const c = themeColors[theme]
+  const [selectedProject, setSelectedProject] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [filterCategory, setFilterCategory] = useState('All')
+  const [filterOpen, setFilterOpen] = useState(false)
+  const markerRefs = useRef({})
+
+  const categories = ['All', ...Array.from(new Set(projects.map(p => p.category)))]
+
+  const filteredProjects = projects.filter(p => {
+    const matchesCategory = filterCategory === 'All' || p.category === filterCategory
+    const matchesSearch = searchQuery === '' ||
+      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.district.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (p.client && p.client.toLowerCase().includes(searchQuery.toLowerCase()))
+    return matchesCategory && matchesSearch
+  })
+
+  const { accent, bg, fg, fgMuted, fgSubtle, borderColor, cardBg, cardBorder } = c
+
+  const handleSelectProject = (project) => {
+    const isSame = selectedProject?.id === project.id
+    setSelectedProject(isSame ? null : project)
+    if (!isSame && markerRefs.current[project.id]) {
+      markerRefs.current[project.id].openPopup()
+    }
+  }
 
   return (
-    <div className="flex h-[calc(100vh-65px)]">
-      <div className="w-80 bg-[#0f1419] border-r border-gray-800 p-4 flex flex-col gap-4 overflow-auto">
-        <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-gray-100">{t.sensors}</h2>
-          <AddSensorForm onAdd={addSensor} />
-        </div>
-        <div className="text-sm text-gray-400 bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">{t.manage}</div>
-        <div className="space-y-2">
-          {sensors.map(sensor => {
-            const colors = categoryColors[sensor.category] || categoryColors['Air Quality']
-            return (
-              <Card key={sensor.id} className="p-3 bg-[#131621] border-gray-800 hover:border-gray-700 transition-all">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <h3 className="font-medium text-sm text-gray-100">{sensor.name}</h3>
-                      <Badge className={`text-xs ${colors.bg} ${colors.text} border ${colors.border}`}>{sensor.status}</Badge>
-                    </div>
-                    <div className="space-y-1.5">
-                      <div className={`flex items-center gap-2 text-xs px-2 py-1 rounded ${colors.bg} ${colors.text} w-fit`}>
-                        {sensor.type === 'automatic' ? <Radio className="w-3 h-3" /> : <Upload className="w-3 h-3" />}
-                        <span className="capitalize">{sensor.type}</span>
-                        <span>•</span>
-                        <span>{sensor.category}</span>
-                      </div>
-                      <p className="text-xs text-gray-400 flex items-center gap-1">
-                        <MapPin className="w-3 h-3" />{sensor.lat.toFixed(4)}, {sensor.lng.toFixed(4)}
-                      </p>
-                      {sensor.lastReading && <p className={`text-xs font-medium ${colors.text}`}>{t.last}: {sensor.lastReading} {sensor.unit}</p>}
-                    </div>
-                  </div>
-                  <Button variant="ghost" size="sm" onClick={() => deleteSensor(sensor.id)} className="text-red-400 hover:text-red-300 hover:bg-red-500/10">
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </Card>
-            )
-          })}
-        </div>
-      </div>
+    <div style={{ display: 'flex', height: 'calc(100vh - 64px)', fontFamily: "'DM Serif Display', Georgia, serif", background: bg, overflow: 'hidden' }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
+        .mono { font-family: 'DM Mono', monospace; }
+        .project-item { transition: background 0.2s, border-color 0.2s; cursor: pointer; }
+        .project-item:hover { background: ${accent}10 !important; border-color: ${accent}40 !important; }
+        .project-item.active { background: ${accent}15 !important; border-color: ${accent}60 !important; }
+        .leaflet-popup-content-wrapper { background: ${isDark ? '#0f1117' : '#ffffff'} !important; border: 1px solid ${borderColor} !important; border-radius: 4px !important; box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important; }
+        .leaflet-popup-content { color: ${fg} !important; margin: 0 !important; }
+        .leaflet-popup-tip { background: ${isDark ? '#0f1117' : '#ffffff'} !important; }
+        .leaflet-popup-close-button { color: ${fgMuted} !important; }
+        .search-input { width: 100%; background: transparent; border: none; outline: none; font-family: 'DM Mono', monospace; font-size: 12px; color: ${fg}; }
+        .search-input::placeholder { color: ${fgSubtle}; }
+        .filter-option { display: flex; align-items: center; gap: 10px; padding: 8px 12px; cursor: pointer; transition: background 0.15s; border-radius: 3px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.05em; color: ${fgMuted}; }
+        .filter-option:hover { background: ${accent}10; color: ${fg}; }
+        .filter-option.selected { color: ${accent}; background: ${accent}10; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: ${borderColor}; border-radius: 2px; }
+      `}</style>
 
-      <div className="flex-1 relative">
-        <div className="absolute top-4 right-4 z-[1000] bg-[#131621] border border-gray-800 shadow-xl rounded-lg p-4 max-w-xs">
-          <h3 className="font-semibold text-sm text-gray-100 mb-2">{t.sensorMap}</h3>
-          <p className="text-xs text-gray-400 mb-3">{t.geoDistribution} {sensors.length} {t.monitoring} {sensors.length === 1 ? t.station : t.stations}</p>
-          {Object.entries(categoryColors).map(([type, colors]) => (
-            <div key={type} className="flex items-center gap-2 mb-1.5">
-              <div className={`w-2 h-2 rounded-full ${colors.bg.replace('/10', '')} shadow-sm`} />
-              <span className="text-xs text-gray-400">{type}</span>
+      {/* Sidebar */}
+      <div style={{ width: 340, flexShrink: 0, background: bg, borderRight: `1px solid ${borderColor}`, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+
+        {/* Header */}
+        <div style={{ padding: '28px 24px 20px', borderBottom: `1px solid ${borderColor}` }}>
+          <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8 }}>
+            {lang === 'en' ? 'Project Map' : 'Projektkarte'}
+          </div>
+          <h1 style={{ fontSize: '1.6rem', fontWeight: 400, letterSpacing: '-0.02em', color: fg, lineHeight: 1.1, marginBottom: 8 }}>
+            {lang === 'en' ? 'Berlin Projects.' : 'Berliner Projekte.'}
+          </h1>
+          <p className="mono" style={{ fontSize: 12, color: fgMuted, lineHeight: 1.7, fontWeight: 300 }}>
+            {lang === 'en'
+              ? `${filteredProjects.length} project${filteredProjects.length !== 1 ? 's' : ''} across the city`
+              : `${filteredProjects.length} Projekt${filteredProjects.length !== 1 ? 'e' : ''} in der Stadt`}
+          </p>
+        </div>
+
+        {/* Search + Filter */}
+        <div style={{ padding: '14px 16px', borderBottom: `1px solid ${borderColor}`, display: 'flex', gap: 8, position: 'relative' }}>
+          {/* Search bar */}
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', border: `1px solid ${borderColor}`, borderRadius: 3, background: cardBg }}>
+            <Search size={13} color={fgSubtle} style={{ flexShrink: 0 }} />
+            <input
+              className="search-input"
+              placeholder={lang === 'en' ? 'Search projects...' : 'Projekte suchen...'}
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery('')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: fgSubtle, display: 'flex' }}>
+                <X size={12} />
+              </button>
+            )}
+          </div>
+
+          {/* Filter button */}
+          <div style={{ position: 'relative' }}>
+            <button
+              onClick={() => setFilterOpen(!filterOpen)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 6, padding: '8px 12px',
+                border: `1px solid ${filterCategory !== 'All' ? accent : borderColor}`,
+                borderRadius: 3, background: filterCategory !== 'All' ? `${accent}15` : cardBg,
+                cursor: 'pointer', fontFamily: "'DM Mono', monospace", fontSize: 11,
+                color: filterCategory !== 'All' ? accent : fgMuted, letterSpacing: '0.05em',
+                transition: 'all 0.2s', whiteSpace: 'nowrap',
+              }}
+            >
+              <SlidersHorizontal size={13} />
+              {filterCategory === 'All' ? (lang === 'en' ? 'Filter' : 'Filter') : filterCategory.split(' ')[0]}
+              <ChevronDown size={11} style={{ transform: filterOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
+            </button>
+
+            {/* Dropdown */}
+            {filterOpen && (
+              <div style={{
+                position: 'absolute', top: 'calc(100% + 6px)', right: 0, zIndex: 100,
+                background: isDark ? '#0f1117' : '#ffffff', border: `1px solid ${borderColor}`,
+                borderRadius: 4, padding: '6px', minWidth: 200,
+                boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+              }}>
+                <div className="mono" style={{ fontSize: 10, color: fgSubtle, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '4px 12px 8px' }}>
+                  {lang === 'en' ? 'Category' : 'Kategorie'}
+                </div>
+                {categories.map(cat => (
+                  <div
+                    key={cat}
+                    className={`filter-option ${filterCategory === cat ? 'selected' : ''}`}
+                    onClick={() => { setFilterCategory(cat); setFilterOpen(false) }}
+                  >
+                    {cat !== 'All' && (
+                      <div style={{ width: 7, height: 7, borderRadius: '50%', background: categoryColors[cat] || accent, flexShrink: 0 }} />
+                    )}
+                    {cat === 'All' ? (lang === 'en' ? 'All categories' : 'Alle Kategorien') : cat}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Active filter pill */}
+        {filterCategory !== 'All' && (
+          <div style={{ padding: '8px 16px', borderBottom: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: categoryColors[filterCategory] || accent }} />
+            <span className="mono" style={{ fontSize: 11, color: categoryColors[filterCategory] || accent, letterSpacing: '0.05em' }}>{filterCategory}</span>
+            <button
+              onClick={() => setFilterCategory('All')}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: fgSubtle, display: 'flex', marginLeft: 'auto', padding: 0 }}
+            >
+              <X size={11} />
+            </button>
+          </div>
+        )}
+
+        {/* Project list */}
+        <div style={{ flex: 1, overflowY: 'auto', padding: '12px 16px' }}>
+          {filteredProjects.length === 0 ? (
+            <div className="mono" style={{ fontSize: 12, color: fgSubtle, textAlign: 'center', padding: '32px 0', letterSpacing: '0.05em' }}>
+              {lang === 'en' ? 'No projects found' : 'Keine Projekte gefunden'}
+            </div>
+          ) : filteredProjects.map(project => (
+            <div
+              key={project.id}
+              className={`project-item ${selectedProject?.id === project.id ? 'active' : ''}`}
+              style={{ padding: '14px 16px', marginBottom: 4, border: `1px solid ${cardBorder}`, background: cardBg, borderRadius: 3 }}
+              onClick={() => handleSelectProject(project)}
+            >
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: categoryColors[project.category] || accent, marginTop: 5, flexShrink: 0 }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 13, fontWeight: 400, color: fg, letterSpacing: '-0.01em', lineHeight: 1.3, marginBottom: 4 }}>
+                    {project.name}
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                    <span className="mono" style={{ fontSize: 10, color: categoryColors[project.category] || accent, letterSpacing: '0.08em' }}>
+                      {project.category}
+                    </span>
+                    <span className="mono" style={{ fontSize: 10, color: fgSubtle }}>·</span>
+                    <span className="mono" style={{ fontSize: 10, color: fgSubtle, letterSpacing: '0.05em' }}>
+                      {project.district}
+                    </span>
+                    {project.client && (
+                      <>
+                        <span className="mono" style={{ fontSize: 10, color: fgSubtle }}>·</span>
+                        <span className="mono" style={{ fontSize: 10, color: fgMuted, letterSpacing: '0.04em' }}>
+                          {project.client}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                  {project.address && (
+                    <div className="mono" style={{ fontSize: 10, color: fgSubtle, marginTop: 4, letterSpacing: '0.03em' }}>
+                      {project.address}
+                    </div>
+                  )}
+                </div>
+                <span className="mono" style={{ fontSize: 10, color: fgSubtle, flexShrink: 0 }}>{project.year}</span>
+              </div>
             </div>
           ))}
         </div>
-        <div className="absolute bottom-4 left-4 z-[1000] flex gap-3">
-          <div className="bg-[#131621] border border-gray-800 shadow-xl rounded-lg px-4 py-3">
-            <div className="text-2xl font-bold text-green-400">{sensors.filter(s => s.status === 'active').length}</div>
-            <div className="text-xs text-gray-400">{t.activeSensors}</div>
+
+        {/* Legend */}
+        <div style={{ padding: '16px 24px', borderTop: `1px solid ${borderColor}` }}>
+          <div className="mono" style={{ fontSize: 10, color: fgSubtle, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 10 }}>
+            {lang === 'en' ? 'Categories' : 'Kategorien'}
           </div>
-          <div className="bg-[#131621] border border-gray-800 shadow-xl rounded-lg px-4 py-3">
-            <div className="text-2xl font-bold text-purple-400">{sensors.length}</div>
-            <div className="text-xs text-gray-400">{t.totalSensors}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {Object.entries(categoryColors).map(([cat, color]) => (
+              <div key={cat} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0 }} />
+                <span className="mono" style={{ fontSize: 10, color: fgMuted, letterSpacing: '0.05em' }}>{cat}</span>
+              </div>
+            ))}
           </div>
         </div>
-        <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%' }}>
-          <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {sensors.map(sensor => (
-            <Marker key={sensor.id} position={[sensor.lat, sensor.lng]}>
+      </div>
+
+      {/* Map */}
+      <div style={{ flex: 1, position: 'relative' }} onClick={() => setFilterOpen(false)}>
+        <MapContainer
+          center={[52.52, 13.405]}
+          zoom={11}
+          style={{ width: '100%', height: '100%' }}
+          zoomControl={true}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {selectedProject && <FlyToMarker project={selectedProject} />}
+          {filteredProjects.map(project => (
+            <Marker
+              key={project.id}
+              position={project.location}
+              icon={selectedProject?.id === project.id ? goldIcon : greenIcon}
+              ref={ref => { if (ref) markerRefs.current[project.id] = ref }}
+              eventHandlers={{ click: () => handleSelectProject(project) }}
+            >
               <Popup>
-                <div className="text-sm">
-                  <div className="font-semibold">{sensor.name}</div>
-                  <div className="text-gray-500">{sensor.category}</div>
-                  <div className="text-gray-500 capitalize">{sensor.type}</div>
-                  {sensor.lastReading && <div className="mt-1 font-medium">{t.last}: {sensor.lastReading} {sensor.unit}</div>}
+                <div style={{ padding: '12px 4px', minWidth: 210 }}>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: categoryColors[project.category] || accent, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6 }}>
+                    {project.category}
+                  </div>
+                  <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 15, fontWeight: 400, color: fg, letterSpacing: '-0.01em', lineHeight: 1.3, marginBottom: 8 }}>
+                    {project.name}
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                    <div style={{ display: 'flex', gap: 16 }}>
+                      <div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
+                          {lang === 'en' ? 'District' : 'Bezirk'}
+                        </div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fg }}>{project.district}</div>
+                      </div>
+                      <div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
+                          {lang === 'en' ? 'Year' : 'Jahr'}
+                        </div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fg }}>{project.year}</div>
+                      </div>
+                    </div>
+                    {project.client && (
+                      <div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
+                          {lang === 'en' ? 'Client' : 'Auftraggeber'}
+                        </div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fg }}>{project.client}</div>
+                      </div>
+                    )}
+                    {project.address && (
+                      <div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
+                          {lang === 'en' ? 'Address' : 'Adresse'}
+                        </div>
+                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fg }}>{project.address}</div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </Popup>
             </Marker>
           ))}
         </MapContainer>
+
+        {/* Selected project overlay */}
+        {selectedProject && (
+          <div style={{
+            position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 1000,
+            background: isDark ? 'rgba(15,17,23,0.95)' : 'rgba(240,239,232,0.95)',
+            border: `1px solid ${accent}40`, borderRadius: 4, padding: '16px 24px',
+            backdropFilter: 'blur(12px)', minWidth: 320, maxWidth: 480,
+            boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16 }}>
+              <div>
+                <div className="mono" style={{ fontSize: 10, color: categoryColors[selectedProject.category] || accent, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 4 }}>
+                  {selectedProject.category} · {selectedProject.district}
+                  {selectedProject.client && ` · ${selectedProject.client}`}
+                </div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 400, color: fg, letterSpacing: '-0.01em', lineHeight: 1.2, marginBottom: selectedProject.address ? 6 : 0 }}>
+                  {selectedProject.name}
+                </div>
+                {selectedProject.address && (
+                  <div className="mono" style={{ fontSize: 11, color: fgMuted, marginTop: 4 }}>
+                    {selectedProject.address}
+                  </div>
+                )}
+              </div>
+              <button
+                onClick={() => setSelectedProject(null)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: fgSubtle, display: 'flex', padding: 0, flexShrink: 0, marginTop: 2 }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
