@@ -15,6 +15,7 @@ import PrivacyPage from './app/pages/PrivacyPage'
 import ServicesPage from './app/pages/ServicesPage'
 import ProjectsPage from './app/pages/ProjectsPage'
 import { Home, Sun, Moon } from 'lucide-react'
+import lumaLogo from './assets/LumaLogom.png'
 
 const queryClient = new QueryClient()
 
@@ -34,21 +35,15 @@ function AppInner() {
   const c = themeColors[theme]
 
   const headerStyle = {
-    background: isDark ? '#0f1117' : '#f0efe8',
-    borderBottom: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.08)',
+    background: '#0a0a0a',
+    borderBottom: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.08)',
   }
 
   const navLinkBase = `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors`
-  const navLinkInactive = isDark
-    ? 'text-white/60 hover:text-white hover:bg-white/10'
-    : 'text-black/50 hover:text-black hover:bg-black/5'
-
-  const langInactive = isDark
-    ? 'text-white/50 hover:text-white hover:bg-white/10'
-    : 'text-black/40 hover:text-black hover:bg-black/5'
-
-  const langBorder = isDark ? 'border-white/10' : 'border-black/10'
-  const langDivider = isDark ? 'bg-white/10' : 'bg-black/10'
+  const navLinkInactive = 'text-white/60 hover:text-white hover:bg-white/10'
+  const langInactive = 'text-white/50 hover:text-white hover:bg-white/10'
+  const langBorder = 'border-white/10'
+  const langDivider = 'bg-white/10'
 
   const activeStyle = { background: c.accent, color: '#ffffff', fontWeight: 500 }
   const langActiveStyle = { background: c.accent, color: '#ffffff' }
@@ -57,14 +52,21 @@ function AppInner() {
     <BrowserRouter>
       <ScrollToTop />
       <div style={{ minHeight: '100vh', background: c.bg, display: 'flex', flexDirection: 'column', transition: 'background 0.3s' }}>
-        <header className="flex items-center justify-between px-6 py-4" style={headerStyle}>
-          <div className="flex items-center gap-3">
-            <div style={{ width: 36, height: 36, borderRadius: 8, background: c.accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#ffffff', fontSize: 13 }}>L</div>
-            <div>
-              <div className="font-semibold" style={{ color: c.fg }}>LUMA Biome Platform</div>
-              <div className="text-xs" style={{ color: c.fgMuted }}>{t.tagline}</div>
-            </div>
+        <header className="flex items-center justify-between px-6 py-3" style={headerStyle}>
+          {/* Logo */}
+          <div className="flex items-center">
+            <img
+              src={lumaLogo}
+              alt="LUMA"
+              style={{
+                height: 32,
+                width: 'auto',
+                objectFit: 'contain',
+                display: 'block',
+              }}
+            />
           </div>
+
           <nav className="flex items-center gap-2">
             <NavLink to="/" end className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => isActive ? activeStyle : {}}>
               <Home size={16} /> {t.home}
