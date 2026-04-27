@@ -4,11 +4,108 @@ import { useLang } from '../context/LangContext'
 import { useTheme, themeColors } from '../context/ThemeContext'
 import { translations } from '../i18n/translations'
 import smoothDrone from '../../assets/SmootherDrone.mp4'
+import goalBG2 from '../../assets/GoalBG.jpg'
+import { X } from 'lucide-react'
 
-const featurePaths = ['/record', '/refine', '/reports']
+// Service thumbnail images
+import serviceThumb1 from '../../assets/Service1/Tree service 1.PNG'
+import serviceThumb2 from '../../assets/Service2/Consulting1.jpeg'
+import serviceThumb3 from '../../assets/Service3/Drone1.jpg'
+import serviceThumb4 from '../../assets/Service5/Climate1.jpg'
+import serviceThumb5 from '../../assets/Service5/Climate2.jpg'
+import serviceThumb6 from '../../assets/Service5/Climate3.jpg'
+import serviceThumb7 from '../../assets/Service5/Climate4.png'
+import serviceThumb8 from '../../assets/Service8/Biome1.JPG'
+import serviceThumb9 from '../../assets/Service9/Stewardship1.JPG'
+
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
 
+const visionMissionContent = {
+  en: {
+    title: 'Vision & Mission',
+    sections: [
+      {
+        heading: 'Vision Statement: What drives us?',
+        body: 'Our overarching goal is to improve and preserve the livelihoods, resilience, and well-being of as many living beings and people as possible — to foster harmonious coexistence in the long term.',
+      },
+      {
+        heading: 'Mission Statement: How do we achieve this?',
+        body: 'With a passion for craftsmanship and modular, innovative, and intelligent solutions, we transform urban spaces into climate-resilient, species-rich oases that invite people to linger and offer a high quality of life. We combine data science with craftsmanship and ecology to deliver all-in-one service solutions.',
+      },
+      {
+        heading: 'Vivid Vision (adaptive description of a future we envision):',
+        body: `The year is 2036. The climate crisis is accelerating faster than scientific predictions assumed. A series of hot summer weeks is cooking Berlin — air temperatures sit at 39°C and barely cool down at night. The asphalt holds the heat. The buildings hold the heat. The city has become its own oven. People are suffering, especially the elderly and children, the populations who never had a way out of the urban heat island.
+
+But there are cool spots in the city now. Step into one of them and the air drops by 4–5°C, sometimes more. These are LUMA's urban micro-forests — dense, multi-layered, native plantings that the city and dozens of property owners invested in years ago, when biodiversity was still treated as decoration. Today they are infrastructure. Each one functions as a living air conditioner, a habitat for hundreds of species, a refuge for residents, and an architectural signature of Berlin's resilience strategy. People sit under their canopies on benches designed into the planting. Children find beetles. Wild bees nest in sand walls. The forests are not just functional — they are beautiful. We made beauty a goal alongside biodiversity, because humans only protect what they love, and a city only defends what it finds worth living in.
+
+When the heavy storms come — and they come more often now, more violent than the climate models predicted — none of these sites flood. The microbiome-enhanced soil absorbs water within minutes, holding it like a sponge instead of shedding it onto the streets. Combined with LUMA's broader rainwater management — intermittent storage containers, biodiverse green roofs, hybrid bioretention cells — Berlin's stormwater system has stopped being a procedure and started behaving like a sponge city. Buildings that would have flooded a decade ago now stay dry.
+
+This works because we never pretended biodiversity was simple. We measured the right things, not just the easy things — soil biology, functional diversity, ecosystem services in euros. We were honest when restorations failed, and we adapted instead of hiding it. We kept the craftsmanship alive: the arborists climbing, the gardeners planting, the soil scientists kneeling in the dirt. The data is only as good as the work beneath it. We respected what traditional land stewards have always known and integrated their knowledge into modern science instead of replacing it. That earned us legitimacy. Greenwashing got harder. Real work got rewarded.
+
+Because we began tracking this work over a decade ago and built sophisticated data systems around it, the evidence has piled up. Investment in green assets reduces costs. Improves long-term asset value. Has measurable effects on local quality of life and biodiversity. Investing in living infrastructure has become as reliable and accessible as it has ever been. The BIOME platform — scientifically backed, independently verified, built on open standards — has emerged as the central hub for the entire urban biodiversity industry. Landscape architects pull verified species performance data from it before specifying a plant. Municipalities issue maintenance contracts through it. Specialized service providers — wild bee experts, soil microbiologists, deadwood habitat builders, green roof engineers — connect with the projects that need them. Researchers at universities draw on years of standardized field data. Insurers price urban ecology into risk models because the data is finally good enough. Tiered access — free for community gardens and citizen scientists, subscription-based for professionals. We built the hub. We do not own the data.
+
+A biodiversity standard, comparable in rigor to carbon accounting, has emerged through our framework — not because we declared it, but because the data was open, the methods transparent, and the results replicable across continents. Companies prove their ecological commitments to authorities and investors with documented track records spanning decades.
+
+LUMA started its European expansion in 2030. Today we are active in France, Italy, Slovenia, Sweden, Spain, Portugal, and most other EU countries. Since politics shifted radically toward renewables and preservation, worldwide demand for our services has grown rapidly — and we are now expanding into Asia, Africa, and the Americas through a LUMA-certified network of practitioners trained in our methods. The work reaches places we will never personally visit. Our team is cross-disciplinary by design — ecologists alongside software engineers alongside arborists alongside designers — because the problems we solve sit at the intersections.
+
+Our customers stay with us because we keep listening. Subscriptions grow not from lock-in but from genuine value. Community feedback drives every release. We forge real partnerships, because we fight for the same purpose.
+
+LUMA contributes to the worldwide movement to preserve life on this planet for generations to come. We are not landscaping. We are not a software company. We are the living infrastructure layer of the cities of the future — proving, every day, that humans and all other life forms can share the same ground, with trust as the foundation, data as the language, beauty as the goal, and craftsmanship as the soul.
+
+This is where we are going. The path will change. The destination will not.`,
+      },
+    ],
+  },
+  de: {
+    title: 'Vision & Mission',
+    sections: [
+      {
+        heading: 'Vision Statement: Was treibt uns an?',
+        body: 'Unser großes Ziel ist es, die Lebensgrundlage, Resilienz und das Wohlbefinden möglichst vieler Lebewesen und Menschen zu verbessern und zu erhalten, um ein harmonisches Zusammenleben langfristig zu fördern.',
+      },
+      {
+        heading: 'Mission Statement: Wie wollen wir das erreichen?',
+        body: 'Mit Leidenschaft für handwerkliche Qualität & modularen, innovativen und intelligenten Lösungen verwandeln wir urbane Räume in klimaresiliente, artenreiche Oasen, die Menschen zum Verweilen einladen und eine hohe Lebensqualität bieten. Wir verbinden dabei Data Science mit Handwerk und Ökologie um All-In-One Servicelösungen anbieten zu können.',
+      },
+      {
+        heading: 'Vivid Vision (eine flexible Beschreibung der Zukunft, die wir uns vorstellen):',
+        body: `Wir schreiben das Jahr 2036. Die Klimakrise beschleunigt sich schneller, als wissenschaftliche Prognosen es angenommen hatten. Eine Serie heißer Sommerwochen kocht Berlin – die Lufttemperatur liegt bei 39°C und kühlt auch nachts kaum ab. Der Asphalt hält die Hitze. Die Gebäude halten die Hitze. Die Stadt ist zu ihrem eigenen Backofen geworden. Die Menschen leiden, insbesondere ältere Menschen und Kinder, also jene Bevölkerungsgruppen, die nie einen Ausweg aus dem urbanen Hitzeinseleffekt hatten.
+
+Aber es gibt jetzt kühle Orte in der Stadt. Tritt in einen davon hinein, und die Luft fällt um 4 bis 5°C, manchmal mehr. Das sind LUMAs urbane Mikrowälder – dichte, mehrschichtige, heimische Pflanzungen, in die die Stadt und Dutzende Eigentümerinnen vor Jahren investiert haben, als Biodiversität noch als Dekoration behandelt wurde. Heute sind sie Infrastruktur. Jeder dieser Wälder funktioniert als lebende Klimaanlage, als Lebensraum für hunderte Arten, als Rückzugsort für Anwohnerinnen und als architektonische Signatur der Resilienzstrategie Berlins. Menschen sitzen unter ihren Kronen auf Bänken, die in die Pflanzung integriert wurden. Kinder finden Käfer. Wildbienen nisten in Sandwänden. Diese Wälder sind nicht nur funktional – sie sind schön. Wir haben Schönheit zum Ziel gemacht, gleichberechtigt neben Biodiversität, denn Menschen schützen nur, was sie lieben, und eine Stadt verteidigt nur, was sie für lebenswert hält.
+
+Wenn die schweren Stürme kommen – und sie kommen häufiger und heftiger, als die Klimamodelle es vorhergesagt hatten – wird keiner dieser Standorte überflutet. Der durch Mikrobiom-Inokulation aufgewertete Boden nimmt Wasser innerhalb von Minuten auf und speichert es wie ein Schwamm, anstatt es auf die Straßen abzugeben. In Kombination mit LUMAs ganzheitlichem Regenwassermanagement – Zwischenspeichern, biodiversen Dachbegrünungen, hybriden Versickerungsmulden – hat Berlins Stadtentwässerung aufgehört, ein Verfahren zu sein, und beginnt, sich wie eine Schwammstadt zu verhalten. Gebäude, die vor einem Jahrzehnt überflutet worden wären, bleiben heute trocken.
+
+Das funktioniert, weil wir nie so getan haben, als wäre Biodiversität einfach. Wir haben die richtigen Dinge gemessen, nicht nur die einfachen – Bodenbiologie, funktionale Diversität, Ökosystemleistungen in Euro. Wir waren ehrlich, wenn Restaurierungen scheiterten, und haben angepasst, statt es zu verstecken. Wir haben das Handwerk lebendig gehalten: die Baumpflegerinnen beim Klettern, die Gärtnerinnen beim Pflanzen, die Bodenwissenschaftlerinnen knietief im Dreck. Daten sind nur so gut wie die Arbeit, die ihnen zugrunde liegt. Wir haben respektiert, was traditionelle Landpflegerinnen schon immer wussten, und ihr Wissen in moderne Wissenschaft integriert, statt es zu ersetzen. Das hat uns Legitimität verschafft. Greenwashing wurde schwerer. Echte Arbeit wurde belohnt.
+
+Weil wir vor über einem Jahrzehnt begonnen haben, diese Arbeit zu dokumentieren und ausgereifte Datensysteme darum herum zu entwickeln, sind die Belege immer dichter geworden. Investitionen in grüne Vermögenswerte senken Kosten. Sie verbessern den langfristigen Wert von Immobilien. Sie haben messbare Effekte auf die lokale Lebensqualität und auf die Biodiversität. Investitionen in lebendige Infrastruktur sind so verlässlich und zugänglich geworden wie nie zuvor. Die BIOME-Plattform – wissenschaftlich fundiert, unabhängig verifiziert, auf offenen Standards aufgebaut – ist zum zentralen Hub für die gesamte urbane Biodiversitätsbranche geworden. Landschaftsarchitektinnen ziehen verifizierte Artperformance-Daten heraus, bevor sie eine einzige Pflanze spezifizieren. Kommunen vergeben Pflegeaufträge über die Plattform. Spezialisierte Dienstleisterinnen – Wildbienenexpertinnen, Bodenmikrobiologinnen, Totholz-Habitatbauerinnen, Gründachingenieurinnen – finden über sie zu den Projekten, die sie brauchen. Forschende an Universitäten greifen auf Jahre standardisierter Felddaten zurück. Versicherungen bepreisen urbane Ökologie in ihren Risikomodellen, weil die Daten endlich gut genug sind. Gestaffelter Zugang – kostenlos für Gemeinschaftsgärten und Citizen Scientists, abonnementbasiert für Profis. Wir haben den Hub gebaut. Die Daten gehören uns nicht.
+
+Ein Biodiversitätsstandard, vergleichbar in seiner Strenge mit der Kohlenstoffbilanzierung, ist durch unser Framework entstanden – nicht weil wir ihn proklamiert haben, sondern weil die Daten offen waren, die Methoden transparent und die Ergebnisse über Kontinente hinweg reproduzierbar. Unternehmen weisen ihre ökologischen Verpflichtungen Behörden und Investor*innen mit dokumentierten Erfolgsbilanzen über Jahrzehnte nach.
+
+LUMA hat 2030 mit der europäischen Expansion begonnen. Heute sind wir in Frankreich, Italien, Slowenien, Schweden, Spanien, Portugal und in den meisten anderen EU-Ländern aktiv. Seit sich die Politik radikal in Richtung erneuerbarer Energien und Naturschutz verschoben hat, ist die weltweite Nachfrage nach unseren Leistungen rapide gewachsen – und wir expandieren nun nach Asien, Afrika und in die Amerikas, getragen von einem LUMA-zertifizierten Netzwerk aus Praktikerinnen, die in unseren Methoden geschult sind. Die Arbeit erreicht Orte, die wir persönlich nie besuchen werden. Unser Team ist interdisziplinär by design – Ökologinnen neben Softwareentwicklerinnen neben Baumpflegerinnen neben Designer*innen – weil die Probleme, die wir lösen, an den Schnittstellen liegen.
+
+Unsere Kund*innen bleiben bei uns, weil wir zuhören. Abonnements wachsen nicht durch Bindung, sondern durch echten Mehrwert. Community-Feedback bestimmt jedes Release. Wir schmieden echte Partnerschaften, weil wir für denselben Zweck kämpfen.
+
+LUMA leistet einen Beitrag zur weltweiten Bewegung, das Leben auf diesem Planeten für kommende Generationen zu bewahren. Wir sind kein Garten- und Landschaftsbauunternehmen. Wir sind kein Softwareunternehmen. Wir sind die lebendige Infrastrukturebene der Städte der Zukunft – und beweisen Tag für Tag, dass Menschen und alle anderen Lebensformen denselben Boden teilen können: mit Vertrauen als Fundament, Daten als Sprache, Schönheit als Ziel und Handwerk als Seele.
+
+Dahin gehen wir. Der Weg wird sich ändern. Das Ziel nicht.`,
+      },
+    ],
+  },
+}
+
 const reviews = [
+  {
+    name: 'Johannes Klar',
+    role: 'Vorstand, JOPE AG',
+    text: 'Thanks to LUMA, the Tiny Forest has become a fixed part of our outdoor design concepts. Wilderness and life are emerging in what are otherwise often clean-cut, dreary courtyards, leading residents to increasingly use these spaces for relaxation and leisure. Across our last 5 construction projects, we have planted over 5,000 plants — many times more than required — contributing to a healthy urban climate. Thank you to Lukas and Malte — more of this!',
+    avatar: null,
+  },
+  {
+    name: 'Gissela Riccio',
+    role: 'Biodiversity Manager, BEW Berliner Energie und Wärme AG',
+    text: 'Together with the LUMA team, we have scientifically assessed the biodiversity potential of our decentralized BEW facilities and decided on and implemented a range of suitable measures. Their dedicated and professional commitment has given us a highly competent partner by our side. We look forward to continuing this partnership and realizing further projects together.',
+    avatar: null,
+  },
   {
     name: 'Markus Lehmann',
     role: 'Head of Sustainability, Berliner Stadtgrün',
@@ -33,19 +130,120 @@ const reviews = [
     text: 'From the initial consultation to the final planting, the LUMA team brought precision and deep ecological knowledge to every decision.',
     avatar: null,
   },
-  {
-    name: 'Thomas Bauer',
-    role: 'CEO, NaturePositive GmbH',
-    text: 'We partnered with LUMA for our corporate biodiversity programme and the results exceeded all targets. Their long-term stewardship model is the future.',
-    avatar: null,
-  },
-  {
-    name: 'Ingrid Müller',
-    role: 'Parks Commissioner, City of Hamburg',
-    text: 'Professional, thorough and genuinely passionate about ecological outcomes. LUMA is now our go-to partner for all climate resilience projects.',
-    avatar: null,
-  },
 ]
+
+const serviceThumbs = {
+  en: [serviceThumb1, serviceThumb2, serviceThumb3, serviceThumb4, serviceThumb5, serviceThumb6, serviceThumb7, serviceThumb8, serviceThumb9],
+  de: [serviceThumb1, serviceThumb2, serviceThumb3, serviceThumb4, serviceThumb5, serviceThumb6, serviceThumb7, serviceThumb8, serviceThumb9],
+}
+
+function VisionModal({ onClose, isDark, c, lang: initialLang }) {
+  const { accent, fg, fgMuted, fgSubtle, borderColor } = c
+  const [modalLang, setModalLang] = useState(initialLang)
+  const content = visionMissionContent[modalLang]
+
+  return (
+    <div
+      style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}
+      onClick={onClose}
+    >
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)' }} />
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          position: 'relative',
+          background: isDark ? '#0f1117' : '#f0efe8',
+          border: `1px solid ${borderColor}`,
+          borderRadius: 4,
+          maxWidth: 780,
+          width: '100%',
+          maxHeight: '88vh',
+          overflowY: 'auto',
+          boxShadow: '0 40px 120px rgba(0,0,0,0.6)',
+          animation: 'modalIn 0.35s cubic-bezier(0.16,1,0.3,1) both',
+        }}
+      >
+        <style>{`
+          @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.94) translateY(24px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+          }
+        `}</style>
+
+        {/* Header */}
+        <div style={{ padding: '40px 48px 32px', borderBottom: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: isDark ? '#0f1117' : '#f0efe8', zIndex: 10 }}>
+          <div>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8 }}>
+              {modalLang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}
+            </div>
+            <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, lineHeight: 1.1 }}>
+              {content.title}
+            </h2>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+            {/* Subtle language toggle */}
+            <div style={{ display: 'flex', alignItems: 'center', border: `1px solid ${borderColor}`, borderRadius: 3, overflow: 'hidden' }}>
+              <button
+                onClick={e => { e.stopPropagation(); setModalLang('en') }}
+                style={{
+                  padding: '5px 12px',
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: 11,
+                  letterSpacing: '0.08em',
+                  background: modalLang === 'en' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent',
+                  color: modalLang === 'en' ? fg : fgSubtle,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >EN</button>
+              <div style={{ width: 1, height: 16, background: borderColor }} />
+              <button
+                onClick={e => { e.stopPropagation(); setModalLang('de') }}
+                style={{
+                  padding: '5px 12px',
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: 11,
+                  letterSpacing: '0.08em',
+                  background: modalLang === 'de' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent',
+                  color: modalLang === 'de' ? fg : fgSubtle,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >DE</button>
+            </div>
+            <button
+              onClick={onClose}
+              style={{ width: 36, height: 36, borderRadius: '50%', background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: fg, transition: 'background 0.2s' }}
+              onMouseEnter={e => e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'}
+              onMouseLeave={e => e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}
+            >
+              <X size={16} />
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div style={{ padding: '40px 48px 56px', display: 'flex', flexDirection: 'column', gap: 40 }}>
+          {content.sections.map((section, i) => (
+            <div key={i}>
+              <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', fontWeight: 400, color: fg, marginBottom: 16, letterSpacing: '-0.01em', lineHeight: 1.3 }}>
+                {section.heading}
+              </h3>
+              <div style={{ height: 1, background: `${accent}30`, marginBottom: 20 }} />
+              {section.body.split('\n\n').map((para, j) => (
+                <p key={j} style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, lineHeight: 1.9, fontWeight: 300, marginBottom: j < section.body.split('\n\n').length - 1 ? 20 : 0 }}>
+                  {para}
+                </p>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function AQIWidget({ isDark, accent, fg, fgMuted, fgSubtle, accentBorder }) {
   const [aqi, setAqi] = useState(null)
@@ -113,6 +311,7 @@ export default function HomePage() {
   const navigate = useNavigate()
   const heroRef = useRef(null)
   const [visible, setVisible] = useState({})
+  const [visionOpen, setVisionOpen] = useState(false)
   const { lang } = useLang()
   const { theme } = useTheme()
   const t = translations[lang].home
@@ -124,6 +323,7 @@ export default function HomePage() {
   const fadeLeft = isDark ? 'linear-gradient(to right, #080c0a, transparent)' : 'linear-gradient(to right, #f0efe8, transparent)'
   const fadeRight = isDark ? 'linear-gradient(to left, #080c0a, transparent)' : 'linear-gradient(to left, #f0efe8, transparent)'
   const statsBg = isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.01)'
+  const thumbs = serviceThumbs[lang]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -156,10 +356,14 @@ export default function HomePage() {
         .reveal.visible { opacity: 1; transform: translateY(0); }
         .services-track { display: flex; width: max-content; animation: scroll-cards 40s linear infinite; gap: 24px; }
         .services-track:hover { animation-play-state: paused; }
-        .service-card { width: 320px; min-height: 260px; flex-shrink: 0; padding: 36px; transition: border-color 0.3s, background 0.3s, transform 0.3s; cursor: pointer; position: relative; overflow: hidden; }
-        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; opacity: 0; transition: opacity 0.3s; }
+        .service-card { width: 320px; min-height: 260px; flex-shrink: 0; transition: border-color 0.3s, background 0.3s, transform 0.3s; cursor: pointer; position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent-color); opacity: 0; transition: opacity 0.3s; z-index: 2; }
         .service-card:hover { transform: translateY(-6px); }
         .service-card:hover::before { opacity: 1; }
+        .service-card .card-img { width: 100%; height: 160px; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+        .service-card:hover .card-img { transform: scale(1.05); }
+        .card-img-wrap { overflow: hidden; height: 160px; }
+        .card-body { padding: 28px 36px 36px; }
         .reviews-track { display: flex; width: max-content; animation: scroll-cards 50s linear infinite; gap: 24px; }
         .reviews-track:hover { animation-play-state: paused; }
         .orb { position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; animation: glow-pulse 4s ease-in-out infinite; }
@@ -169,6 +373,8 @@ export default function HomePage() {
         .footer-link:hover { opacity: 0.7; }
         .footer-legal { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 400; text-decoration: underline; cursor: pointer; background: none; border: none; transition: opacity 0.2s; padding: 0; text-align: left; }
         .footer-legal:hover { opacity: 0.7; }
+        .learn-more-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: transparent; border: 1px solid rgba(255,255,255,0.35); color: #ffffff; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, border-color 0.2s; margin-top: 32px; }
+        .learn-more-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
       `}</style>
 
       {/* Hero */}
@@ -182,7 +388,6 @@ export default function HomePage() {
         </div>
         <div style={{ position: 'absolute', inset: 0, zIndex: 1, backgroundImage: `linear-gradient(${gridColor} 1px, transparent 1px), linear-gradient(90deg, ${gridColor} 1px, transparent 1px)`, backgroundSize: '60px 60px', pointerEvents: 'none', opacity: 0.4 }} />
         <div className="orb" style={{ width: 600, height: 600, background: isDark ? 'rgba(16,185,129,0.1)' : 'rgba(10,118,82,0.07)', top: -100, right: -100, zIndex: 1 }} />
-
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 900 }}>
           <div className="hero-badge" style={{ marginBottom: 32 }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 14px', background: accentMuted, border: `1px solid ${accentBorder}`, color: accent, fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
@@ -199,7 +404,6 @@ export default function HomePage() {
             <button onClick={() => navigate('/reports')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer' }}>{t.viewReports}</button>
           </div>
         </div>
-
         <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.9, zIndex: 2 }}>
           <AQIWidget isDark={isDark} accent={accent} fg={fg} fgMuted={fgMuted} fgSubtle={fgSubtle} accentBorder={accentBorder} />
         </div>
@@ -219,12 +423,14 @@ export default function HomePage() {
           <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, background: fadeRight, zIndex: 10, pointerEvents: 'none' }} />
           <div className="services-track">
             {[...t.services, ...t.services].map((service, i) => (
-              <div key={i} className="service-card" style={{ border: `1px solid ${cardBorder}`, background: cardBg, '--accent': accent }}>
-                <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.15em', marginBottom: 24 }}>{service.number}</div>
-                <div style={{ width: 32, height: 1, background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)', marginBottom: 24 }} />
-                <h3 style={{ fontSize: 22, fontWeight: 400, letterSpacing: '-0.01em', marginBottom: 16, color: fg }}>{service.title}</h3>
-                <p className="mono" style={{ fontSize: 12, color: fgSubtle, lineHeight: 1.75, fontWeight: 300 }}>{t.comingSoon}</p>
-                <div style={{ position: 'absolute', bottom: 36, right: 36 }}>
+              <div key={i} className="service-card" style={{ border: `1px solid ${cardBorder}`, background: cardBg, '--accent-color': accent }}>
+                <div className="card-img-wrap">
+                  <img src={thumbs[i % thumbs.length]} alt={service.title} className="card-img" />
+                </div>
+                <div className="card-body">
+                  <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.15em', marginBottom: 16 }}>{service.number}</div>
+                  <div style={{ width: 32, height: 1, background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)', marginBottom: 16 }} />
+                  <h3 style={{ fontSize: 20, fontWeight: 400, letterSpacing: '-0.01em', marginBottom: 12, color: fg }}>{service.title}</h3>
                   <span className="mono" style={{ fontSize: 11, color: isDark ? 'rgba(16,185,129,0.5)' : 'rgba(10,118,82,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{t.learnMore}</span>
                 </div>
               </div>
@@ -234,50 +440,53 @@ export default function HomePage() {
       </section>
 
       {/* Vision & Mission */}
-      <section style={{ padding: '120px 80px', borderBottom: `1px solid ${borderColor}` }}>
-        <div data-id="vision" className={`reveal${visible.vision ? ' visible' : ''}`}>
-          <div className="section-label" style={{ color: accent }}>
-            {lang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}
-          </div>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: fg, marginBottom: 80, maxWidth: 700 }}>
-            {lang === 'en' ? 'What is Our Goal?' : 'Was ist unser Ziel?'}
-          </h2>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80 }}>
-            {/* Vision */}
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
-                <div style={{ width: 40, height: 1, background: accent }} />
-                <span className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-                  {lang === 'en' ? 'Our Vision' : 'Unsere Vision'}
-                </span>
-              </div>
-              <h3 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.15, color: fg, marginBottom: 24 }}>
-                {lang === 'en' ? 'For every living being.' : 'Für jedes Lebewesen.'}
-              </h3>
-              <p className="mono" style={{ fontSize: 13, color: fgMuted, lineHeight: 1.9, fontWeight: 300 }}>
-                {lang === 'en'
-                  ? 'Our great goal is to improve and maintain the livelihoods and well-being of as many living beings as possible in order to promote harmonious coexistence and climate resilience in urban spaces. From bees to humans.'
-                  : 'Unser großes Ziel ist es, die Lebensgrundlagen und das Wohlbefinden möglichst vieler Lebewesen zu verbessern und zu erhalten, um ein harmonisches Miteinander und Klimaresilienz in urbanen Räumen zu fördern. Von Bienen bis Menschen.'}
-              </p>
+      <section style={{ position: 'relative', borderBottom: `1px solid ${borderColor}`, overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${goalBG2})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'local' }} />
+        <div style={{ position: 'absolute', inset: 0, background: isDark ? 'rgba(8,12,10,0.55)' : 'rgba(8,12,10,0.45)', backdropFilter: 'blur(1px)' }} />
+        <div style={{ position: 'relative', zIndex: 1, padding: '120px 80px' }}>
+          <div data-id="vision" className={`reveal${visible.vision ? ' visible' : ''}`}>
+            <div className="section-label" style={{ color: accent }}>
+              {lang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}
             </div>
-
-            {/* Mission */}
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
-                <div style={{ width: 40, height: 1, background: accent }} />
-                <span className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-                  {lang === 'en' ? 'Our Mission' : 'Unsere Mission'}
-                </span>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: '#ffffff', marginBottom: 80, maxWidth: 700 }}>
+              {lang === 'en' ? 'What is Our Goal?' : 'Was ist unser Ziel?'}
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80 }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
+                  <div style={{ width: 40, height: 1, background: accent }} />
+                  <span className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
+                    {lang === 'en' ? 'Our Vision' : 'Unsere Vision'}
+                  </span>
+                </div>
+                <h3 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.15, color: '#ffffff', marginBottom: 24 }}>
+                  {lang === 'en' ? 'For every living being.' : 'Für jedes Lebewesen.'}
+                </h3>
+                <p className="mono" style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.9, fontWeight: 300 }}>
+                  {lang === 'en'
+                    ? 'Our great goal is to improve and maintain the livelihoods and well-being of as many living beings as possible in order to promote harmonious coexistence and climate resilience in urban spaces. From bees to humans.'
+                    : 'Unser großes Ziel ist es, die Lebensgrundlagen und das Wohlbefinden möglichst vieler Lebewesen zu verbessern und zu erhalten, um ein harmonisches Miteinander und Klimaresilienz in urbanen Räumen zu fördern. Von Bienen bis Menschen.'}
+                </p>
+                <button className="learn-more-btn" onClick={() => setVisionOpen(true)}>
+                  {lang === 'en' ? 'Learn More →' : 'Mehr erfahren →'}
+                </button>
               </div>
-              <h3 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.15, color: fg, marginBottom: 24 }}>
-                {lang === 'en' ? 'Craftsmanship meets ecology.' : 'Handwerk trifft Ökologie.'}
-              </h3>
-              <p className="mono" style={{ fontSize: 13, color: fgMuted, lineHeight: 1.9, fontWeight: 300 }}>
-                {lang === 'en'
-                  ? 'We are passionate about quality craftsmanship, modular, and intelligent solutions. We transform urban spaces into climate-resilient, species-rich oases that invite you to linger.'
-                  : 'Wir sind leidenschaftlich begeistert von Qualitätshandwerk, modularen und intelligenten Lösungen. Wir verwandeln urbane Räume in klimaresiliente, artenreiche Oasen, die zum Verweilen einladen.'}
-              </p>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
+                  <div style={{ width: 40, height: 1, background: accent }} />
+                  <span className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
+                    {lang === 'en' ? 'Our Mission' : 'Unsere Mission'}
+                  </span>
+                </div>
+                <h3 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.15, color: '#ffffff', marginBottom: 24 }}>
+                  {lang === 'en' ? 'Craftsmanship meets ecology.' : 'Handwerk trifft Ökologie.'}
+                </h3>
+                <p className="mono" style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.9, fontWeight: 300 }}>
+                  {lang === 'en'
+                    ? 'We are passionate about quality craftsmanship, modular, and intelligent solutions. We transform urban spaces into climate-resilient, species-rich oases that invite you to linger.'
+                    : 'Wir sind leidenschaftlich begeistert von Qualitätshandwerk, modularen und intelligenten Lösungen. Wir verwandeln urbane Räume in klimaresiliente, artenreiche Oasen, die zum Verweilen einladen.'}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -305,34 +514,11 @@ export default function HomePage() {
           <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, background: fadeRight, zIndex: 10, pointerEvents: 'none' }} />
           <div className="reviews-track">
             {[...reviews, ...reviews].map((review, i) => (
-              <div key={i} style={{
-                width: 360,
-                flexShrink: 0,
-                padding: 36,
-                border: `1px solid ${cardBorder}`,
-                background: cardBg,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 24,
-                position: 'relative',
-              }}>
+              <div key={i} style={{ width: 360, flexShrink: 0, padding: 36, border: `1px solid ${cardBorder}`, background: cardBg, display: 'flex', flexDirection: 'column', gap: 24, position: 'relative' }}>
                 <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 64, lineHeight: 0.8, color: accent, opacity: 0.3, marginBottom: 8 }}>"</div>
-                <p className="mono" style={{ fontSize: 12, color: fgMuted, lineHeight: 1.85, fontWeight: 300, flexGrow: 1 }}>
-                  {review.text}
-                </p>
+                <p className="mono" style={{ fontSize: 12, color: fgMuted, lineHeight: 1.85, fontWeight: 300, flexGrow: 1 }}>{review.text}</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 16, paddingTop: 20, borderTop: `1px solid ${borderColor}` }}>
-                  <div style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: '50%',
-                    border: `1px solid ${accent}40`,
-                    background: `${accent}10`,
-                    flexShrink: 0,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    overflow: 'hidden',
-                  }}>
+                  <div style={{ width: 44, height: 44, borderRadius: '50%', border: `1px solid ${accent}40`, background: `${accent}10`, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                     {review.avatar
                       ? <img src={review.avatar} alt={review.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       : <span style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 16, color: accent }}>{review.name.charAt(0)}</span>
@@ -393,13 +579,9 @@ export default function HomePage() {
             <a href="mailto:info@luma.earth" style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = accent} onMouseLeave={e => e.currentTarget.style.color = fgMuted}>{t.footerEmail}</a>
           </div>
         </div>
-
         <div style={{ padding: '40px 80px', borderTop: `1px solid ${borderColor}` }}>
-          <button onClick={() => navigate('/privacy')} className="footer-legal" style={{ color: fg }}>
-            {t.footerLegal}
-          </button>
+          <button onClick={() => navigate('/privacy')} className="footer-legal" style={{ color: fg }}>{t.footerLegal}</button>
         </div>
-
         <div style={{ padding: '24px 80px 32px', borderTop: `1px solid ${borderColor}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ width: 28, height: 28, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#ffffff', fontSize: 12 }}>L</div>
@@ -413,6 +595,16 @@ export default function HomePage() {
           <div className="mono" style={{ fontSize: 11, color: fgSubtle, letterSpacing: '0.05em' }}>{t.copyright}</div>
         </div>
       </footer>
+
+      {/* Vision Modal */}
+      {visionOpen && (
+        <VisionModal
+          onClose={() => setVisionOpen(false)}
+          isDark={isDark}
+          c={c}
+          lang={lang}
+        />
+      )}
     </div>
   )
 }
