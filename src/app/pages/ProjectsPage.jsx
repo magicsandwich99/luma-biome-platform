@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useTheme, themeColors } from '../context/ThemeContext'
 import { useLang } from '../context/LangContext'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
-import serviceBG2 from '../../assets/ServiceBG2.jpeg'
+import serviceBG2 from '../../assets/ProjectsBG1.jpg'
 
 // AG (Alt-Glienicke) BEW
 import ag1 from '../../assets/ProjectsPage/AG (Alt-Glienicke) BEW/AG1.jpg'

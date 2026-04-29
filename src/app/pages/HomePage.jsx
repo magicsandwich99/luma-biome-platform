@@ -22,6 +22,11 @@ import gisselaPhoto from '../../assets/Gissela.jpg'
 
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
 
+const heroSub = {
+  en: 'Luma is an all-in-one service provider to help companies to achieve real-world impact & meaningful insights into their biodiversity and climate adaptation resilience projects.',
+  de: 'Luma ist ein All-in-One-Dienstleister, der Unternehmen dabei unterstützt, echte Wirkung zu erzielen und aussagekräftige Einblicke in ihre Biodiversitäts- und Klimaanpassungsprojekte zu gewinnen.',
+}
+
 const visionMissionContent = {
   en: {
     title: 'Vision & Mission',
@@ -313,7 +318,9 @@ export default function HomePage() {
           <h1 className="hero-title" style={{ fontSize: 'clamp(3rem, 7vw, 6.5rem)', lineHeight: 1.02, letterSpacing: '-0.03em', marginBottom: 32, fontWeight: 400, color: '#ffffff' }}>
             {t.heroTitle1}<br /><em style={{ color: accent }}>{t.heroTitle2}</em>
           </h1>
-          <p className="hero-sub mono" style={{ fontSize: 15, lineHeight: 1.8, color: 'rgba(255,255,255,0.65)', maxWidth: 560, marginBottom: 48, fontWeight: 300 }}>{t.heroSub}</p>
+          <p className="hero-sub mono" style={{ fontSize: 15, lineHeight: 1.8, color: 'rgba(255,255,255,0.65)', maxWidth: 560, marginBottom: 48, fontWeight: 300 }}>
+            {heroSub[lang]}
+          </p>
           <div className="hero-cta" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
             <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.enterPlatform}</button>
             <button onClick={() => navigate('/reports')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer' }}>{t.viewReports}</button>

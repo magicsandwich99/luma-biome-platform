@@ -44,7 +44,7 @@ import stewardship6 from '../../assets/Service9/Stewardship6.JPG'
 import stewardship7 from '../../assets/Service9/Stewardship7.JPG'
 import stewardship8 from '../../assets/Service9/Stewardship8.JPG'
 
-import serviceBG2 from '../../assets/ServiceBG2.jpeg'
+import serviceBG2 from '../../assets/ServiceBG1.jpg'
 
 const serviceDetails = {
   en: [
