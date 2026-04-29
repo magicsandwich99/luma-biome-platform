@@ -5,9 +5,8 @@ import { useTheme, themeColors } from '../context/ThemeContext'
 import { translations } from '../i18n/translations'
 import smoothDrone from '../../assets/SmootherDrone.mp4'
 import goalBG2 from '../../assets/GoalBG.jpg'
-import { X } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
-// Service thumbnail images
 import serviceThumb1 from '../../assets/Service1/Tree service 1.PNG'
 import serviceThumb2 from '../../assets/Service2/Consulting1.jpeg'
 import serviceThumb3 from '../../assets/Service3/Drone1.jpg'
@@ -17,6 +16,9 @@ import serviceThumb6 from '../../assets/Service5/Climate3.jpg'
 import serviceThumb7 from '../../assets/Service5/Climate4.png'
 import serviceThumb8 from '../../assets/Service8/Biome1.JPG'
 import serviceThumb9 from '../../assets/Service9/Stewardship1.JPG'
+
+import johannesPhoto from '../../assets/Johannes.jpg'
+import gisselaPhoto from '../../assets/Gissela.jpg'
 
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
 
@@ -96,39 +98,23 @@ Dahin gehen wir. Der Weg wird sich ändern. Das Ziel nicht.`,
 const reviews = [
   {
     name: 'Johannes Klar',
+    nameDE: 'Johannes Klar',
     role: 'Vorstand, JOPE AG',
-    text: 'Thanks to LUMA, the Tiny Forest has become a fixed part of our outdoor design concepts. Wilderness and life are emerging in what are otherwise often clean-cut, dreary courtyards, leading residents to increasingly use these spaces for relaxation and leisure. Across our last 5 construction projects, we have planted over 5,000 plants — many times more than required — contributing to a healthy urban climate. Thank you to Lukas and Malte — more of this!',
-    avatar: null,
+    roleDE: 'Vorstand, JOPE AG',
+    textEN: 'Thanks to LUMA, the Tiny Forest has become a fixed part of our outdoor design concepts. Wilderness and life are emerging in what are otherwise often clean-cut, dreary courtyards, leading residents to increasingly use these spaces for relaxation and leisure. Across our last 5 construction projects, we have planted over 5,000 plants — many times more than required — contributing to a healthy urban climate. Thank you to Lukas and Malte — more of this!',
+    textDE: 'Dank LUMA ist der Tiny Forest ein fester Bestandteil unserer Außenanlagenkonzepte geworden. Es entsteht Wildnis und Leben in den ansonsten oftmals clean gestalteten, tristen Innenhöfen, was dazu führt, dass die Bewohner den Hof vermehrt als Erholungsort und Aufenthaltsraum nutzen. In den letzten 5 Bauprojekten haben wir so über 5.000 Pflanzen gesetzt, das ist ein Vielfaches von dem geforderten und trägt zum gesunden Stadtklima bei. Danke an Lukas und Malte - mehr davon!',
+    avatar: johannesPhoto,
+    side: 'left',
   },
   {
     name: 'Gissela Riccio',
+    nameDE: 'Gissela Riccio',
     role: 'Biodiversity Manager, BEW Berliner Energie und Wärme AG',
-    text: 'Together with the LUMA team, we have scientifically assessed the biodiversity potential of our decentralized BEW facilities and decided on and implemented a range of suitable measures. Their dedicated and professional commitment has given us a highly competent partner by our side. We look forward to continuing this partnership and realizing further projects together.',
-    avatar: null,
-  },
-  {
-    name: 'Markus Lehmann',
-    role: 'Head of Sustainability, Berliner Stadtgrün',
-    text: 'LUMA transformed how we manage urban green infrastructure. The combination of field expertise and digital monitoring is unlike anything else on the market.',
-    avatar: null,
-  },
-  {
-    name: 'Sophie Renard',
-    role: 'Project Lead, Green Cities Initiative',
-    text: 'The soil microbiome work they did on our site was exceptional. We saw measurable improvement in tree vitality within the first season.',
-    avatar: null,
-  },
-  {
-    name: 'Jonas Weber',
-    role: 'Director, Urban Ecology Dept.',
-    text: 'Their drone survey and BIOME platform integration gave us data-driven insights we previously could only dream about. Reporting has never been easier.',
-    avatar: null,
-  },
-  {
-    name: 'Katrin Hoffmann',
-    role: 'Landscape Architect, Studio K',
-    text: 'From the initial consultation to the final planting, the LUMA team brought precision and deep ecological knowledge to every decision.',
-    avatar: null,
+    roleDE: 'Biodiversity Managerin, BEW Berliner Energie und Wärme AG',
+    textEN: 'Together with the LUMA team, we have scientifically assessed the biodiversity potential of our decentralized BEW facilities and decided on and implemented a range of suitable measures. Their dedicated and professional commitment has given us a highly competent partner by our side. We look forward to continuing this partnership and realizing further projects together.',
+    textDE: 'Wir haben zusammen mit dem Team von LUMA das Biodiversitätspotenzial unserer dezentralen Anlagen der BEW wissenschaftlich ausgewertet und verschiedenen passende Maßnahmen dafür entschieden und umgesetzt. Durch Ihren engagierten und professionellen Einsatz haben wir einen sehr kompetenten Partner an unserer Seite. Wir werden diese Partnerschaft weiter fortsetzen und weitere Projekten zusammen realisieren.',
+    avatar: gisselaPhoto,
+    side: 'right',
   },
 ]
 
@@ -143,99 +129,36 @@ function VisionModal({ onClose, isDark, c, lang: initialLang }) {
   const content = visionMissionContent[modalLang]
 
   return (
-    <div
-      style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}
-      onClick={onClose}
-    >
+    <div style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }} onClick={onClose}>
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)' }} />
       <div
         onClick={e => e.stopPropagation()}
-        style={{
-          position: 'relative',
-          background: isDark ? '#0f1117' : '#f0efe8',
-          border: `1px solid ${borderColor}`,
-          borderRadius: 4,
-          maxWidth: 780,
-          width: '100%',
-          maxHeight: '88vh',
-          overflowY: 'auto',
-          boxShadow: '0 40px 120px rgba(0,0,0,0.6)',
-          animation: 'modalIn 0.35s cubic-bezier(0.16,1,0.3,1) both',
-        }}
+        style={{ position: 'relative', background: isDark ? '#0f1117' : '#f0efe8', border: `1px solid ${borderColor}`, borderRadius: 4, maxWidth: 780, width: '100%', maxHeight: '88vh', overflowY: 'auto', boxShadow: '0 40px 120px rgba(0,0,0,0.6)', animation: 'modalIn 0.35s cubic-bezier(0.16,1,0.3,1) both' }}
       >
-        <style>{`
-          @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.94) translateY(24px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-          }
-        `}</style>
-
-        {/* Header */}
+        <style>{`@keyframes modalIn { from { opacity: 0; transform: scale(0.94) translateY(24px); } to { opacity: 1; transform: scale(1) translateY(0); } }`}</style>
         <div style={{ padding: '40px 48px 32px', borderBottom: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: isDark ? '#0f1117' : '#f0efe8', zIndex: 10 }}>
           <div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8 }}>
-              {modalLang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}
-            </div>
-            <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, lineHeight: 1.1 }}>
-              {content.title}
-            </h2>
+            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8 }}>{modalLang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}</div>
+            <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, lineHeight: 1.1 }}>{content.title}</h2>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-            {/* Subtle language toggle */}
             <div style={{ display: 'flex', alignItems: 'center', border: `1px solid ${borderColor}`, borderRadius: 3, overflow: 'hidden' }}>
-              <button
-                onClick={e => { e.stopPropagation(); setModalLang('en') }}
-                style={{
-                  padding: '5px 12px',
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: 11,
-                  letterSpacing: '0.08em',
-                  background: modalLang === 'en' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent',
-                  color: modalLang === 'en' ? fg : fgSubtle,
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
-              >EN</button>
+              <button onClick={e => { e.stopPropagation(); setModalLang('en') }} style={{ padding: '5px 12px', fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: '0.08em', background: modalLang === 'en' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent', color: modalLang === 'en' ? fg : fgSubtle, border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}>EN</button>
               <div style={{ width: 1, height: 16, background: borderColor }} />
-              <button
-                onClick={e => { e.stopPropagation(); setModalLang('de') }}
-                style={{
-                  padding: '5px 12px',
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: 11,
-                  letterSpacing: '0.08em',
-                  background: modalLang === 'de' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent',
-                  color: modalLang === 'de' ? fg : fgSubtle,
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
-              >DE</button>
+              <button onClick={e => { e.stopPropagation(); setModalLang('de') }} style={{ padding: '5px 12px', fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: '0.08em', background: modalLang === 'de' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent', color: modalLang === 'de' ? fg : fgSubtle, border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}>DE</button>
             </div>
-            <button
-              onClick={onClose}
-              style={{ width: 36, height: 36, borderRadius: '50%', background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: fg, transition: 'background 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'}
-              onMouseLeave={e => e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}
-            >
+            <button onClick={onClose} style={{ width: 36, height: 36, borderRadius: '50%', background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: fg, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} onMouseLeave={e => e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}>
               <X size={16} />
             </button>
           </div>
         </div>
-
-        {/* Content */}
         <div style={{ padding: '40px 48px 56px', display: 'flex', flexDirection: 'column', gap: 40 }}>
           {content.sections.map((section, i) => (
             <div key={i}>
-              <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', fontWeight: 400, color: fg, marginBottom: 16, letterSpacing: '-0.01em', lineHeight: 1.3 }}>
-                {section.heading}
-              </h3>
+              <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', fontWeight: 400, color: fg, marginBottom: 16, letterSpacing: '-0.01em', lineHeight: 1.3 }}>{section.heading}</h3>
               <div style={{ height: 1, background: `${accent}30`, marginBottom: 20 }} />
               {section.body.split('\n\n').map((para, j) => (
-                <p key={j} style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, lineHeight: 1.9, fontWeight: 300, marginBottom: j < section.body.split('\n\n').length - 1 ? 20 : 0 }}>
-                  {para}
-                </p>
+                <p key={j} style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, lineHeight: 1.9, fontWeight: 300, marginBottom: j < section.body.split('\n\n').length - 1 ? 20 : 0 }}>{para}</p>
               ))}
             </div>
           ))}
@@ -253,18 +176,10 @@ function AQIWidget({ isDark, accent, fg, fgMuted, fgSubtle, accentBorder }) {
     fetch('https://api.open-meteo.com/v1/air-quality?latitude=52.52&longitude=13.41&current=european_aqi,pm10,pm2_5,nitrogen_dioxide')
       .then(r => r.json())
       .then(data => {
-        setAqi({
-          aqi: data.current?.european_aqi ?? 42,
-          pm25: data.current?.pm2_5?.toFixed(1) ?? '8.2',
-          pm10: data.current?.pm10?.toFixed(1) ?? '12.4',
-          no2: data.current?.nitrogen_dioxide?.toFixed(1) ?? '18.1',
-        })
+        setAqi({ aqi: data.current?.european_aqi ?? 42, pm25: data.current?.pm2_5?.toFixed(1) ?? '8.2', pm10: data.current?.pm10?.toFixed(1) ?? '12.4', no2: data.current?.nitrogen_dioxide?.toFixed(1) ?? '18.1' })
         setLoading(false)
       })
-      .catch(() => {
-        setAqi({ aqi: 42, pm25: '8.2', pm10: '12.4', no2: '18.1' })
-        setLoading(false)
-      })
+      .catch(() => { setAqi({ aqi: 42, pm25: '8.2', pm10: '12.4', no2: '18.1' }); setLoading(false) })
   }, [])
 
   const getAqiLabel = (val) => {
@@ -285,21 +200,14 @@ function AQIWidget({ isDark, accent, fg, fgMuted, fgSubtle, accentBorder }) {
         <div style={{ width: 8, height: 8, borderRadius: '50%', background: info.color, boxShadow: `0 0 8px ${info.color}` }} />
       </div>
       <div style={{ fontSize: 48, letterSpacing: '-0.03em', color: info.color, lineHeight: 1, marginBottom: 4, fontFamily: "'DM Serif Display', Georgia, serif" }}>
-        {loading ? '—' : aqi.aqi}
-        <span style={{ fontSize: 16, color: fgMuted, marginLeft: 4, fontFamily: "'DM Mono', monospace" }}>AQI</span>
+        {loading ? '—' : aqi.aqi}<span style={{ fontSize: 16, color: fgMuted, marginLeft: 4, fontFamily: "'DM Mono', monospace" }}>AQI</span>
       </div>
       <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: info.color, fontWeight: 500, marginBottom: 12 }}>{info.label}</div>
       {!loading && aqi && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}>
-            <span>PM2.5</span><span>{aqi.pm25} µg/m³</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}>
-            <span>PM10</span><span>{aqi.pm10} µg/m³</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}>
-            <span>NO₂</span><span>{aqi.no2} µg/m³</span>
-          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}><span>PM2.5</span><span>{aqi.pm25} µg/m³</span></div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}><span>PM10</span><span>{aqi.pm10} µg/m³</span></div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}><span>NO₂</span><span>{aqi.no2} µg/m³</span></div>
         </div>
       )}
       <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginTop: 8 }}>Berlin, DE</div>
@@ -312,6 +220,7 @@ export default function HomePage() {
   const heroRef = useRef(null)
   const [visible, setVisible] = useState({})
   const [visionOpen, setVisionOpen] = useState(false)
+  const [activeReview, setActiveReview] = useState(0)
   const { lang } = useLang()
   const { theme } = useTheme()
   const t = translations[lang].home
@@ -327,14 +236,17 @@ export default function HomePage() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) setVisible(v => ({ ...v, [e.target.dataset.id]: true }))
-      }),
+      entries => entries.forEach(e => { if (e.isIntersecting) setVisible(v => ({ ...v, [e.target.dataset.id]: true })) }),
       { threshold: 0.15 }
     )
     document.querySelectorAll('[data-id]').forEach(el => observer.observe(el))
     return () => observer.disconnect()
   }, [])
+
+  const review = reviews[activeReview]
+  const reviewText = lang === 'en' ? review.textEN : review.textDE
+  const reviewName = lang === 'en' ? review.name : review.nameDE
+  const reviewRole = lang === 'en' ? review.role : review.roleDE
 
   return (
     <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", background: bg, color: fg, overflowX: 'hidden', transition: 'background 0.3s, color 0.3s' }}>
@@ -348,6 +260,7 @@ export default function HomePage() {
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
         @keyframes scroll-cards { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes glow-pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.9; } }
+        @keyframes reviewFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         .hero-title { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
         .hero-sub { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.45s both; }
         .hero-cta { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
@@ -364,8 +277,6 @@ export default function HomePage() {
         .service-card:hover .card-img { transform: scale(1.05); }
         .card-img-wrap { overflow: hidden; height: 160px; }
         .card-body { padding: 28px 36px 36px; }
-        .reviews-track { display: flex; width: max-content; animation: scroll-cards 50s linear infinite; gap: 24px; }
-        .reviews-track:hover { animation-play-state: paused; }
         .orb { position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; animation: glow-pulse 4s ease-in-out infinite; }
         .framework-pill { padding: 8px 20px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.05em; transition: all 0.2s; cursor: default; }
         .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
@@ -375,6 +286,10 @@ export default function HomePage() {
         .footer-legal:hover { opacity: 0.7; }
         .learn-more-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: transparent; border: 1px solid rgba(255,255,255,0.35); color: #ffffff; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, border-color 0.2s; margin-top: 32px; }
         .learn-more-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+        .review-nav-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid ${borderColor}; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: ${fgMuted}; }
+        .review-nav-btn:hover { border-color: ${accent}; color: ${accent}; background: ${accent}10; }
+        .review-dot { width: 8px; height: 8px; border-radius: 50%; cursor: pointer; transition: all 0.3s; border: none; padding: 0; }
+        .review-content { animation: reviewFade 0.4s ease both; }
       `}</style>
 
       {/* Hero */}
@@ -445,9 +360,7 @@ export default function HomePage() {
         <div style={{ position: 'absolute', inset: 0, background: isDark ? 'rgba(8,12,10,0.55)' : 'rgba(8,12,10,0.45)', backdropFilter: 'blur(1px)' }} />
         <div style={{ position: 'relative', zIndex: 1, padding: '120px 80px' }}>
           <div data-id="vision" className={`reveal${visible.vision ? ' visible' : ''}`}>
-            <div className="section-label" style={{ color: accent }}>
-              {lang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}
-            </div>
+            <div className="section-label" style={{ color: accent }}>{lang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}</div>
             <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1.05, color: '#ffffff', marginBottom: 80, maxWidth: 700 }}>
               {lang === 'en' ? 'What is Our Goal?' : 'Was ist unser Ziel?'}
             </h2>
@@ -455,17 +368,13 @@ export default function HomePage() {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
                   <div style={{ width: 40, height: 1, background: accent }} />
-                  <span className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-                    {lang === 'en' ? 'Our Vision' : 'Unsere Vision'}
-                  </span>
+                  <span className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase' }}>{lang === 'en' ? 'Our Vision' : 'Unsere Vision'}</span>
                 </div>
                 <h3 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.15, color: '#ffffff', marginBottom: 24 }}>
                   {lang === 'en' ? 'For every living being.' : 'Für jedes Lebewesen.'}
                 </h3>
                 <p className="mono" style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.9, fontWeight: 300 }}>
-                  {lang === 'en'
-                    ? 'Our great goal is to improve and maintain the livelihoods and well-being of as many living beings as possible in order to promote harmonious coexistence and climate resilience in urban spaces. From bees to humans.'
-                    : 'Unser großes Ziel ist es, die Lebensgrundlagen und das Wohlbefinden möglichst vieler Lebewesen zu verbessern und zu erhalten, um ein harmonisches Miteinander und Klimaresilienz in urbanen Räumen zu fördern. Von Bienen bis Menschen.'}
+                  {lang === 'en' ? 'Our great goal is to improve and maintain the livelihoods and well-being of as many living beings as possible in order to promote harmonious coexistence and climate resilience in urban spaces. From bees to humans.' : 'Unser großes Ziel ist es, die Lebensgrundlagen und das Wohlbefinden möglichst vieler Lebewesen zu verbessern und zu erhalten, um ein harmonisches Miteinander und Klimaresilienz in urbanen Räumen zu fördern. Von Bienen bis Menschen.'}
                 </p>
                 <button className="learn-more-btn" onClick={() => setVisionOpen(true)}>
                   {lang === 'en' ? 'Learn More →' : 'Mehr erfahren →'}
@@ -474,17 +383,13 @@ export default function HomePage() {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
                   <div style={{ width: 40, height: 1, background: accent }} />
-                  <span className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-                    {lang === 'en' ? 'Our Mission' : 'Unsere Mission'}
-                  </span>
+                  <span className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase' }}>{lang === 'en' ? 'Our Mission' : 'Unsere Mission'}</span>
                 </div>
                 <h3 style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.15, color: '#ffffff', marginBottom: 24 }}>
                   {lang === 'en' ? 'Craftsmanship meets ecology.' : 'Handwerk trifft Ökologie.'}
                 </h3>
                 <p className="mono" style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.9, fontWeight: 300 }}>
-                  {lang === 'en'
-                    ? 'We are passionate about quality craftsmanship, modular, and intelligent solutions. We transform urban spaces into climate-resilient, species-rich oases that invite you to linger.'
-                    : 'Wir sind leidenschaftlich begeistert von Qualitätshandwerk, modularen und intelligenten Lösungen. Wir verwandeln urbane Räume in klimaresiliente, artenreiche Oasen, die zum Verweilen einladen.'}
+                  {lang === 'en' ? 'We are passionate about quality craftsmanship, modular, and intelligent solutions. We transform urban spaces into climate-resilient, species-rich oases that invite you to linger.' : 'Wir sind leidenschaftlich begeistert von Qualitätshandwerk, modularen und intelligenten Lösungen. Wir verwandeln urbane Räume in klimaresiliente, artenreiche Oasen, die zum Verweilen einladen.'}
                 </p>
               </div>
             </div>
@@ -492,46 +397,64 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Customer Reviews */}
-      <section style={{ padding: '100px 0', borderBottom: `1px solid ${borderColor}`, overflow: 'hidden', background: statsBg }}>
-        <div style={{ padding: '0 80px', marginBottom: 56, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+      {/* Client Feedback */}
+      <section style={{ padding: '100px 80px', borderBottom: `1px solid ${borderColor}`, background: statsBg }}>
+        <div style={{ marginBottom: 64, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <div>
-            <div className="section-label" style={{ color: accent }}>
-              {lang === 'en' ? 'Client Feedback' : 'Kundenstimmen'}
-            </div>
+            <div className="section-label" style={{ color: accent }}>{lang === 'en' ? 'Client Feedback' : 'Kundenstimmen'}</div>
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.1, color: fg }}>
               {lang === 'en' ? 'Trusted by those\nwho care for cities.' : 'Vertrauen derer,\ndie Städte gestalten.'}
             </h2>
           </div>
-          <p className="mono" style={{ fontSize: 13, color: fgMuted, maxWidth: 320, lineHeight: 1.7, fontWeight: 300, textAlign: 'right' }}>
-            {lang === 'en'
-              ? 'From city parks departments to corporate sustainability teams — here is what our partners say.'
-              : 'Von Grünflächenämtern bis hin zu Corporate-Sustainability-Teams — das sagen unsere Partner.'}
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <button className="review-nav-btn" onClick={() => setActiveReview(i => (i - 1 + reviews.length) % reviews.length)}>
+              <ChevronLeft size={18} />
+            </button>
+            <div style={{ display: 'flex', gap: 8 }}>
+              {reviews.map((_, i) => (
+                <button key={i} className="review-dot" style={{ background: i === activeReview ? accent : (isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)') }} onClick={() => setActiveReview(i)} />
+              ))}
+            </div>
+            <button className="review-nav-btn" onClick={() => setActiveReview(i => (i + 1) % reviews.length)}>
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
-        <div style={{ overflow: 'hidden', position: 'relative' }}>
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 120, background: fadeLeft, zIndex: 10, pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 120, background: fadeRight, zIndex: 10, pointerEvents: 'none' }} />
-          <div className="reviews-track">
-            {[...reviews, ...reviews].map((review, i) => (
-              <div key={i} style={{ width: 360, flexShrink: 0, padding: 36, border: `1px solid ${cardBorder}`, background: cardBg, display: 'flex', flexDirection: 'column', gap: 24, position: 'relative' }}>
-                <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 64, lineHeight: 0.8, color: accent, opacity: 0.3, marginBottom: 8 }}>"</div>
-                <p className="mono" style={{ fontSize: 12, color: fgMuted, lineHeight: 1.85, fontWeight: 300, flexGrow: 1 }}>{review.text}</p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16, paddingTop: 20, borderTop: `1px solid ${borderColor}` }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', border: `1px solid ${accent}40`, background: `${accent}10`, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                    {review.avatar
-                      ? <img src={review.avatar} alt={review.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                      : <span style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 16, color: accent }}>{review.name.charAt(0)}</span>
-                    }
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 15, fontWeight: 400, color: fg, letterSpacing: '-0.01em', marginBottom: 3 }}>{review.name}</div>
-                    <div className="mono" style={{ fontSize: 10, color: fgSubtle, letterSpacing: '0.05em' }}>{review.role}</div>
-                  </div>
+
+        <div
+          key={activeReview}
+          className="review-content"
+          style={{ display: 'grid', gridTemplateColumns: review.side === 'left' ? '340px 1fr' : '1fr 340px', border: `1px solid ${cardBorder}`, background: cardBg, overflow: 'hidden', minHeight: 400 }}
+        >
+          {review.side === 'left' && (
+            <div style={{ position: 'relative', background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: 0, right: 0, width: 3, height: '100%', background: `linear-gradient(to bottom, ${accent}, ${accent}00)` }} />
+              <img src={review.avatar} alt={review.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+            </div>
+          )}
+
+          <div style={{ padding: '64px 72px', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
+            <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 120, lineHeight: 0.8, color: accent, opacity: isDark ? 0.08 : 0.06, position: 'absolute', top: 32, left: review.side === 'left' ? 56 : 'auto', right: review.side === 'right' ? 56 : 'auto', userSelect: 'none' }}>"</div>
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <p style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', color: fg, lineHeight: 1.7, fontWeight: 400, letterSpacing: '-0.01em', marginBottom: 40, fontStyle: 'italic' }}>
+                "{reviewText}"
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+                <div style={{ width: 40, height: 1, background: accent }} />
+                <div>
+                  <div style={{ fontSize: 15, fontWeight: 400, color: fg, letterSpacing: '-0.01em', marginBottom: 4 }}>{reviewName}</div>
+                  <div className="mono" style={{ fontSize: 11, color: fgSubtle, letterSpacing: '0.05em' }}>{reviewRole}</div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
+
+          {review.side === 'right' && (
+            <div style={{ position: 'relative', background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, width: 3, height: '100%', background: `linear-gradient(to bottom, ${accent}, ${accent}00)` }} />
+              <img src={review.avatar} alt={review.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+            </div>
+          )}
         </div>
       </section>
 
@@ -596,15 +519,7 @@ export default function HomePage() {
         </div>
       </footer>
 
-      {/* Vision Modal */}
-      {visionOpen && (
-        <VisionModal
-          onClose={() => setVisionOpen(false)}
-          isDark={isDark}
-          c={c}
-          lang={lang}
-        />
-      )}
+      {visionOpen && <VisionModal onClose={() => setVisionOpen(false)} isDark={isDark} c={c} lang={lang} />}
     </div>
   )
 }
