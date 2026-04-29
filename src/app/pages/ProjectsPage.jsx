@@ -484,62 +484,58 @@ export default function ProjectsPage() {
       {/* Gallery grid */}
       <div style={{ padding: '80px 80px 120px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 3 }}>
-          {projects.map((project, i) => {
-            const heights = [380, 460, 320, 420, 360, 480, 340, 400, 440, 360, 420, 380, 460, 320, 400, 440, 380]
-            const h = heights[i % heights.length]
-            return (
-              <div
-                key={project.id}
-                className="project-tile"
-                style={{ height: h }}
-                onClick={() => setSelectedProject(project)}
-              >
-                {project.images && project.images.length > 0 ? (
-                  <img
-                    src={project.images[0]}
-                    alt={project.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  />
-                ) : (
-                  <div
-                    className="placeholder"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      background: isDark
-                        ? `hsl(${140 + (i * 17) % 40}, 12%, ${8 + (i * 3) % 10}%)`
-                        : `hsl(${100 + (i * 17) % 60}, 18%, ${82 + (i * 2) % 12}%)`,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 8 }}>
-                        {String(project.id).padStart(2, '0')}
-                      </div>
-                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                        {lang === 'en' ? 'Photo coming soon' : 'Foto folgt'}
-                      </div>
+          {projects.map((project, i) => (
+            <div
+              key={project.id}
+              className="project-tile"
+              style={{ height: 380 }}
+              onClick={() => setSelectedProject(project)}
+            >
+              {project.images && project.images.length > 0 ? (
+                <img
+                  src={project.images[0]}
+                  alt={project.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              ) : (
+                <div
+                  className="placeholder"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    background: isDark
+                      ? `hsl(${140 + (i * 17) % 40}, 12%, ${8 + (i * 3) % 10}%)`
+                      : `hsl(${100 + (i * 17) % 60}, 18%, ${82 + (i * 2) % 12}%)`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 8 }}>
+                      {String(project.id).padStart(2, '0')}
                     </div>
-                  </div>
-                )}
-                <div className="overlay">
-                  <div className="overlay-text">
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 6 }}>
-                      {lang === 'en' ? project.category : project.categoryDE}
-                    </div>
-                    <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1rem, 2vw, 1.3rem)', fontWeight: 400, color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.2, marginBottom: 8 }}>
-                      {lang === 'en' ? project.name : project.nameDE}
-                    </div>
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em' }}>
-                      {project.location} · {project.year}
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                      {lang === 'en' ? 'Photo coming soon' : 'Foto folgt'}
                     </div>
                   </div>
                 </div>
+              )}
+              <div className="overlay">
+                <div className="overlay-text">
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 6 }}>
+                    {lang === 'en' ? project.category : project.categoryDE}
+                  </div>
+                  <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1rem, 2vw, 1.3rem)', fontWeight: 400, color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.2, marginBottom: 8 }}>
+                    {lang === 'en' ? project.name : project.nameDE}
+                  </div>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em' }}>
+                    {project.location} · {project.year}
+                  </div>
+                </div>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </div>
 
