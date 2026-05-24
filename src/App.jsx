@@ -14,6 +14,7 @@ import ContactPage from './app/pages/ContactPage'
 import PrivacyPage from './app/pages/PrivacyPage'
 import ServicesPage from './app/pages/ServicesPage'
 import ProjectsPage from './app/pages/ProjectsPage'
+import ProjectDetailPage from './app/pages/ProjectDetailPage'
 import { Home, Sun, Moon, User, LogOut } from 'lucide-react'
 import lumaLogoDark from './assets/LumaLogom.png'
 import lumaLogoLight from './assets/PNGLogo.png'
@@ -160,6 +161,7 @@ function AppInner() {
               <Route path="/" element={<HomePage />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/projects/:slug" element={<ProjectDetailPage />} />
               <Route path="/record" element={<MapPage />} />
               <Route path="/refine" element={<RefinePage />} />
               <Route path="/reports" element={<ReportsPage />} />
