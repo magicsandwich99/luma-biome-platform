@@ -322,8 +322,8 @@ export default function HomePage() {
             {heroSub[lang]}
           </p>
           <div className="hero-cta" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.enterPlatform}</button>
-            <button onClick={() => navigate('/reports')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer' }}>{t.viewReports}</button>
+            <button onClick={() => navigate('/projects')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.enterPlatform}</button>
+            <button onClick={() => navigate('/contact')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer' }}>{t.viewReports}</button>
           </div>
         </div>
         <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.9, zIndex: 2 }}>
@@ -331,8 +331,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Trust stats bar */}
+      <section style={{ padding: '48px 80px', borderTop: `1px solid ${borderColor}`, borderBottom: `1px solid ${borderColor}`, background: statsBg }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0 }}>
+          {t.stats.map((stat, i) => (
+            <div key={i} style={{ padding: '24px 32px', borderRight: i < 3 ? `1px solid ${borderColor}` : 'none', textAlign: 'center' }}>
+              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 700, color: accent, letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 8 }}>{stat.value}</div>
+              <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fgMuted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Our Services */}
-      <section style={{ padding: '100px 0', borderTop: `1px solid ${borderColor}`, borderBottom: `1px solid ${borderColor}`, overflow: 'hidden', background: statsBg }}>
+      <section style={{ padding: '100px 0', borderBottom: `1px solid ${borderColor}`, overflow: 'hidden', background: statsBg }}>
         <div style={{ padding: '0 80px', marginBottom: 56, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <div>
             <div className="section-label" style={{ color: accent }}>{t.servicesLabel}</div>
@@ -488,7 +500,7 @@ export default function HomePage() {
             {t.ctaTitle1}<br /><em style={{ color: accent }}>{t.ctaTitle2}</em>
           </h2>
           <p className="mono" style={{ fontSize: 13, color: fgMuted, marginBottom: 48, lineHeight: 1.8 }}>{t.ctaDesc}</p>
-          <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '18px 48px', background: accent, color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.launchPlatform}</button>
+          <button onClick={() => navigate('/contact')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '18px 48px', background: accent, color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.launchPlatform}</button>
         </div>
       </section>
 
