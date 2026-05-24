@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react'
-import { BrowserRouter, Routes, Route, NavLink, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink, Link, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { DataProvider } from './app/context/DataContext'
 import { LangProvider, useLang } from './app/context/LangContext'
@@ -166,8 +166,33 @@ function AppInner() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/impressum" element={<PrivacyPage />} />
             </Routes>
           </main>
+
+          {/* Footer */}
+          <footer style={{ borderTop: `1px solid ${isDark ? 'rgba(243,224,168,0.08)' : 'rgba(0,18,25,0.08)'}`, background: isDark ? '#001219' : '#F3E0A8', padding: '24px 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+            <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: isDark ? 'rgba(243,224,168,0.35)' : 'rgba(0,18,25,0.35)', letterSpacing: '0.05em' }}>
+              © 2026 LUMA GbR · Malte Larsen & Lukas Steingässer
+            </span>
+            <div style={{ display: 'flex', gap: 24 }}>
+              {[
+                { to: '/impressum', label: lang === 'en' ? 'Legal Notice' : 'Impressum' },
+                { to: '/privacy', label: lang === 'en' ? 'Privacy Policy' : 'Datenschutz' },
+                { to: '/contact', label: lang === 'en' ? 'Contact' : 'Kontakt' },
+              ].map(link => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: isDark ? 'rgba(243,224,168,0.4)' : 'rgba(0,18,25,0.4)', textDecoration: 'none', letterSpacing: '0.05em', transition: 'color 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.color = c.accent}
+                  onMouseLeave={e => e.currentTarget.style.color = isDark ? 'rgba(243,224,168,0.4)' : 'rgba(0,18,25,0.4)'}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </footer>
 
           {/* Theme toggle */}
           <button
