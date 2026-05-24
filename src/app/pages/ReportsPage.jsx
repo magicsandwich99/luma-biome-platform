@@ -325,7 +325,7 @@ export default function ReportsPage() {
             </div>
             <div style={{
               fontSize: card.isText ? 20 : 26, fontWeight: 700, color: card.accent,
-              fontFamily: card.isText ? 'inherit' : "'DM Mono', monospace",
+              fontFamily: card.isText ? 'inherit' : "'Space Mono', monospace",
             }}>
               {card.value}
             </div>

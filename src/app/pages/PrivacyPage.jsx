@@ -163,10 +163,10 @@ export default function PrivacyPage() {
   const t = content[lang]
 
   return (
-    <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
+    <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
-        .mono { font-family: 'DM Mono', monospace; }
+        .mono { font-family: 'Space Mono', monospace; }
       `}</style>
 
       {/* Hero band */}

@@ -101,10 +101,10 @@ export default function MapPage() {
   }
 
   return (
-    <div style={{ display: 'flex', height: 'calc(100vh - 64px)', fontFamily: "'DM Serif Display', Georgia, serif", background: bg, overflow: 'hidden' }}>
+    <div style={{ display: 'flex', height: 'calc(100vh - 64px)', fontFamily: "'Space Grotesk', sans-serif", background: bg, overflow: 'hidden' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
-        .mono { font-family: 'DM Mono', monospace; }
+        .mono { font-family: 'Space Mono', monospace; }
         .project-item { transition: background 0.2s, border-color 0.2s; cursor: pointer; }
         .project-item:hover { background: ${accent}10 !important; border-color: ${accent}40 !important; }
         .project-item.active { background: ${accent}15 !important; border-color: ${accent}60 !important; }
@@ -112,9 +112,9 @@ export default function MapPage() {
         .leaflet-popup-content { color: ${fg} !important; margin: 0 !important; }
         .leaflet-popup-tip { background: ${isDark ? '#0f1117' : '#ffffff'} !important; }
         .leaflet-popup-close-button { color: ${fgMuted} !important; }
-        .search-input { width: 100%; background: transparent; border: none; outline: none; font-family: 'DM Mono', monospace; font-size: 12px; color: ${fg}; }
+        .search-input { width: 100%; background: transparent; border: none; outline: none; font-family: 'Space Mono', monospace; font-size: 12px; color: ${fg}; }
         .search-input::placeholder { color: ${fgSubtle}; }
-        .filter-option { display: flex; align-items: center; gap: 10px; padding: 8px 12px; cursor: pointer; transition: background 0.15s; border-radius: 3px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.05em; color: ${fgMuted}; }
+        .filter-option { display: flex; align-items: center; gap: 10px; padding: 8px 12px; cursor: pointer; transition: background 0.15s; border-radius: 3px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.05em; color: ${fgMuted}; }
         .filter-option:hover { background: ${accent}10; color: ${fg}; }
         .filter-option.selected { color: ${accent}; background: ${accent}10; }
         ::-webkit-scrollbar { width: 4px; }
@@ -166,7 +166,7 @@ export default function MapPage() {
                 display: 'flex', alignItems: 'center', gap: 6, padding: '8px 12px',
                 border: `1px solid ${filterCategory !== 'All' ? accent : borderColor}`,
                 borderRadius: 3, background: filterCategory !== 'All' ? `${accent}15` : cardBg,
-                cursor: 'pointer', fontFamily: "'DM Mono', monospace", fontSize: 11,
+                cursor: 'pointer', fontFamily: "'Space Mono', monospace", fontSize: 11,
                 color: filterCategory !== 'All' ? accent : fgMuted, letterSpacing: '0.05em',
                 transition: 'all 0.2s', whiteSpace: 'nowrap',
               }}
@@ -305,41 +305,41 @@ export default function MapPage() {
             >
               <Popup>
                 <div style={{ padding: '12px 4px', minWidth: 210 }}>
-                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: categoryColors[project.category] || accent, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6 }}>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: categoryColors[project.category] || accent, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6 }}>
                     {project.category}
                   </div>
-                  <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 15, fontWeight: 400, color: fg, letterSpacing: '-0.01em', lineHeight: 1.3, marginBottom: 8 }}>
+                  <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 15, fontWeight: 400, color: fg, letterSpacing: '-0.01em', lineHeight: 1.3, marginBottom: 8 }}>
                     {project.name}
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                     <div style={{ display: 'flex', gap: 16 }}>
                       <div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
+                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
                           {lang === 'en' ? 'District' : 'Bezirk'}
                         </div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fg }}>{project.district}</div>
+                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fg }}>{project.district}</div>
                       </div>
                       <div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
+                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
                           {lang === 'en' ? 'Year' : 'Jahr'}
                         </div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fg }}>{project.year}</div>
+                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fg }}>{project.year}</div>
                       </div>
                     </div>
                     {project.client && (
                       <div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
+                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
                           {lang === 'en' ? 'Client' : 'Auftraggeber'}
                         </div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fg }}>{project.client}</div>
+                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fg }}>{project.client}</div>
                       </div>
                     )}
                     {project.address && (
                       <div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
+                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle, marginBottom: 2 }}>
                           {lang === 'en' ? 'Address' : 'Adresse'}
                         </div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fg }}>{project.address}</div>
+                        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fg }}>{project.address}</div>
                       </div>
                     )}
                   </div>

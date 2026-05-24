@@ -595,7 +595,7 @@ function ServiceModal({ service, onClose, isDark, c }) {
                 style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s ease' }}
               />
               <div style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(0,0,0,0.5)', borderRadius: 20, padding: '4px 12px' }}>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: '#fff', letterSpacing: '0.05em' }}>{imgIndex + 1} / {service.images.length}</span>
+                <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: '#fff', letterSpacing: '0.05em' }}>{imgIndex + 1} / {service.images.length}</span>
               </div>
               {service.images.length > 1 && (
                 <>
@@ -632,7 +632,7 @@ function ServiceModal({ service, onClose, isDark, c }) {
               <div style={{ width: 60, height: 60, borderRadius: '50%', border: `1px dashed ${borderColor}`, margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ color: fgSubtle, fontSize: 24 }}>+</span>
               </div>
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fgSubtle, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 16 }}>Images coming soon</p>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fgSubtle, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 16 }}>Images coming soon</p>
               <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
                 <button style={{ width: 40, height: 40, borderRadius: '50%', background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)', border: `1px solid ${borderColor}`, cursor: 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', color: fgSubtle }}><ChevronLeft size={18} /></button>
                 <button style={{ width: 40, height: 40, borderRadius: '50%', background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)', border: `1px solid ${borderColor}`, cursor: 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', color: fgSubtle }}><ChevronRight size={18} /></button>
@@ -642,24 +642,24 @@ function ServiceModal({ service, onClose, isDark, c }) {
         </div>
 
         <div style={{ padding: '40px 48px 48px' }}>
-          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>{service.number}</div>
-          <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, marginBottom: 12, lineHeight: 1.1 }}>{service.title}</h2>
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, marginBottom: 40, lineHeight: 1.7, fontWeight: 300 }}>{service.summary}</p>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>{service.number}</div>
+          <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, marginBottom: 12, lineHeight: 1.1 }}>{service.title}</h2>
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: fgMuted, marginBottom: 40, lineHeight: 1.7, fontWeight: 300 }}>{service.summary}</p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
             {service.points.map((point, i) => (
               <div key={i}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
                   <div style={{ width: 24, height: 24, borderRadius: '50%', background: `${accent}20`, border: `1px solid ${accent}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: accent, fontWeight: 500 }}>{String(i + 1).padStart(2, '0')}</span>
+                    <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 9, color: accent, fontWeight: 500 }}>{String(i + 1).padStart(2, '0')}</span>
                   </div>
-                  <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1rem, 2vw, 1.25rem)', fontWeight: 400, color: fg, letterSpacing: '-0.01em' }}>{point.title}</h3>
+                  <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(1rem, 2vw, 1.25rem)', fontWeight: 400, color: fg, letterSpacing: '-0.01em' }}>{point.title}</h3>
                 </div>
                 <div style={{ paddingLeft: 40, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {point.bullets.map((bullet, j) => (
                     <div key={j} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                       <div style={{ width: 4, height: 4, borderRadius: '50%', background: accent, marginTop: 7, flexShrink: 0 }} />
-                      <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 12, color: fgMuted, lineHeight: 1.75, fontWeight: 300 }}>{bullet}</p>
+                      <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: fgMuted, lineHeight: 1.75, fontWeight: 300 }}>{bullet}</p>
                     </div>
                   ))}
                 </div>
@@ -684,10 +684,10 @@ export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState(null)
 
   return (
-    <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
+    <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
-        .mono { font-family: 'DM Mono', monospace; }
+        .mono { font-family: 'Space Mono', monospace; }
         .service-tile {
           border: 1px solid ${cardBorder};
           background: ${cardBg};

@@ -162,10 +162,9 @@ export default function AboutPage() {
   ]
 
   return (
-    <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
+    <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
-        .mono { font-family: 'DM Mono', monospace; }
+        .mono { font-family: 'Space Mono', monospace; }
         .team-card { transition: transform 0.3s; }
         .team-card:hover { transform: translateY(-4px); }
         .block-card:hover .block-number { color: ${accent} !important; }
@@ -182,7 +181,7 @@ export default function AboutPage() {
           fontSize: 'clamp(120px, 18vw, 220px)', fontWeight: 400, lineHeight: 1,
           color: isDark ? 'rgba(16,185,129,0.04)' : 'rgba(10,118,82,0.05)',
           letterSpacing: '-0.05em', pointerEvents: 'none', userSelect: 'none',
-          fontFamily: "'DM Serif Display', Georgia, serif",
+          fontFamily: "'Space Grotesk', sans-serif",
         }}>
           LUMA
         </div>
@@ -215,7 +214,7 @@ export default function AboutPage() {
                 className="block-number"
                 style={{
                   position: 'absolute', top: 20, right: 28,
-                  fontFamily: "'DM Serif Display', Georgia, serif",
+                  fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: 72, fontWeight: 400, lineHeight: 1,
                   color: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)',
                   letterSpacing: '-0.05em', transition: 'color 0.3s',
@@ -234,7 +233,7 @@ export default function AboutPage() {
                 {block.heading}
               </h3>
               <div style={{ width: 32, height: 1, background: `${accent}50`, marginBottom: 20 }} />
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, lineHeight: 1.9, fontWeight: 300 }}>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: fgMuted, lineHeight: 1.9, fontWeight: 300 }}>
                 {block.body}
               </p>
             </div>
@@ -303,7 +302,7 @@ export default function AboutPage() {
                   padding: '14px 18px',
                   marginBottom: 22,
                 }}>
-                  <p style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 14, color: fg, lineHeight: 1.6, fontStyle: 'italic', margin: 0 }}>
+                  <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, color: fg, lineHeight: 1.6, fontStyle: 'italic', margin: 0 }}>
                     {member.quote[lang]}
                   </p>
                 </div>

@@ -370,7 +370,7 @@ function ProjectModal({ project, onClose, isDark, c, lang }) {
             <>
               <img src={project.images[imgIndex]} alt={`${project.name} ${imgIndex + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(0,0,0,0.5)', borderRadius: 20, padding: '4px 12px' }}>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: '#fff', letterSpacing: '0.05em' }}>{imgIndex + 1} / {project.images.length}</span>
+                <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: '#fff', letterSpacing: '0.05em' }}>{imgIndex + 1} / {project.images.length}</span>
               </div>
               {project.images.length > 1 && (
                 <>
@@ -389,7 +389,7 @@ function ProjectModal({ project, onClose, isDark, c, lang }) {
               <div style={{ width: 64, height: 64, borderRadius: '50%', border: `1px dashed ${borderColor}`, margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ color: fgSubtle, fontSize: 28 }}>+</span>
               </div>
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fgSubtle, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fgSubtle, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                 {lang === 'en' ? 'Images coming soon' : 'Bilder demnächst'}
               </p>
             </div>
@@ -398,20 +398,20 @@ function ProjectModal({ project, onClose, isDark, c, lang }) {
 
         <div style={{ padding: '40px 48px 48px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
-            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', border: `1px solid ${accent}30`, padding: '4px 10px' }}>
+            <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', border: `1px solid ${accent}30`, padding: '4px 10px' }}>
               {lang === 'en' ? project.category : project.categoryDE}
             </span>
-            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fgSubtle, letterSpacing: '0.1em' }}>{project.year}</span>
+            <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fgSubtle, letterSpacing: '0.1em' }}>{project.year}</span>
           </div>
-          <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, marginBottom: 8, lineHeight: 1.1 }}>
+          <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, marginBottom: 8, lineHeight: 1.1 }}>
             {lang === 'en' ? project.name : project.nameDE}
           </h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 28 }}>
             <div style={{ width: 4, height: 4, borderRadius: '50%', background: accent }} />
-            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: fgSubtle, letterSpacing: '0.08em' }}>{project.location}</span>
+            <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fgSubtle, letterSpacing: '0.08em' }}>{project.location}</span>
           </div>
           <div style={{ height: 1, background: borderColor, marginBottom: 28 }} />
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, lineHeight: 1.85, fontWeight: 300 }}>
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: fgMuted, lineHeight: 1.85, fontWeight: 300 }}>
             {lang === 'en' ? project.description : project.descriptionDE}
           </p>
         </div>
@@ -429,10 +429,10 @@ export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState(null)
 
   return (
-    <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
+    <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
-        .mono { font-family: 'DM Mono', monospace; }
+        .mono { font-family: 'Space Mono', monospace; }
         .project-tile { cursor: pointer; position: relative; overflow: hidden; }
         .project-tile .overlay {
           position: absolute; inset: 0;
@@ -512,10 +512,10 @@ export default function ProjectsPage() {
                   }}
                 >
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 8 }}>
+                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 8 }}>
                       {String(project.id).padStart(2, '0')}
                     </div>
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                       {lang === 'en' ? 'Photo coming soon' : 'Foto folgt'}
                     </div>
                   </div>
@@ -523,13 +523,13 @@ export default function ProjectsPage() {
               )}
               <div className="overlay">
                 <div className="overlay-text">
-                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 6 }}>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 6 }}>
                     {lang === 'en' ? project.category : project.categoryDE}
                   </div>
-                  <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1rem, 2vw, 1.3rem)', fontWeight: 400, color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.2, marginBottom: 8 }}>
+                  <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(1rem, 2vw, 1.3rem)', fontWeight: 400, color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.2, marginBottom: 8 }}>
                     {lang === 'en' ? project.name : project.nameDE}
                   </div>
-                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em' }}>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em' }}>
                     {project.location} · {project.year}
                   </div>
                 </div>
