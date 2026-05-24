@@ -23,8 +23,8 @@ import gisselaPhoto from '../../assets/Gissela.jpg'
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
 
 const heroSub = {
-  en: 'Luma is an all-in-one service provider to help companies to achieve real-world impact & meaningful insights into their biodiversity and climate adaptation resilience projects.',
-  de: 'Luma ist ein All-in-One-Dienstleister, der Unternehmen dabei unterstützt, echte Wirkung zu erzielen und aussagekräftige Einblicke in ihre Biodiversitäts- und Klimaanpassungsprojekte zu gewinnen.',
+  en: 'We design, build, and steward urban ecosystems — combining ecological craftsmanship, soil science, and data to make cities more livable, resilient, and biodiverse.',
+  de: 'Wir planen, bauen und pflegen urbane Ökosysteme — mit ökologischem Handwerk, Bodenkunde und Daten für lebenswertere, resilientere und artenreichere Städte.',
 }
 
 const visionMissionContent = {
