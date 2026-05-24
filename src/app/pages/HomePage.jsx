@@ -173,49 +173,139 @@ function VisionModal({ onClose, isDark, c, lang: initialLang }) {
   )
 }
 
-function AQIWidget({ isDark, accent, fg, fgMuted, fgSubtle, accentBorder }) {
-  const [aqi, setAqi] = useState(null)
+function calcVPD(tempC, rhPct) {
+  const svp = 0.6108 * Math.exp(17.27 * tempC / (tempC + 237.3))
+  const avp = svp * rhPct / 100
+  return Math.max(0, svp - avp)
+}
+
+function vpdInfo(vpd, lang) {
+  if (vpd < 0.4) return { label: lang === 'de' ? 'Sehr niedrig' : 'Very low', color: '#60a5fa' }
+  if (vpd < 0.8) return { label: lang === 'de' ? 'Optimal' : 'Optimal', color: '#10b981' }
+  if (vpd < 1.2) return { label: lang === 'de' ? 'Mäßig' : 'Moderate', color: '#f59e0b' }
+  if (vpd < 2.0) return { label: lang === 'de' ? 'Stress' : 'Stress', color: '#f97316' }
+  return { label: lang === 'de' ? 'Kritisch' : 'Critical', color: '#ef4444' }
+}
+
+function aqiInfo(val, lang) {
+  if (val <= 20) return { label: lang === 'de' ? 'Sehr gut' : 'Good', color: '#10b981' }
+  if (val <= 40) return { label: lang === 'de' ? 'Gut' : 'Fair', color: '#10b981' }
+  if (val <= 60) return { label: lang === 'de' ? 'Mäßig' : 'Moderate', color: '#f59e0b' }
+  if (val <= 80) return { label: lang === 'de' ? 'Schlecht' : 'Poor', color: '#f97316' }
+  if (val <= 100) return { label: lang === 'de' ? 'Sehr schlecht' : 'Very Poor', color: '#ef4444' }
+  return { label: lang === 'de' ? 'Extrem schlecht' : 'Hazardous', color: '#7c3aed' }
+}
+
+function uvInfo(uv, lang) {
+  if (uv <= 2) return { label: lang === 'de' ? 'Niedrig' : 'Low', color: '#10b981' }
+  if (uv <= 5) return { label: lang === 'de' ? 'Mäßig' : 'Moderate', color: '#f59e0b' }
+  if (uv <= 7) return { label: lang === 'de' ? 'Hoch' : 'High', color: '#f97316' }
+  if (uv <= 10) return { label: lang === 'de' ? 'Sehr hoch' : 'Very High', color: '#ef4444' }
+  return { label: lang === 'de' ? 'Extrem' : 'Extreme', color: '#7c3aed' }
+}
+
+function ClimateWidget({ isDark, accent, fg, fgMuted, fgSubtle, accentBorder, lang }) {
+  const [data, setData] = useState(null)
+  const [city, setCity] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('https://api.open-meteo.com/v1/air-quality?latitude=52.52&longitude=13.41&current=european_aqi,pm10,pm2_5,nitrogen_dioxide')
-      .then(r => r.json())
-      .then(data => {
-        setAqi({ aqi: data.current?.european_aqi ?? 42, pm25: data.current?.pm2_5?.toFixed(1) ?? '8.2', pm10: data.current?.pm10?.toFixed(1) ?? '12.4', no2: data.current?.nitrogen_dioxide?.toFixed(1) ?? '18.1' })
+    const fetchData = async (lat, lon) => {
+      try {
+        const [weather, airQ, geo] = await Promise.all([
+          fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,uv_index,shortwave_radiation&timezone=auto`).then(r => r.json()),
+          fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=european_aqi,pm2_5,pm10&timezone=auto`).then(r => r.json()),
+          fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=en`).then(r => r.json()),
+        ])
+        const c = weather.current
+        const a = airQ.current
+        const temp = c.temperature_2m
+        const rh = c.relative_humidity_2m
+        setData({
+          temp: temp?.toFixed(1),
+          feelsLike: c.apparent_temperature?.toFixed(1),
+          rh,
+          precip: c.precipitation?.toFixed(1),
+          uv: c.uv_index?.toFixed(1),
+          solar: Math.round(c.shortwave_radiation),
+          aqi: Math.round(a.european_aqi),
+          pm25: a.pm2_5?.toFixed(1),
+          vpd: calcVPD(temp, rh).toFixed(2),
+        })
+        const addr = geo.address
+        setCity(addr?.city || addr?.town || addr?.village || addr?.county || 'Unknown')
+      } catch {
+        setData({ temp: '—', feelsLike: '—', rh: null, precip: '—', uv: '—', solar: '—', aqi: '—', pm25: '—', vpd: null })
+        setCity('Berlin')
+      } finally {
         setLoading(false)
-      })
-      .catch(() => { setAqi({ aqi: 42, pm25: '8.2', pm10: '12.4', no2: '18.1' }); setLoading(false) })
+      }
+    }
+
+    navigator.geolocation?.getCurrentPosition(
+      pos => fetchData(pos.coords.latitude, pos.coords.longitude),
+      () => fetchData(52.52, 13.41),
+      { timeout: 5000 }
+    ) || fetchData(52.52, 13.41)
   }, [])
 
-  const getAqiLabel = (val) => {
-    if (val <= 20) return { label: 'Good', color: '#10b981' }
-    if (val <= 40) return { label: 'Fair', color: '#10b981' }
-    if (val <= 60) return { label: 'Moderate', color: '#f59e0b' }
-    if (val <= 80) return { label: 'Poor', color: '#f97316' }
-    if (val <= 100) return { label: 'Very Poor', color: '#ef4444' }
-    return { label: 'Extremely Poor', color: '#7c3aed' }
-  }
+  const mono = { fontFamily: "'Space Mono', monospace" }
+  const row = (label, value, unit, color) => (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+      <span style={{ ...mono, fontSize: 10, color: fgSubtle, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{label}</span>
+      <span style={{ ...mono, fontSize: 11, color: color || fgMuted, fontWeight: 500 }}>{value}{unit ? <span style={{ fontSize: 9, color: fgSubtle, marginLeft: 2 }}>{unit}</span> : null}</span>
+    </div>
+  )
 
-  const info = aqi ? getAqiLabel(aqi.aqi) : { label: '...', color: accent }
+  const aqiI = data?.aqi && data.aqi !== '—' ? aqiInfo(data.aqi, lang) : { label: '…', color: accent }
+  const vpdI = data?.vpd && data.vpd !== null ? vpdInfo(parseFloat(data.vpd), lang) : { label: '…', color: fgSubtle }
+  const uvI = data?.uv && data.uv !== '—' ? uvInfo(parseFloat(data.uv), lang) : { label: '…', color: fgSubtle }
 
   return (
-    <div style={{ padding: 24, border: `1px solid ${accentBorder}`, background: isDark ? 'rgba(0,18,25,0.85)' : 'rgba(243,224,168,0.9)', backdropFilter: 'blur(20px)', minWidth: 220 }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Live — Air Quality</div>
-        <div style={{ width: 8, height: 8, borderRadius: '50%', background: info.color, boxShadow: `0 0 8px ${info.color}` }} />
-      </div>
-      <div style={{ fontSize: 48, letterSpacing: '-0.03em', color: info.color, lineHeight: 1, marginBottom: 4, fontFamily: "'Space Grotesk', sans-serif" }}>
-        {loading ? '—' : aqi.aqi}<span style={{ fontSize: 16, color: fgMuted, marginLeft: 4, fontFamily: "'Space Mono', monospace" }}>AQI</span>
-      </div>
-      <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: info.color, fontWeight: 500, marginBottom: 12 }}>{info.label}</div>
-      {!loading && aqi && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle }}><span>PM2.5</span><span>{aqi.pm25} µg/m³</span></div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle }}><span>PM10</span><span>{aqi.pm10} µg/m³</span></div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle }}><span>NO₂</span><span>{aqi.no2} µg/m³</span></div>
+    <div style={{ width: 260, border: `1px solid ${accentBorder}`, background: isDark ? 'rgba(0,18,25,0.88)' : 'rgba(243,224,168,0.92)', backdropFilter: 'blur(24px)', overflow: 'hidden' }}>
+      {/* Header */}
+      <div style={{ padding: '14px 18px 12px', borderBottom: `1px solid ${accentBorder}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ ...mono, fontSize: 10, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+          {lang === 'de' ? 'Live — Klimadaten' : 'Live — Climate Data'}
         </div>
-      )}
-      <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle, marginTop: 8 }}>Berlin, DE</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ ...mono, fontSize: 9, color: fgSubtle }}>{loading ? '…' : city}</div>
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: loading ? fgSubtle : '#10b981', boxShadow: loading ? 'none' : '0 0 6px #10b981' }} />
+        </div>
+      </div>
+
+      {/* AQI primary */}
+      <div style={{ padding: '16px 18px 12px', borderBottom: `1px solid ${accentBorder}` }}>
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, marginBottom: 2 }}>
+          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 44, fontWeight: 700, color: aqiI.color, lineHeight: 1, letterSpacing: '-0.03em' }}>{loading ? '—' : data?.aqi}</span>
+          <span style={{ ...mono, fontSize: 12, color: fgMuted, marginBottom: 6 }}>AQI</span>
+          <span style={{ ...mono, fontSize: 11, color: aqiI.color, fontWeight: 600, marginBottom: 6, marginLeft: 4 }}>{aqiI.label}</span>
+        </div>
+        <div style={{ display: 'flex', gap: 12 }}>
+          {row('PM2.5', data?.pm25 ?? '—', 'µg/m³', null)}
+        </div>
+      </div>
+
+      {/* Weather grid */}
+      <div style={{ padding: '12px 18px', display: 'flex', flexDirection: 'column', gap: 8, borderBottom: `1px solid ${accentBorder}` }}>
+        {row(lang === 'de' ? 'Temperatur' : 'Temperature', data?.temp ?? '—', '°C', fg)}
+        {row(lang === 'de' ? 'Gefühlt' : 'Feels like', data?.feelsLike ?? '—', '°C', null)}
+        {row('UV Index', data?.uv != null ? `${data.uv} — ${uvI.label}` : '—', '', uvI.color)}
+        {row(lang === 'de' ? 'Niederschlag' : 'Precipitation', data?.precip ?? '—', 'mm/h', null)}
+        {row(lang === 'de' ? 'Sonnenstrahlung' : 'Solar radiation', data?.solar ?? '—', 'W/m²', null)}
+      </div>
+
+      {/* Plant stress */}
+      <div style={{ padding: '10px 18px 14px' }}>
+        <div style={{ ...mono, fontSize: 10, color: fgSubtle, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>
+          {lang === 'de' ? 'Pflanzenstress (VPD)' : 'Plant Stress (VPD)'}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 22, fontWeight: 700, color: vpdI.color, lineHeight: 1 }}>{data?.vpd ?? '—'}</span>
+          <span style={{ ...mono, fontSize: 10, color: fgSubtle }}>kPa</span>
+          <span style={{ ...mono, fontSize: 11, color: vpdI.color, fontWeight: 600 }}>{vpdI.label}</span>
+        </div>
+      </div>
     </div>
   )
 }
@@ -327,7 +417,7 @@ export default function HomePage() {
           </div>
         </div>
         <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.9, zIndex: 2 }}>
-          <AQIWidget isDark={isDark} accent={accent} fg={fg} fgMuted={fgMuted} fgSubtle={fgSubtle} accentBorder={accentBorder} />
+          <ClimateWidget isDark={isDark} accent={accent} fg={fg} fgMuted={fgMuted} fgSubtle={fgSubtle} accentBorder={accentBorder} lang={lang} />
         </div>
       </section>
 
