@@ -46,6 +46,7 @@ function AppInner() {
   }
 
   const navLinkBase = `flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors`
+  const navFont = { fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500, fontSize: 13 }
   const navLinkInactive = isDark
     ? 'text-white/60 hover:text-white hover:bg-white/10'
     : 'text-black/50 hover:text-black hover:bg-black/5'
@@ -80,19 +81,19 @@ function AppInner() {
             </div>
 
             <nav className="flex items-center gap-2">
-              <NavLink to="/" end className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => isActive ? activeStyle : {}}>
+              <NavLink to="/" end className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => ({ ...navFont, ...(isActive ? activeStyle : {}) })}>
                 <Home size={16} /> {t.home}
               </NavLink>
-              <NavLink to="/services" className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => isActive ? activeStyle : {}}>
+              <NavLink to="/services" className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => ({ ...navFont, ...(isActive ? activeStyle : {}) })}>
                 {t.services}
               </NavLink>
-              <NavLink to="/projects" className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => isActive ? activeStyle : {}}>
+              <NavLink to="/projects" className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => ({ ...navFont, ...(isActive ? activeStyle : {}) })}>
                 {t.projects}
               </NavLink>
-              <NavLink to="/about" className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => isActive ? activeStyle : {}}>
+              <NavLink to="/about" className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => ({ ...navFont, ...(isActive ? activeStyle : {}) })}>
                 {t.about}
               </NavLink>
-              <NavLink to="/contact" className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => isActive ? activeStyle : {}}>
+              <NavLink to="/contact" className={({ isActive }) => `${navLinkBase} ${isActive ? '' : navLinkInactive}`} style={({ isActive }) => ({ ...navFont, ...(isActive ? activeStyle : {}) })}>
                 {t.contactNav}
               </NavLink>
 

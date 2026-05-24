@@ -175,7 +175,7 @@ export default function AboutPage() {
       `}</style>
 
       {/* ── HERO HEADER ── */}
-      <div style={{ position: 'relative', padding: '100px 80px 80px', borderBottom: `1px solid ${borderColor}`, overflow: 'hidden' }}>
+      <div className="page-hero" style={{ position: 'relative', borderBottom: `1px solid ${borderColor}`, overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', top: '50%', right: -20, transform: 'translateY(-50%)',
           fontSize: 'clamp(120px, 18vw, 220px)', fontWeight: 400, lineHeight: 1,
@@ -196,8 +196,8 @@ export default function AboutPage() {
       </div>
 
       {/* ── COMPANY STORY — 4 numbered blocks ── */}
-      <div style={{ padding: '80px 80px 0' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
+      <div className="page-section" style={{ paddingBottom: 0 }}>
+        <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
           {companyBlocks[lang].map((block, i) => (
             <div
               key={i}
@@ -242,7 +242,7 @@ export default function AboutPage() {
       </div>
 
       {/* ── LUMA TEAM MEMBERS ── */}
-      <div style={{ padding: '80px 80px 0' }}>
+      <div className="page-section" style={{ paddingBottom: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 56 }}>
           <div style={{ width: 40, height: 1, background: accent }} />
           <div className="mono" style={{ fontSize: 11, color: fgSubtle, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
@@ -338,7 +338,7 @@ export default function AboutPage() {
       </div>
 
       {/* ── PLATFORM TEAM ── */}
-      <div style={{ padding: '80px 80px 120px' }}>
+      <div className="page-section-lg">
         <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 56 }}>
           <div style={{ width: 40, height: 1, background: accent }} />
           <div className="mono" style={{ fontSize: 11, color: fgSubtle, letterSpacing: '0.2em', textTransform: 'uppercase' }}>

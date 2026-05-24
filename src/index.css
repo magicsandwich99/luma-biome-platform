@@ -10,3 +10,25 @@ body {
   color: #F3E0A8;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ── Responsive helpers ─────────────────────────────────────── */
+.page-hero    { padding: 80px 80px 64px; }
+.page-section { padding: 64px 80px; }
+.page-section-lg { padding: 80px 80px 120px; }
+
+@media (max-width: 1024px) {
+  .page-hero    { padding: 64px 48px 48px !important; }
+  .page-section { padding: 48px 48px !important; }
+  .page-section-lg { padding: 64px 48px 80px !important; }
+}
+
+@media (max-width: 768px) {
+  .page-hero    { padding: 48px 24px 40px !important; }
+  .page-section { padding: 40px 24px !important; }
+  .page-section-lg { padding: 48px 24px 64px !important; }
+  .grid-3col { grid-template-columns: 1fr !important; }
+  .grid-2col { grid-template-columns: 1fr !important; }
+  .grid-4col { grid-template-columns: repeat(2, 1fr) !important; }
+  .hide-mobile { display: none !important; }
+  .contact-sidebar { border-left: none !important; border-top: 1px solid rgba(243,224,168,0.08); }
+}

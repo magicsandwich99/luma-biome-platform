@@ -568,7 +568,7 @@ function ServiceModal({ service, onClose, isDark, c }) {
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)' }} />
       <div
         onClick={e => e.stopPropagation()}
-        style={{ position: 'relative', background: isDark ? '#0f1117' : '#f0efe8', border: `1px solid ${borderColor}`, borderRadius: 4, maxWidth: 860, width: '100%', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 40px 120px rgba(0,0,0,0.5)', animation: 'modalIn 0.35s cubic-bezier(0.16,1,0.3,1) both' }}
+        style={{ position: 'relative', background: isDark ? '#001219' : '#F3E0A8', border: `1px solid ${borderColor}`, borderRadius: 4, maxWidth: 860, width: '100%', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 40px 120px rgba(0,0,0,0.5)', animation: 'modalIn 0.35s cubic-bezier(0.16,1,0.3,1) both' }}
       >
         <style>{`
           @keyframes modalIn {
@@ -686,7 +686,6 @@ export default function ServicesPage() {
   return (
     <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: bg, color: fg, minHeight: '100vh', transition: 'background 0.3s, color 0.3s' }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
         .mono { font-family: 'Space Mono', monospace; }
         .service-tile {
           border: 1px solid ${cardBorder};
@@ -716,7 +715,7 @@ export default function ServicesPage() {
       `}</style>
 
       {/* Header band with background image */}
-      <div style={{ position: 'relative', borderBottom: `1px solid ${borderColor}`, padding: '80px 80px 64px', overflow: 'hidden' }}>
+      <div className="page-hero" style={{ position: 'relative', borderBottom: `1px solid ${borderColor}`, overflow: 'hidden' }}>
         {/* Background image */}
         <div style={{
           position: 'absolute', inset: 0,
@@ -728,8 +727,8 @@ export default function ServicesPage() {
         <div style={{
           position: 'absolute', inset: 0,
           background: isDark
-            ? 'linear-gradient(to right, rgba(8,12,10,0.72) 0%, rgba(8,12,10,0.5) 60%, rgba(8,12,10,0.2) 100%)'
-            : 'linear-gradient(to right, rgba(8,12,10,0.65) 0%, rgba(8,12,10,0.4) 60%, rgba(8,12,10,0.1) 100%)',
+            ? 'linear-gradient(to right, rgba(0,18,25,0.82) 0%, rgba(0,18,25,0.55) 60%, rgba(0,18,25,0.2) 100%)'
+            : 'linear-gradient(to right, rgba(0,18,25,0.72) 0%, rgba(0,18,25,0.45) 60%, rgba(0,18,25,0.1) 100%)',
         }} />
         {/* Content */}
         <div style={{ position: 'relative', zIndex: 1 }}>
@@ -746,8 +745,8 @@ export default function ServicesPage() {
       </div>
 
       {/* Services grid */}
-      <div style={{ padding: '80px 80px 120px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+      <div className="page-section-lg">
+        <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {services.map((service, i) => (
             <div key={i} className="service-tile" onClick={() => setSelectedService(service)}>
               <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.15em', marginBottom: 20 }}>{service.number}</div>

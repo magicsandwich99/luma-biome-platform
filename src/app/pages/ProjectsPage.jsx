@@ -457,7 +457,7 @@ export default function ProjectsPage() {
       `}</style>
 
       {/* Header with background image */}
-      <div style={{ position: 'relative', borderBottom: `1px solid ${borderColor}`, padding: '80px 80px 64px', overflow: 'hidden' }}>
+      <div className="page-hero" style={{ position: 'relative', borderBottom: `1px solid ${borderColor}`, overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: `url(${serviceBG2})`,
@@ -467,8 +467,8 @@ export default function ProjectsPage() {
         <div style={{
           position: 'absolute', inset: 0,
           background: isDark
-            ? 'linear-gradient(to right, rgba(8,12,10,0.72) 0%, rgba(8,12,10,0.5) 60%, rgba(8,12,10,0.2) 100%)'
-            : 'linear-gradient(to right, rgba(8,12,10,0.65) 0%, rgba(8,12,10,0.4) 60%, rgba(8,12,10,0.1) 100%)',
+            ? 'linear-gradient(to right, rgba(0,18,25,0.82) 0%, rgba(0,18,25,0.55) 60%, rgba(0,18,25,0.2) 100%)'
+            : 'linear-gradient(to right, rgba(0,18,25,0.72) 0%, rgba(0,18,25,0.45) 60%, rgba(0,18,25,0.1) 100%)',
         }} />
         <div style={{ position: 'relative', zIndex: 1 }}>
           <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 16 }}>
@@ -486,8 +486,8 @@ export default function ProjectsPage() {
       </div>
 
       {/* Gallery grid */}
-      <div style={{ padding: '80px 80px 120px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 3 }}>
+      <div className="page-section-lg">
+        <div className="grid-3col" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 3 }}>
           {projects.map((project, i) => (
             <div
               key={project.id}

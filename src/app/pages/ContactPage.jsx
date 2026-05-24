@@ -88,10 +88,15 @@ export default function ContactPage() {
         .mono { font-family: 'Space Mono', monospace; }
         .contact-input:focus { border-color: ${accent} !important; }
         .contact-input::placeholder { color: ${fgSubtle}; opacity: 0.7; }
+        @media (max-width: 768px) {
+          .contact-form-col { padding: 40px 24px !important; border-right: none !important; }
+          .contact-sidebar-col { padding: 40px 24px !important; border-top: 1px solid ${borderColor}; }
+          .contact-name-grid { grid-template-columns: 1fr !important; }
+        }
       `}</style>
 
       {/* Hero */}
-      <div style={{ padding: '80px 80px 64px', borderBottom: `1px solid ${borderColor}` }}>
+      <div className="page-hero" style={{ borderBottom: `1px solid ${borderColor}` }}>
         <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 16 }}>{c.label}</div>
         <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.0, marginBottom: 16 }}>
           {c.title}
@@ -99,10 +104,10 @@ export default function ContactPage() {
         <p className="mono" style={{ fontSize: 14, color: fgMuted, maxWidth: 480, lineHeight: 1.8 }}>{c.intro}</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: 0, minHeight: 'calc(100vh - 300px)' }}>
+      <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: 0, minHeight: 'calc(100vh - 300px)' }}>
 
         {/* Form */}
-        <div style={{ padding: '64px 80px', borderRight: `1px solid ${borderColor}` }}>
+        <div className="contact-form-col" style={{ padding: '64px 80px', borderRight: `1px solid ${borderColor}` }}>
           {status === 'success' ? (
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', maxWidth: 480 }}>
               <div style={{ width: 48, height: 48, borderRadius: '50%', background: `${accent}20`, border: `1px solid ${accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 32, fontSize: 20 }}>✓</div>
@@ -111,7 +116,7 @@ export default function ContactPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 560 }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div className="contact-name-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 <input
                   className="contact-input"
                   style={inputStyle}
@@ -175,7 +180,7 @@ export default function ContactPage() {
         </div>
 
         {/* Sidebar */}
-        <div style={{ padding: '64px 48px', display: 'flex', flexDirection: 'column', gap: 48 }}>
+        <div className="contact-sidebar-col" style={{ padding: '64px 48px', display: 'flex', flexDirection: 'column', gap: 48 }}>
           <div>
             <div className="mono" style={{ fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 20 }}>{c.orContact}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>

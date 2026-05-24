@@ -376,7 +376,7 @@ export default function HomePage() {
       {/* Vision & Mission */}
       <section style={{ position: 'relative', borderBottom: `1px solid ${borderColor}`, overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${goalBG2})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'local' }} />
-        <div style={{ position: 'absolute', inset: 0, background: isDark ? 'rgba(8,12,10,0.55)' : 'rgba(8,12,10,0.45)', backdropFilter: 'blur(1px)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: isDark ? 'rgba(0,18,25,0.55)' : 'rgba(0,18,25,0.45)', backdropFilter: 'blur(1px)' }} />
         <div style={{ position: 'relative', zIndex: 1, padding: '120px 80px' }}>
           <div data-id="vision" className={`reveal${visible.vision ? ' visible' : ''}`}>
             <div className="section-label" style={{ color: accent }}>{lang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}</div>
