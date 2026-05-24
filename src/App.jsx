@@ -40,8 +40,8 @@ function AppInner() {
 
   const headerStyle = {
     height: 64,
-    background: isDark ? '#0a0a0a' : '#f0efe8',
-    borderBottom: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.08)',
+    background: isDark ? '#001219' : '#F3E0A8',
+    borderBottom: isDark ? '1px solid rgba(243,224,168,0.1)' : '1px solid rgba(0,18,25,0.08)',
     transition: 'background 0.3s',
   }
 

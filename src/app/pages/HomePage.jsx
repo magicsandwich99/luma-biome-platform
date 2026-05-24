@@ -138,19 +138,19 @@ function VisionModal({ onClose, isDark, c, lang: initialLang }) {
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)' }} />
       <div
         onClick={e => e.stopPropagation()}
-        style={{ position: 'relative', background: isDark ? '#0f1117' : '#f0efe8', border: `1px solid ${borderColor}`, borderRadius: 4, maxWidth: 780, width: '100%', maxHeight: '88vh', overflowY: 'auto', boxShadow: '0 40px 120px rgba(0,0,0,0.6)', animation: 'modalIn 0.35s cubic-bezier(0.16,1,0.3,1) both' }}
+        style={{ position: 'relative', background: isDark ? '#001219' : '#F3E0A8', border: `1px solid ${borderColor}`, borderRadius: 4, maxWidth: 780, width: '100%', maxHeight: '88vh', overflowY: 'auto', boxShadow: '0 40px 120px rgba(0,0,0,0.6)', animation: 'modalIn 0.35s cubic-bezier(0.16,1,0.3,1) both' }}
       >
         <style>{`@keyframes modalIn { from { opacity: 0; transform: scale(0.94) translateY(24px); } to { opacity: 1; transform: scale(1) translateY(0); } }`}</style>
-        <div style={{ padding: '40px 48px 32px', borderBottom: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: isDark ? '#0f1117' : '#f0efe8', zIndex: 10 }}>
+        <div style={{ padding: '40px 48px 32px', borderBottom: `1px solid ${borderColor}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: isDark ? '#001219' : '#F3E0A8', zIndex: 10 }}>
           <div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8 }}>{modalLang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}</div>
-            <h2 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, lineHeight: 1.1 }}>{content.title}</h2>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8 }}>{modalLang === 'en' ? 'Purpose & Direction' : 'Zweck & Ausrichtung'}</div>
+            <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 400, letterSpacing: '-0.02em', color: fg, lineHeight: 1.1 }}>{content.title}</h2>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', border: `1px solid ${borderColor}`, borderRadius: 3, overflow: 'hidden' }}>
-              <button onClick={e => { e.stopPropagation(); setModalLang('en') }} style={{ padding: '5px 12px', fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: '0.08em', background: modalLang === 'en' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent', color: modalLang === 'en' ? fg : fgSubtle, border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}>EN</button>
+              <button onClick={e => { e.stopPropagation(); setModalLang('en') }} style={{ padding: '5px 12px', fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: '0.08em', background: modalLang === 'en' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent', color: modalLang === 'en' ? fg : fgSubtle, border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}>EN</button>
               <div style={{ width: 1, height: 16, background: borderColor }} />
-              <button onClick={e => { e.stopPropagation(); setModalLang('de') }} style={{ padding: '5px 12px', fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: '0.08em', background: modalLang === 'de' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent', color: modalLang === 'de' ? fg : fgSubtle, border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}>DE</button>
+              <button onClick={e => { e.stopPropagation(); setModalLang('de') }} style={{ padding: '5px 12px', fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: '0.08em', background: modalLang === 'de' ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)') : 'transparent', color: modalLang === 'de' ? fg : fgSubtle, border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}>DE</button>
             </div>
             <button onClick={onClose} style={{ width: 36, height: 36, borderRadius: '50%', background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: fg, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.15)'} onMouseLeave={e => e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}>
               <X size={16} />
@@ -160,10 +160,10 @@ function VisionModal({ onClose, isDark, c, lang: initialLang }) {
         <div style={{ padding: '40px 48px 56px', display: 'flex', flexDirection: 'column', gap: 40 }}>
           {content.sections.map((section, i) => (
             <div key={i}>
-              <h3 style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', fontWeight: 400, color: fg, marginBottom: 16, letterSpacing: '-0.01em', lineHeight: 1.3 }}>{section.heading}</h3>
+              <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', fontWeight: 400, color: fg, marginBottom: 16, letterSpacing: '-0.01em', lineHeight: 1.3 }}>{section.heading}</h3>
               <div style={{ height: 1, background: `${accent}30`, marginBottom: 20 }} />
               {section.body.split('\n\n').map((para, j) => (
-                <p key={j} style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, lineHeight: 1.9, fontWeight: 300, marginBottom: j < section.body.split('\n\n').length - 1 ? 20 : 0 }}>{para}</p>
+                <p key={j} style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: fgMuted, lineHeight: 1.9, fontWeight: 300, marginBottom: j < section.body.split('\n\n').length - 1 ? 20 : 0 }}>{para}</p>
               ))}
             </div>
           ))}
@@ -199,23 +199,23 @@ function AQIWidget({ isDark, accent, fg, fgMuted, fgSubtle, accentBorder }) {
   const info = aqi ? getAqiLabel(aqi.aqi) : { label: '...', color: accent }
 
   return (
-    <div style={{ padding: 24, border: `1px solid ${accentBorder}`, background: isDark ? 'rgba(8,12,10,0.8)' : 'rgba(240,239,232,0.9)', backdropFilter: 'blur(20px)', minWidth: 220 }}>
+    <div style={{ padding: 24, border: `1px solid ${accentBorder}`, background: isDark ? 'rgba(0,18,25,0.85)' : 'rgba(243,224,168,0.9)', backdropFilter: 'blur(20px)', minWidth: 220 }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Live — Air Quality</div>
+        <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Live — Air Quality</div>
         <div style={{ width: 8, height: 8, borderRadius: '50%', background: info.color, boxShadow: `0 0 8px ${info.color}` }} />
       </div>
-      <div style={{ fontSize: 48, letterSpacing: '-0.03em', color: info.color, lineHeight: 1, marginBottom: 4, fontFamily: "'DM Serif Display', Georgia, serif" }}>
-        {loading ? '—' : aqi.aqi}<span style={{ fontSize: 16, color: fgMuted, marginLeft: 4, fontFamily: "'DM Mono', monospace" }}>AQI</span>
+      <div style={{ fontSize: 48, letterSpacing: '-0.03em', color: info.color, lineHeight: 1, marginBottom: 4, fontFamily: "'Space Grotesk', sans-serif" }}>
+        {loading ? '—' : aqi.aqi}<span style={{ fontSize: 16, color: fgMuted, marginLeft: 4, fontFamily: "'Space Mono', monospace" }}>AQI</span>
       </div>
-      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: info.color, fontWeight: 500, marginBottom: 12 }}>{info.label}</div>
+      <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: info.color, fontWeight: 500, marginBottom: 12 }}>{info.label}</div>
       {!loading && aqi && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}><span>PM2.5</span><span>{aqi.pm25} µg/m³</span></div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}><span>PM10</span><span>{aqi.pm10} µg/m³</span></div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle }}><span>NO₂</span><span>{aqi.no2} µg/m³</span></div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle }}><span>PM2.5</span><span>{aqi.pm25} µg/m³</span></div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle }}><span>PM10</span><span>{aqi.pm10} µg/m³</span></div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle }}><span>NO₂</span><span>{aqi.no2} µg/m³</span></div>
         </div>
       )}
-      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: fgSubtle, marginTop: 8 }}>Berlin, DE</div>
+      <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle, marginTop: 8 }}>Berlin, DE</div>
     </div>
   )
 }
@@ -233,9 +233,9 @@ export default function HomePage() {
   const c = themeColors[theme]
   const { accent, accentHover, accentMuted, accentBorder, bg, fg, fgMuted, fgSubtle, borderColor, cardBg, cardBorder } = c
 
-  const gridColor = isDark ? 'rgba(16,185,129,0.04)' : 'rgba(10,118,82,0.04)'
-  const fadeLeft = isDark ? 'linear-gradient(to right, #080c0a, transparent)' : 'linear-gradient(to right, #f0efe8, transparent)'
-  const fadeRight = isDark ? 'linear-gradient(to left, #080c0a, transparent)' : 'linear-gradient(to left, #f0efe8, transparent)'
+  const gridColor = isDark ? 'rgba(8,170,86,0.04)' : 'rgba(8,170,86,0.04)'
+  const fadeLeft = isDark ? 'linear-gradient(to right, #001219, transparent)' : 'linear-gradient(to right, #F3E0A8, transparent)'
+  const fadeRight = isDark ? 'linear-gradient(to left, #001219, transparent)' : 'linear-gradient(to left, #F3E0A8, transparent)'
   const statsBg = isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.01)'
   const thumbs = serviceThumbs[lang]
 
@@ -254,11 +254,11 @@ export default function HomePage() {
   const reviewRole = lang === 'en' ? review.role : review.roleDE
 
   return (
-    <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", background: bg, color: fg, overflowX: 'hidden', transition: 'background 0.3s, color 0.3s' }}>
+    <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: bg, color: fg, overflowX: 'hidden', transition: 'background 0.3s, color 0.3s', letterSpacing: '-0.01em' }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        .mono { font-family: 'DM Mono', monospace; }
+        .mono { font-family: 'Space Mono', monospace; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(2.4); opacity: 0; } }
@@ -283,13 +283,13 @@ export default function HomePage() {
         .card-img-wrap { overflow: hidden; height: 160px; }
         .card-body { padding: 28px 36px 36px; }
         .orb { position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; animation: glow-pulse 4s ease-in-out infinite; }
-        .framework-pill { padding: 8px 20px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.05em; transition: all 0.2s; cursor: default; }
-        .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
-        .footer-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: none; border: none; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
+        .framework-pill { padding: 8px 20px; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.05em; transition: all 0.2s; cursor: default; }
+        .section-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+        .footer-link { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: none; border: none; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
         .footer-link:hover { opacity: 0.7; }
-        .footer-legal { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 400; text-decoration: underline; cursor: pointer; background: none; border: none; transition: opacity 0.2s; padding: 0; text-align: left; }
+        .footer-legal { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 400; text-decoration: underline; cursor: pointer; background: none; border: none; transition: opacity 0.2s; padding: 0; text-align: left; }
         .footer-legal:hover { opacity: 0.7; }
-        .learn-more-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: transparent; border: 1px solid rgba(255,255,255,0.35); color: #ffffff; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, border-color 0.2s; margin-top: 32px; }
+        .learn-more-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: transparent; border: 1px solid rgba(255,255,255,0.35); color: #ffffff; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, border-color 0.2s; margin-top: 32px; }
         .learn-more-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
         .review-nav-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid ${borderColor}; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: ${fgMuted}; }
         .review-nav-btn:hover { border-color: ${accent}; color: ${accent}; background: ${accent}10; }
@@ -303,14 +303,14 @@ export default function HomePage() {
           <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}>
             <source src={smoothDrone} type="video/mp4" />
           </video>
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(8,12,10,0.72) 0%, rgba(8,12,10,0.5) 40%, rgba(8,12,10,0.82) 100%)' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,18,25,0.72) 0%, rgba(0,18,25,0.5) 40%, rgba(0,18,25,0.82) 100%)' }} />
           <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 160, zIndex: 2, background: `linear-gradient(to bottom, transparent, ${bg})`, pointerEvents: 'none' }} />
         </div>
         <div style={{ position: 'absolute', inset: 0, zIndex: 1, backgroundImage: `linear-gradient(${gridColor} 1px, transparent 1px), linear-gradient(90deg, ${gridColor} 1px, transparent 1px)`, backgroundSize: '60px 60px', pointerEvents: 'none', opacity: 0.4 }} />
-        <div className="orb" style={{ width: 600, height: 600, background: isDark ? 'rgba(16,185,129,0.1)' : 'rgba(10,118,82,0.07)', top: -100, right: -100, zIndex: 1 }} />
+        <div className="orb" style={{ width: 600, height: 600, background: isDark ? 'rgba(8,170,86,0.1)' : 'rgba(8,170,86,0.07)', top: -100, right: -100, zIndex: 1 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 900 }}>
           <div className="hero-badge" style={{ marginBottom: 32 }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 14px', background: accentMuted, border: `1px solid ${accentBorder}`, color: accent, fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 14px', background: accentMuted, border: `1px solid ${accentBorder}`, color: accent, fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: accent, display: 'inline-block', animation: 'pulse-ring 2s ease-out infinite' }} />
               {t.badge}
             </span>
@@ -322,8 +322,8 @@ export default function HomePage() {
             {heroSub[lang]}
           </p>
           <div className="hero-cta" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.enterPlatform}</button>
-            <button onClick={() => navigate('/reports')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer' }}>{t.viewReports}</button>
+            <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.enterPlatform}</button>
+            <button onClick={() => navigate('/reports')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer' }}>{t.viewReports}</button>
           </div>
         </div>
         <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.9, zIndex: 2 }}>
@@ -441,9 +441,9 @@ export default function HomePage() {
           )}
 
           <div style={{ padding: '64px 72px', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
-            <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 120, lineHeight: 0.8, color: accent, opacity: isDark ? 0.08 : 0.06, position: 'absolute', top: 32, left: review.side === 'left' ? 56 : 'auto', right: review.side === 'right' ? 56 : 'auto', userSelect: 'none' }}>"</div>
+            <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 120, lineHeight: 0.8, color: accent, opacity: isDark ? 0.08 : 0.06, position: 'absolute', top: 32, left: review.side === 'left' ? 56 : 'auto', right: review.side === 'right' ? 56 : 'auto', userSelect: 'none' }}>"</div>
             <div style={{ position: 'relative', zIndex: 1 }}>
-              <p style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', color: fg, lineHeight: 1.7, fontWeight: 400, letterSpacing: '-0.01em', marginBottom: 40, fontStyle: 'italic' }}>
+              <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', color: fg, lineHeight: 1.7, fontWeight: 400, letterSpacing: '-0.01em', marginBottom: 40, fontStyle: 'italic' }}>
                 "{reviewText}"
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
@@ -488,7 +488,7 @@ export default function HomePage() {
             {t.ctaTitle1}<br /><em style={{ color: accent }}>{t.ctaTitle2}</em>
           </h2>
           <p className="mono" style={{ fontSize: 13, color: fgMuted, marginBottom: 48, lineHeight: 1.8 }}>{t.ctaDesc}</p>
-          <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '18px 48px', background: accent, color: '#ffffff', fontFamily: "'DM Mono', monospace", fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.launchPlatform}</button>
+          <button onClick={() => navigate('/record')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '18px 48px', background: accent, color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.launchPlatform}</button>
         </div>
       </section>
 
@@ -506,7 +506,7 @@ export default function HomePage() {
           </div>
           <div>
             <h3 style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)', fontWeight: 700, marginBottom: 24, color: fg }}>{t.footerContactTitle}</h3>
-            <a href="mailto:info@luma.earth" style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, color: fgMuted, textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = accent} onMouseLeave={e => e.currentTarget.style.color = fgMuted}>{t.footerEmail}</a>
+            <a href="mailto:info@luma.earth" style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: fgMuted, textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = accent} onMouseLeave={e => e.currentTarget.style.color = fgMuted}>{t.footerEmail}</a>
           </div>
         </div>
         <div style={{ padding: '40px 80px', borderTop: `1px solid ${borderColor}` }}>
