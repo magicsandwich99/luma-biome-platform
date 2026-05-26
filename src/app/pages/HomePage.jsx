@@ -412,8 +412,8 @@ export default function HomePage() {
             {heroSub[lang]}
           </p>
           <div className="hero-cta" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <button onClick={() => navigate('/projects')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.enterPlatform}</button>
-            <button onClick={() => navigate('/contact')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer' }}>{t.viewReports}</button>
+            <button onClick={() => navigate('/contact')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.viewReports}</button>
+            <button onClick={() => navigate('/projects')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer' }}>{t.enterPlatform}</button>
           </div>
         </div>
         <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.9, zIndex: 2 }}>
@@ -422,12 +422,23 @@ export default function HomePage() {
       </section>
 
       {/* Trust stats bar */}
-      <section style={{ padding: '48px 80px', borderTop: `1px solid ${borderColor}`, borderBottom: `1px solid ${borderColor}`, background: statsBg }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0 }}>
+      <section style={{ borderTop: `1px solid ${borderColor}`, borderBottom: `1px solid ${borderColor}`, background: statsBg }}>
+        <div style={{ padding: '40px 80px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, borderBottom: `1px solid ${borderColor}` }}>
           {t.stats.map((stat, i) => (
-            <div key={i} style={{ padding: '24px 32px', borderRight: i < 3 ? `1px solid ${borderColor}` : 'none', textAlign: 'center' }}>
+            <div key={i} style={{ padding: '20px 32px', borderRight: i < 3 ? `1px solid ${borderColor}` : 'none', textAlign: 'center' }}>
               <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 700, color: accent, letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 8 }}>{stat.value}</div>
               <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: fgMuted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        {/* Client trust strip */}
+        <div style={{ padding: '20px 80px', display: 'flex', alignItems: 'center', gap: 40, flexWrap: 'wrap' }}>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: fgSubtle, letterSpacing: '0.2em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+            {lang === 'en' ? 'Trusted by' : 'Vertrauen von'}
+          </div>
+          {['JOPE AG', 'BEW · Berliner Energie und Wärme AG', 'Bezirksamt Charlottenburg-Wilmersdorf', 'HTW Berlin', 'WISAG'].map((client, i) => (
+            <div key={i} style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 13, color: fgMuted, fontWeight: 400, letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>
+              {client}
             </div>
           ))}
         </div>
