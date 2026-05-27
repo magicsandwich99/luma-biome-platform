@@ -23,8 +23,8 @@ import gisselaPhoto from '../../assets/Gissela.jpg'
 const frameworks = ['GRI Standards', 'TNFD', 'CDP', 'EU Taxonomy', 'CSRD', 'TCFD']
 
 const heroSub = {
-  en: 'We design, build, and steward urban ecosystems — combining ecological craftsmanship, soil science, and data to make cities more livable, resilient, and biodiverse.',
-  de: 'Wir planen, bauen und pflegen urbane Ökosysteme — mit ökologischem Handwerk, Bodenkunde und Daten für lebenswertere, resilientere und artenreichere Städte.',
+  en: 'Urban spaces need living infrastructure, not green facades. From soil microbiome to canopy — we design, install and steward ecosystems that get better every year.',
+  de: 'Urbane Räume brauchen lebendige Infrastruktur, keine grünen Fassaden. Vom Bodenmikrobiom bis zum Blätterdach — wir planen, bauen und pflegen Ökosysteme, die wachsen.',
 }
 
 const visionMissionContent = {
@@ -385,6 +385,14 @@ export default function HomePage() {
         .review-nav-btn:hover { border-color: ${accent}; color: ${accent}; background: ${accent}10; }
         .review-dot { width: 8px; height: 8px; border-radius: 50%; cursor: pointer; transition: all 0.3s; border: none; padding: 0; }
         .review-content { animation: reviewFade 0.4s ease both; }
+        @media (max-width: 1100px) {
+          .climate-widget-desktop { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .hero-section-inner { padding: 100px 24px 64px !important; }
+          .hero-cta-row { flex-direction: column !important; }
+          .hero-cta-row button { width: 100% !important; justify-content: center !important; }
+        }
       `}</style>
 
       {/* Hero */}
@@ -398,7 +406,7 @@ export default function HomePage() {
         </div>
         <div style={{ position: 'absolute', inset: 0, zIndex: 1, backgroundImage: `linear-gradient(${gridColor} 1px, transparent 1px), linear-gradient(90deg, ${gridColor} 1px, transparent 1px)`, backgroundSize: '60px 60px', pointerEvents: 'none', opacity: 0.4 }} />
         <div className="orb" style={{ width: 600, height: 600, background: isDark ? 'rgba(8,170,86,0.1)' : 'rgba(8,170,86,0.07)', top: -100, right: -100, zIndex: 1 }} />
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 900 }}>
+        <div className="hero-section-inner" style={{ position: 'relative', zIndex: 2, maxWidth: 900 }}>
           <div className="hero-badge" style={{ marginBottom: 32 }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 14px', background: accentMuted, border: `1px solid ${accentBorder}`, color: accent, fontFamily: "'Space Mono', monospace", fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: accent, display: 'inline-block', animation: 'pulse-ring 2s ease-out infinite' }} />
@@ -408,15 +416,15 @@ export default function HomePage() {
           <h1 className="hero-title" style={{ fontSize: 'clamp(3rem, 7vw, 6.5rem)', lineHeight: 1.02, letterSpacing: '-0.03em', marginBottom: 32, fontWeight: 400, color: '#ffffff' }}>
             {t.heroTitle1}<br /><em style={{ color: accent }}>{t.heroTitle2}</em>
           </h1>
-          <p className="hero-sub mono" style={{ fontSize: 15, lineHeight: 1.8, color: 'rgba(255,255,255,0.65)', maxWidth: 560, marginBottom: 48, fontWeight: 300 }}>
+          <p className="hero-sub" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 18, lineHeight: 1.65, color: 'rgba(255,255,255,0.75)', maxWidth: 540, marginBottom: 48, fontWeight: 300, letterSpacing: '-0.01em' }}>
             {heroSub[lang]}
           </p>
-          <div className="hero-cta" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+          <div className="hero-cta hero-cta-row" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
             <button onClick={() => navigate('/contact')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: accent, color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = accentHover} onMouseLeave={e => e.currentTarget.style.background = accent}>{t.viewReports}</button>
             <button onClick={() => navigate('/projects')} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', background: 'transparent', color: '#ffffff', fontFamily: "'Space Mono', monospace", fontSize: 13, fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer' }}>{t.enterPlatform}</button>
           </div>
         </div>
-        <div style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.9, zIndex: 2 }}>
+        <div className="climate-widget-desktop" style={{ position: 'absolute', right: 80, top: '50%', transform: 'translateY(-50%)', animation: 'float 6s ease-in-out infinite', opacity: 0.9, zIndex: 2 }}>
           <ClimateWidget isDark={isDark} accent={accent} fg={fg} fgMuted={fgMuted} fgSubtle={fgSubtle} accentBorder={accentBorder} lang={lang} />
         </div>
       </section>

@@ -17,30 +17,23 @@ export default function ProjectsPage() {
       <style>{`
         .mono { font-family: 'Space Mono', monospace; }
         .project-tile { cursor: pointer; position: relative; overflow: hidden; }
-        .project-tile .overlay {
-          position: absolute; inset: 0;
-          background: rgba(0,0,0,0);
-          transition: background 0.35s ease;
-          display: flex; align-items: flex-end; padding: 28px;
+        .project-tile .tile-label {
+          position: absolute; bottom: 0; left: 0; right: 0;
+          padding: 48px 20px 16px;
+          background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+          transition: padding 0.3s ease;
         }
-        .project-tile:hover .overlay { background: rgba(0,0,0,0.6); }
-        .project-tile .overlay-text {
-          opacity: 0; transform: translateY(12px);
-          transition: opacity 0.3s ease, transform 0.3s ease;
+        .project-tile:hover .tile-label { padding-bottom: 20px; }
+        .project-tile .tile-extra {
+          opacity: 0; transform: translateY(6px); max-height: 0;
+          transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
+          overflow: hidden;
         }
-        .project-tile:hover .overlay-text { opacity: 1; transform: translateY(0); }
+        .project-tile:hover .tile-extra { opacity: 1; transform: translateY(0); max-height: 60px; }
         .project-tile img, .project-tile .placeholder {
           transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
         }
         .project-tile:hover img, .project-tile:hover .placeholder { transform: scale(1.04); }
-        .view-arrow {
-          display: inline-flex; align-items: center; gap: 6px;
-          font-family: 'Space Mono', monospace; font-size: 10px;
-          color: ${accent}; letter-spacing: 0.15em; text-transform: uppercase;
-          margin-top: 10px; opacity: 0; transform: translateX(-4px);
-          transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
-        }
-        .project-tile:hover .view-arrow { opacity: 1; transform: translateX(0); }
       `}</style>
 
       {/* Header with background image */}
@@ -112,18 +105,18 @@ export default function ProjectsPage() {
                   </div>
                 </div>
               )}
-              <div className="overlay">
-                <div className="overlay-text">
-                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 6 }}>
-                    {lang === 'en' ? project.category : project.categoryDE}
-                  </div>
-                  <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(1rem, 2vw, 1.3rem)', fontWeight: 400, color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.2, marginBottom: 4 }}>
-                    {lang === 'en' ? project.name : project.nameDE}
-                  </div>
-                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: 'rgba(255,255,255,0.55)', letterSpacing: '0.08em' }}>
+              <div className="tile-label">
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 5 }}>
+                  {lang === 'en' ? project.category : project.categoryDE}
+                </div>
+                <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(0.95rem, 1.8vw, 1.2rem)', fontWeight: 400, color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+                  {lang === 'en' ? project.name : project.nameDE}
+                </div>
+                <div className="tile-extra">
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.08em', marginTop: 6 }}>
                     {project.location} · {project.year}
                   </div>
-                  <div className="view-arrow">
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.15em', textTransform: 'uppercase', marginTop: 8 }}>
                     {lang === 'en' ? 'View Project →' : 'Projekt ansehen →'}
                   </div>
                 </div>

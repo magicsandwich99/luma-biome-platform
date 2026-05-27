@@ -81,6 +81,9 @@ export default function ProjectDetailPage() {
   const name = lang === 'en' ? project.name : project.nameDE
   const category = lang === 'en' ? project.category : project.categoryDE
   const description = lang === 'en' ? project.description : project.descriptionDE
+  const challenge = project.challenge ? (lang === 'en' ? project.challenge.en : project.challenge.de) : null
+  const approach = project.approach ? (lang === 'en' ? project.approach.en : project.approach.de) : null
+  const result = project.result ? (lang === 'en' ? project.result.en : project.result.de) : null
 
   const metaItems = [
     { label: lang === 'en' ? 'Year' : 'Jahr', value: project.year },
@@ -160,11 +163,61 @@ export default function ProjectDetailPage() {
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 40px 80px' }}>
 
         {/* Description */}
-        <div style={{ maxWidth: 760, marginBottom: galleryImages.length > 0 ? 72 : 0 }}>
+        <div style={{ maxWidth: 760, marginBottom: challenge ? 72 : (galleryImages.length > 0 ? 72 : 0) }}>
           <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, color: fgMuted, lineHeight: 2, fontWeight: 300, margin: 0 }}>
             {description}
           </p>
         </div>
+
+        {/* Pitch-deck blocks */}
+        {challenge && (
+          <div style={{ marginBottom: galleryImages.length > 0 ? 72 : 0 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 2, marginBottom: 2 }}>
+              {/* Challenge */}
+              <div style={{ background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)', border: `1px solid ${borderColor}`, padding: '36px 36px 40px' }}>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 20 }}>
+                  {lang === 'en' ? '01 — Challenge' : '01 — Aufgabe'}
+                </div>
+                <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, color: fg, lineHeight: 1.7, fontWeight: 300, margin: 0 }}>
+                  {challenge}
+                </p>
+              </div>
+
+              {/* Result */}
+              {result && (
+                <div style={{ background: isDark ? `${accent}12` : `${accent}0d`, border: `1px solid ${accent}30`, padding: '36px 36px 40px' }}>
+                  <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 20 }}>
+                    {lang === 'en' ? '03 — Result' : '03 — Ergebnis'}
+                  </div>
+                  <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 16, color: fg, lineHeight: 1.7, fontWeight: 300, margin: 0 }}>
+                    {result}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Approach */}
+            {approach && approach.length > 0 && (
+              <div style={{ background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: `1px solid ${borderColor}`, padding: '36px 36px 40px' }}>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 28 }}>
+                  {lang === 'en' ? '02 — Approach' : '02 — Vorgehen'}
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '16px 40px' }}>
+                  {approach.map((item, i) => (
+                    <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                      <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: accent, letterSpacing: '0.1em', marginTop: 3, flexShrink: 0 }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </div>
+                      <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 14, color: fgMuted, lineHeight: 1.65, fontWeight: 300 }}>
+                        {item}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Gallery */}
         {galleryImages.length > 0 && (
